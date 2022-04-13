@@ -1,12 +1,14 @@
 import React from 'react'
-import './header.scss'
+import './Header.css'
+import Navbar from './Navbar.js'
 
-function header() {
+function Header() {
   return (
     <div className='header-body'>
-
+      <h1>Cocktails</h1>
+      <Navbar/>
     </div>
   )
 }
 
-export default header
+export default Header
