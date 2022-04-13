@@ -7,9 +7,11 @@ import { useNavigate } from 'react-router-dom';
 function Navbar() {
   const navigate = useNavigate();
   return (
-    <div>
-      <button onClick={()=>navigate("/untried")}><CheckCircleIcon/></button>
-      <button onClick={()=>navigate("/tried")}><ListAltIcon/></button>
+    <div className='nav-bar'>
+      <div className='nav-buttons'>
+        <button className='nav-button' onClick={()=>navigate("/untried")}><CheckCircleIcon/></button>
+        <button className='nav-button' onClick={()=>navigate("/tried")}><ListAltIcon/></button>
+      </div>
     </div>
   )
 }

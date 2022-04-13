@@ -1,0 +1,20 @@
+.nav-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-buttons{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.nav-button{
+    width:50%;
+    height: 100%;
+    background-color: rgb(154,154,154);
+}

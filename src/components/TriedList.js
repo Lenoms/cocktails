@@ -1,11 +1,14 @@
 import React from 'react'
-import CocktailItem from './CocktailItem'
+import TriedCocktailItem from './TriedCocktailItem'
 import './Lists.css'
 
 function TriedList() {
   return (
     <div className='list'>
-        <CocktailItem></CocktailItem>
+        <TriedCocktailItem></TriedCocktailItem>
+        <TriedCocktailItem></TriedCocktailItem>
+        <TriedCocktailItem></TriedCocktailItem>
+        <TriedCocktailItem></TriedCocktailItem>
     </div>
   )
 }
