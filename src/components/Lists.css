@@ -3,3 +3,14 @@
     position: absolute;
     bottom: 0;
 }
+@media (min-width: 600px) {
+    .list{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .list{
+        width: 100%;
+    }
+}

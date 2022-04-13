@@ -8,8 +8,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header className="header"/>
-      <Routes className="lists">
+      <Header/>
+      <Routes>
         <Route exact path="/tried" element={<TriedList/>}></Route>
         <Route exact path="/untried" element={<UntriedList/>}></Route>
       </Routes>
