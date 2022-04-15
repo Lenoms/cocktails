@@ -15,10 +15,16 @@ function Navbar() {
   return (
     <div className="nav-bar">
       <div className="nav-buttons">
-        <button className="nav-button" onClick={() => navigate("/tried")}>
+        <button
+          className="nav-button"
+          onClick={() => navigate("/cocktails/tried")}
+        >
           <CheckCircleIcon />
         </button>
-        <button className="nav-button" onClick={() => navigate("/untried")}>
+        <button
+          className="nav-button"
+          onClick={() => navigate("/cocktails/untried")}
+        >
           <ListAltIcon />
         </button>
         <button onClick={clickHandler}>test</button>
