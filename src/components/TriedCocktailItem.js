@@ -1,16 +1,15 @@
-import React from 'react'
-import './TriedCocktailItem.css'
-import placeholder from '../placeholder.jpg'
+import React from "react";
+import "./TriedCocktailItem.css";
+import placeholder from "../placeholder.jpg";
 
-function TriedCocktailItem() {
+function TriedCocktailItem({ cocktailName, cocktailGrade }) {
   return (
     <div className="tried-cocktail-item-body">
-      <h3>Cocktail Name</h3>
-      <h3>Letter Grade</h3>
+      <h3>{cocktailName}</h3>
+      <h3>{cocktailGrade}</h3>
       <img id="cocktail-image" src={placeholder}></img>
-
     </div>
-  )
+  );
 }
 
-export default TriedCocktailItem
+export default TriedCocktailItem;
