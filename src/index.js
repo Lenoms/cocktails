@@ -1,30 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 //import * as firebase from 'firebase';
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8DLy1n5YJZuTDXfQMWwzo6hkQiuPJcLM",
   authDomain: "cocktails-aec8a.firebaseapp.com",
-  databaseURL: "https://cocktails-aec8a-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL:
+    "https://cocktails-aec8a-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "cocktails-aec8a",
   storageBucket: "cocktails-aec8a.appspot.com",
   messagingSenderId: "155652064704",
   appId: "1:155652064704:web:55ebf042fbe4de8eb63425",
-  measurementId: "G-GS6JQQLRM5"
+  measurementId: "G-GS6JQQLRM5",
 };
 initializeApp(firebaseConfig);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter basename="/cocktails">
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </BrowserRouter>
 );
 
