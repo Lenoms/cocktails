@@ -13,7 +13,7 @@
     flex-direction: column;
 }
 
-h1{
+.header-title{
     color: white;
     line-height: 30%;
 }

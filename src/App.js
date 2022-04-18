@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TriedList from "./components/TriedList";
 import UntriedList from "./components/UntriedList";
+import CreateCocktail from "./components/CreateCocktail";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route exact path="/cocktails/tried" element={<TriedList />} />
         <Route exact path="/cocktails/untried" element={<UntriedList />} />
+        <Route exact path="/cocktails/create" element={<CreateCocktail />} />
       </Routes>
     </div>
   );

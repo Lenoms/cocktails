@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
 import TriedCocktailItem from "./TriedCocktailItem";
+import AddButton from "./AddButton";
 
 function UntriedList() {
   let [data, setData] = useState([]);
@@ -15,8 +16,6 @@ function UntriedList() {
           if (snapshot.exists()) {
             setData(Object.values(snapshot.val()));
             setLoading(false);
-          } else {
-            console.log("No data available");
           }
         })
         .catch((error) => {
@@ -24,7 +23,7 @@ function UntriedList() {
         });
     }
     fetchCocktails();
-  }, []);
+  });
 
   if (loading) {
     return <h1>Loading!</h1>;
@@ -39,6 +38,8 @@ function UntriedList() {
             ></TriedCocktailItem>
           );
         })}
+
+        <AddButton />
       </div>
     );
   }

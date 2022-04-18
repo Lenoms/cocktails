@@ -9,14 +9,14 @@ import {
 } from "firebase/database";
 
 const CocktailService = {
-  getCocktailsList: function (setLoading, setData) {
+  getCocktailsList: ({ dataFetched }) => {
     async function fetchCocktails() {
       const dbRef = ref(getDatabase());
       get(child(dbRef, "cocktails"))
         .then((snapshot) => {
           if (snapshot.exists()) {
-            setData(snapshot.val());
-            setLoading(false);
+            dataFetched();
+            return snapshot.val();
           } else {
             console.log("No data available");
           }
@@ -25,7 +25,7 @@ const CocktailService = {
           console.error(error);
         });
     }
-    fetchCocktails();
+    return fetchCocktails();
   },
 
   writeToDatabase: function (cocktailName, cocktailGrade) {
