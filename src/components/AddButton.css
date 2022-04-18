@@ -1,0 +1,28 @@
+.add-button{
+    aspect-ratio: 1;
+    background-color: green;
+    border-radius: 50%;
+    border: none;
+    position: fixed;
+    bottom: 5%;
+    cursor: pointer;
+
+}
+
+.add-button:hover{
+    background-color: rgb(52, 152, 52);
+}
+
+@media (min-width: 600px) {
+    .add-button{
+        width: 100px;
+        left: 65%;
+    }
+}
+
+@media (max-width: 600px) {
+    .add-button{
+        width: 50px;
+        left: 95%;
+    }
+}

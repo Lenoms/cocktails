@@ -1,0 +1,21 @@
+.create-cocktail{
+    height: 80%;
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cocktail-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label{
+    margin-right: 10px;
+}
+
+.form-input-field{
+}
