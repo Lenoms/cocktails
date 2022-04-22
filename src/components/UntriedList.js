@@ -33,6 +33,7 @@ function UntriedList() {
         {data.map(function (item) {
           return (
             <TriedCocktailItem
+              key={item.cocktailName}
               cocktailGrade={item.cocktailGrade}
               cocktailName={item.cocktailName}
             ></TriedCocktailItem>
