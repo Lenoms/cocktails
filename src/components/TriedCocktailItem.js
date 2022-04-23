@@ -4,7 +4,11 @@ import placeholder from "../placeholder.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getDatabase, ref, remove } from "firebase/database";
 
-function TriedCocktailItem({ cocktailName, cocktailGrade }) {
+function TriedCocktailItem({
+  cocktailName,
+  cocktailGrade,
+  cocktailImageUrl = placeholder,
+}) {
   const deleteCocktail = () => {
     const db = getDatabase();
     remove(ref(db, "cocktails/" + cocktailName));
@@ -14,7 +18,7 @@ function TriedCocktailItem({ cocktailName, cocktailGrade }) {
     <div className="tried-cocktail-item-body">
       <h3 className="cocktail-name">{cocktailName}</h3>
       <h3>{cocktailGrade}</h3>
-      <img id="cocktail-image" src={placeholder}></img>
+      <img id="cocktail-image" src={cocktailImageUrl}></img>
       <button className="delete-button" onClick={deleteCocktail}>
         <DeleteIcon />
       </button>

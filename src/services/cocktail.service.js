@@ -28,11 +28,12 @@ const CocktailService = {
     return fetchCocktails();
   },
 
-  writeToDatabase: function (cocktailName, cocktailGrade) {
+  writeToDatabase: function (cocktailName, cocktailGrade, imgUrl) {
     const db = getDatabase();
     set(ref(db, "cocktails/" + cocktailName), {
       cocktailName: cocktailName,
       cocktailGrade: cocktailGrade,
+      image: imgUrl,
     });
     console.log("wrote to database?");
   },
