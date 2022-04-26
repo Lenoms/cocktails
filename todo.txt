@@ -1,0 +1,9 @@
+- Implement tried/untried and moving between them. This is the next big thing.
+  Requires storing a flag with each cocktail, then filtering based on each flag?
+  Add a checkbox in create cocktail page for 'tried?' aswell. 
+- Add add button in other list and maybe make create navigate based on whether the created cocktail
+  is tried or not. Like it takes you to the page of the one you just made.
+- Add a back button in create page.
+- Add cocktail item expansion
+- Add cocktail description
+- Make whole thing nicer
