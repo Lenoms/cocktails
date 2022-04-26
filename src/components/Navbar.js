@@ -8,10 +8,6 @@ import CocktailService from "../services/cocktail.service";
 function Navbar() {
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    CocktailService.writeToDatabase("White Lady", "C");
-  };
-
   return (
     <div className="nav-bar">
       <div className="nav-buttons">
@@ -27,7 +23,6 @@ function Navbar() {
         >
           <ListAltIcon />
         </button>
-        <button onClick={clickHandler}>test</button>
       </div>
     </div>
   );
