@@ -9,31 +9,13 @@ import {
 } from "firebase/database";
 
 const CocktailService = {
-  getCocktailsList: ({ dataFetched }) => {
-    async function fetchCocktails() {
-      const dbRef = ref(getDatabase());
-      get(child(dbRef, "cocktails"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            dataFetched();
-            return snapshot.val();
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-    return fetchCocktails();
-  },
-
-  writeToDatabase: function (cocktailName, cocktailGrade, imgUrl) {
+  writeToDatabase: function (cocktailName, cocktailGrade, imgUrl, tried) {
     const db = getDatabase();
     set(ref(db, "cocktails/" + cocktailName), {
       cocktailName: cocktailName,
       cocktailGrade: cocktailGrade,
       image: imgUrl,
+      tried: tried,
     });
     console.log("wrote to database?");
   },

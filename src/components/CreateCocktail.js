@@ -20,11 +20,16 @@ function CreateCocktail() {
   function addCocktail() {
     var name = document.getElementById("cocktail-name").value;
     var grade = document.getElementById("cocktail-grade").value;
-    CocktailService.writeToDatabase(name, grade, imgUrl);
-    navigate("/cocktails/untried");
+    var tried = document.getElementById("tried").checked;
+    CocktailService.writeToDatabase(name, grade, imgUrl, tried);
+    if (tried) {
+      navigate("/cocktails/tried");
+    } else {
+      navigate("/cocktails/untried");
+    }
   }
 
-  function setFileData(event) {
+  function uploadImage(event) {
     const storageRef = ref(storage, `images/${event.target.files[0].name}`);
     const uploadTask = uploadBytesResumable(storageRef, event.target.files[0]);
     uploadTask.on(
@@ -68,12 +73,14 @@ function CreateCocktail() {
           id="cocktail-grade"
           name="cocktail-grade"
         ></input>
+        <label htmlFor="tried">Tried?</label>
+        <input type="checkbox" id="tried"></input>
         <input
           type="file"
           id="pic"
           name="pic"
           accept=".jpg, .jpeg, .png"
-          onChange={setFileData}
+          onChange={uploadImage}
         ></input>
         <button disabled={!imgUrl} className="submit-button" type="submit">
           Add

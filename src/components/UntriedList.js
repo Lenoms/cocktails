@@ -9,7 +9,7 @@ function UntriedList() {
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchCocktails() {
+    function fetchCocktails() {
       const dbRef = ref(getDatabase());
       get(child(dbRef, "cocktails"))
         .then((snapshot) => {
@@ -26,20 +26,27 @@ function UntriedList() {
   });
 
   if (loading) {
-    return <h1>Loading!</h1>;
+    return (
+      <div>
+        <h1>Loading!</h1>
+        <AddButton />
+      </div>
+    );
   } else {
     return (
       <div className="list">
-        {data.map(function (item) {
-          return (
-            <TriedCocktailItem
-              key={item.cocktailName}
-              cocktailGrade={item.cocktailGrade}
-              cocktailName={item.cocktailName}
-              cocktailImageUrl={item.image}
-            ></TriedCocktailItem>
-          );
-        })}
+        {data
+          .filter((cocktail) => cocktail.tried != true)
+          .map(function (item) {
+            return (
+              <TriedCocktailItem
+                key={item.cocktailName}
+                cocktailGrade={item.cocktailGrade}
+                cocktailName={item.cocktailName}
+                cocktailImageUrl={item.image}
+              ></TriedCocktailItem>
+            );
+          })}
 
         <AddButton />
       </div>
