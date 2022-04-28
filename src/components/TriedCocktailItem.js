@@ -11,14 +11,18 @@ function TriedCocktailItem({
   cocktailImageUrl = placeholder,
 }) {
   const navigate = useNavigate();
-  const deleteCocktail = () => {
+  const deleteCocktail = (e) => {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
     const db = getDatabase();
     remove(ref(db, "cocktails/" + cocktailName));
-    console.log("cocktail deleted");
   };
 
   const cocktailClicked = () => {
-    console.log("Cocktail clicked");
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
     navigate("/cocktails/info");
   };
   return (
