@@ -3,7 +3,6 @@ import "./Navbar.css";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
-import CocktailService from "../services/cocktail.service";
 
 function Navbar() {
   const navigate = useNavigate();
