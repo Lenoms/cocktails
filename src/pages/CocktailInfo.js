@@ -3,9 +3,7 @@ import "./CocktailInfo.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
-function CocktailInfo() {
-  const location = useLocation();
-
+function CocktailInfo({ location }) {
   if (!!location.state) {
     let cocktail = location.state.cocktailItem;
     return (

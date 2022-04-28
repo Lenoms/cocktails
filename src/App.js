@@ -18,7 +18,11 @@ function App() {
           <Route exact path="/cocktails/tried" element={<TriedList />} />
           <Route exact path="/cocktails/untried" element={<UntriedList />} />
           <Route exact path="/cocktails/create" element={<CreateCocktail />} />
-          <Route exact path="/cocktails/info" element={<CocktailInfo />} />
+          <Route
+            exact
+            path="/cocktails/info"
+            element={<CocktailInfo location={location} />}
+          />
         </Routes>
       </AnimatePresence>
     </div>
