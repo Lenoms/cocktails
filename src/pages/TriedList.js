@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
 import TriedCocktailItem from "../components/TriedCocktailItem";
-import AddButton from "../components/AddButton";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 
 function TriedList() {
   let [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
-  let navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCocktails() {

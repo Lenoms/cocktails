@@ -10,6 +10,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
+import { motion } from "framer-motion";
 
 function CreateCocktail() {
   const navigate = useNavigate();
@@ -52,7 +53,20 @@ function CreateCocktail() {
   }
 
   return (
-    <div className="create-cocktail">
+    <motion.div
+      className="create-cocktail"
+      initial={{
+        opacity: 0,
+        x: "-200vw",
+        transition: { ease: "easeInOut", duration: 0.5 },
+      }}
+      animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+      exit={{
+        opacity: 0,
+        x: "-200vw",
+        transition: { ease: "easeInOut", duration: 0.5 },
+      }}
+    >
       <h1>Add Cocktail</h1>
       <form className="cocktail-form" onSubmit={addCocktail}>
         <label className="form-label" htmlFor="cocktail-name">
@@ -95,7 +109,7 @@ function CreateCocktail() {
         </div>
       )}
       {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
-    </div>
+    </motion.div>
   );
 }
 

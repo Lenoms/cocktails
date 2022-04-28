@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
 import TriedCocktailItem from "../components/TriedCocktailItem";
-import AddButton from "../components/AddButton";
 import { motion } from "framer-motion";
 
 function UntriedList() {

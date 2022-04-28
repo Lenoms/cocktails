@@ -16,7 +16,7 @@ function AddButton() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="button-container">
       <ThemeProvider theme={theme}>
         <button
           onClick={() => navigate("/cocktails/create")}
