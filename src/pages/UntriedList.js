@@ -53,9 +53,7 @@ function UntriedList() {
             return (
               <TriedCocktailItem
                 key={item.cocktailName}
-                cocktailGrade={item.cocktailGrade}
-                cocktailName={item.cocktailName}
-                cocktailImageUrl={item.image}
+                item={item}
               ></TriedCocktailItem>
             );
           })}

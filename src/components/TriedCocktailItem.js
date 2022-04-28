@@ -5,12 +5,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getDatabase, ref, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
-function TriedCocktailItem({
-  cocktailName,
-  cocktailGrade,
-  cocktailImageUrl = placeholder,
-}) {
+function TriedCocktailItem({ item }) {
   const navigate = useNavigate();
+  let cocktailName = item.cocktailName;
+  let cocktailGrade = item.cocktailGrade;
+  let cocktailImageUrl = item.image;
+
   const deleteCocktail = (e) => {
     if (!e) var e = window.event;
     e.cancelBubble = true;
@@ -23,7 +23,7 @@ function TriedCocktailItem({
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
-    navigate("/cocktails/info");
+    navigate("/cocktails/info", { state: { cocktailItem: item } });
   };
   return (
     <div className="tried-cocktail-item-body" onClick={cocktailClicked}>
