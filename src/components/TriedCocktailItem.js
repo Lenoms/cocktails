@@ -15,8 +15,9 @@ function TriedCocktailItem({ item }) {
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
+    console.log("delete called");
     const db = getDatabase();
-    remove(ref(db, "cocktails/" + cocktailName));
+    remove(ref(db, "cocktails/tried/" + cocktailName));
   };
 
   const cocktailClicked = () => {
