@@ -9,13 +9,26 @@ import {
 } from "firebase/database";
 
 const CocktailService = {
-  writeToDatabase: function (cocktailName, cocktailGrade, imgUrl, tried) {
+  writeTriedToDatabase: function (
+    cocktailName,
+    cocktailGrade,
+    cocktailNotes,
+    imgUrl
+  ) {
     const db = getDatabase();
-    set(ref(db, "cocktails/" + cocktailName), {
+    set(ref(db, "cocktails/tried/" + cocktailName), {
       cocktailName: cocktailName,
       cocktailGrade: cocktailGrade,
+      cocktailNotes: cocktailNotes,
       image: imgUrl,
-      tried: tried,
+    });
+    console.log("wrote to database?");
+  },
+
+  writeUntriedToDatabase: function (cocktailName) {
+    const db = getDatabase();
+    set(ref(db, "cocktails/untried/" + cocktailName), {
+      cocktailName: cocktailName,
     });
     console.log("wrote to database?");
   },

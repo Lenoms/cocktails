@@ -16,16 +16,18 @@ function CreateCocktail() {
   const navigate = useNavigate();
   const [progresspercent, setProgresspercent] = useState(0);
   const [imgUrl, setImgUrl] = useState(null);
+  const [tried, setTried] = useState(false);
   const storage = getStorage();
 
   function addCocktail() {
     var name = document.getElementById("cocktail-name").value;
-    var grade = document.getElementById("cocktail-grade").value;
-    var tried = document.getElementById("tried").checked;
-    CocktailService.writeToDatabase(name, grade, imgUrl, tried);
     if (tried) {
+      var grade = document.getElementById("cocktail-grade").value;
+      var notes = document.getElementById("cocktail-notes").value;
+      CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
       navigate("/cocktails/tried");
     } else {
+      CocktailService.writeUntriedToDatabase(name);
       navigate("/cocktails/untried");
     }
   }
@@ -50,6 +52,10 @@ function CreateCocktail() {
         });
       }
     );
+  }
+
+  function checkboxClicked(e) {
+    setTried(!tried);
   }
 
   return (
@@ -78,36 +84,56 @@ function CreateCocktail() {
           id="cocktail-name"
           name="cocktail-name"
         ></input>
-        <label className="form-label" htmlFor="cocktail-grade">
-          Cocktail Grade
-        </label>
-        <input
-          className="form-input-field"
-          type="text"
-          id="cocktail-grade"
-          name="cocktail-grade"
-        ></input>
         <label htmlFor="tried">Tried?</label>
-        <input type="checkbox" id="tried"></input>
-        <input
-          type="file"
-          id="pic"
-          name="pic"
-          accept=".jpg, .jpeg, .png"
-          onChange={uploadImage}
-        ></input>
-        <button disabled={!imgUrl} className="submit-button" type="submit">
+        <input type="checkbox" id="tried" onChange={checkboxClicked}></input>
+        {tried && (
+          <>
+            <label className="form-label" htmlFor="cocktail-notes">
+              Notes:
+            </label>
+            <input
+              className="form-input-field"
+              type="text"
+              id="cocktail-notes"
+              name="cocktail-notes"
+            ></input>
+            <label className="form-label" htmlFor="cocktail-grade">
+              Cocktail Grade
+            </label>
+            <select name="cocktail-grade" id="cocktail-grade">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="F">F</option>
+            </select>
+            <input
+              type="file"
+              id="pic"
+              name="pic"
+              accept=".jpg, .jpeg, .png"
+              onChange={uploadImage}
+            ></input>
+            {!imgUrl && tried && (
+              <div className="outerbar">
+                <div
+                  className="innerbar"
+                  style={{ width: `${progresspercent}%` }}
+                >
+                  {progresspercent}%
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        <button
+          disabled={progresspercent != 0 && progresspercent != 100}
+          className="submit-button"
+          type="submit"
+        >
           Add
         </button>
       </form>
-
-      {!imgUrl && (
-        <div className="outerbar">
-          <div className="innerbar" style={{ width: `${progresspercent}%` }}>
-            {progresspercent}%
-          </div>
-        </div>
-      )}
       {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
     </motion.div>
   );

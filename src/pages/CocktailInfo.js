@@ -23,7 +23,10 @@ function CocktailInfo({ location }) {
       >
         <h1>{cocktail.cocktailName}</h1>
         <img id="cocktail-info-image" src={cocktail.image}></img>
-        <h3>Description here</h3>
+        <h1 className="cocktail-grade">Grade: {cocktail.cocktailGrade}</h1>
+        <div className="cocktail-description">
+          Notes: {cocktail.cocktailNotes}{" "}
+        </div>
       </motion.div>
     );
   } else {

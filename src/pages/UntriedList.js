@@ -11,7 +11,7 @@ function UntriedList() {
   useEffect(() => {
     function fetchCocktails() {
       const dbRef = ref(getDatabase());
-      get(child(dbRef, "cocktails"))
+      get(child(dbRef, "cocktails/untried"))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setData(Object.values(snapshot.val()));
@@ -47,16 +47,9 @@ function UntriedList() {
           transition: { ease: "easeInOut", duration: 0.5 },
         }}
       >
-        {data
-          .filter((cocktail) => cocktail.tried != true)
-          .map(function (item) {
-            return (
-              <TriedCocktailItem
-                key={item.cocktailName}
-                item={item}
-              ></TriedCocktailItem>
-            );
-          })}
+        {data.map(function (item) {
+          return <h1 key={item.cocktailName}>{item.cocktailName}</h1>;
+        })}
       </motion.div>
     );
   }

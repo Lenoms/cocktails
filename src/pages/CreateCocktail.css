@@ -11,6 +11,7 @@
 .cocktail-form{
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 
 .form-label{

@@ -11,7 +11,7 @@ function TriedList() {
   useEffect(() => {
     async function fetchCocktails() {
       const dbRef = ref(getDatabase());
-      get(child(dbRef, "cocktails"))
+      get(child(dbRef, "cocktails/tried"))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setData(Object.values(snapshot.val()));
@@ -47,16 +47,14 @@ function TriedList() {
           transition: { ease: "easeInOut", duration: 0.5 },
         }}
       >
-        {data
-          .filter((cocktail) => cocktail.tried == true)
-          .map(function (item) {
-            return (
-              <TriedCocktailItem
-                key={item.cocktailName}
-                item={item}
-              ></TriedCocktailItem>
-            );
-          })}
+        {data.map(function (item) {
+          return (
+            <TriedCocktailItem
+              key={item.cocktailName}
+              item={item}
+            ></TriedCocktailItem>
+          );
+        })}
       </motion.div>
     );
   }
