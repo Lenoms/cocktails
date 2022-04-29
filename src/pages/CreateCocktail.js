@@ -127,7 +127,7 @@ function CreateCocktail() {
         )}
 
         <button
-          disabled={progresspercent != 0 && progresspercent != 100}
+          disabled={!imgUrl && tried}
           className="submit-button"
           type="submit"
         >
