@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
-import TriedCocktailItem from "../components/TriedCocktailItem";
+import UntriedCocktailItem from "../components/UntriedCocktailItem";
 import { motion } from "framer-motion";
 
 function UntriedList() {
@@ -48,7 +48,12 @@ function UntriedList() {
         }}
       >
         {data.map(function (item) {
-          return <h1 key={item.cocktailName}>{item.cocktailName}</h1>;
+          return (
+            <UntriedCocktailItem
+              key={item.cocktailName}
+              item={item}
+            ></UntriedCocktailItem>
+          );
         })}
       </motion.div>
     );

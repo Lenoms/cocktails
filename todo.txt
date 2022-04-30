@@ -1,5 +1,12 @@
-- Add a back button in create page.
-- Add cocktail item expansion - nav to new page? want a nice transition
-- Add cocktail description
+MVP Stuff
+
+- Implement untried item and untried list
 - Moving between tried/untried list
+- Make tried page home page
+- Sorting (alphabetical and grade)
 - Make whole thing nicer
+
+Upcoming features
+
+-Ingredients and bar stock
+-Sorting by ingredient
