@@ -3,6 +3,7 @@ import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
 import TriedCocktailItem from "../components/TriedCocktailItem";
 import { motion } from "framer-motion";
+import { RouteAnimation } from "../animations/RouteAnimation";
 
 function TriedList() {
   let [data, setData] = useState([]);
@@ -35,17 +36,9 @@ function TriedList() {
     return (
       <motion.div
         className="list"
-        initial={{
-          opacity: 0,
-          x: "-200vw",
-          transition: { ease: "easeInOut", duration: 0.5 },
-        }}
-        animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
-        exit={{
-          opacity: 0,
-          x: "-200vw",
-          transition: { ease: "easeInOut", duration: 0.5 },
-        }}
+        initial={RouteAnimation.initial}
+        animate={RouteAnimation.animate}
+        exit={RouteAnimation.exit}
       >
         {data.map(function (item) {
           return (

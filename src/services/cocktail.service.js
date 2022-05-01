@@ -1,12 +1,19 @@
 import {
   getDatabase,
-  ref,
+  ref as databaseRef,
   onValue,
   update,
   set,
   get,
   child,
 } from "firebase/database";
+
+import {
+  getDownloadURL,
+  getStorage,
+  uploadBytesResumable,
+  ref,
+} from "firebase/storage";
 
 const CocktailService = {
   writeTriedToDatabase: function (
@@ -16,7 +23,7 @@ const CocktailService = {
     imgUrl
   ) {
     const db = getDatabase();
-    set(ref(db, "cocktails/tried/" + cocktailName), {
+    set(databaseRef(db, "cocktails/tried/" + cocktailName), {
       cocktailName: cocktailName,
       cocktailGrade: cocktailGrade,
       cocktailNotes: cocktailNotes,
@@ -27,10 +34,33 @@ const CocktailService = {
 
   writeUntriedToDatabase: function (cocktailName) {
     const db = getDatabase();
-    set(ref(db, "cocktails/untried/" + cocktailName), {
+    set(databaseRef(db, "cocktails/untried/" + cocktailName), {
       cocktailName: cocktailName,
     });
     console.log("wrote to database?");
+  },
+
+  uploadImage: function (event, setProgresspercent, setImgUrl) {
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${event.target.files[0].name}`);
+    const uploadTask = uploadBytesResumable(storageRef, event.target.files[0]);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL);
+        });
+      }
+    );
   },
 };
 

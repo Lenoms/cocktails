@@ -2,6 +2,7 @@ import React from "react";
 import "./CocktailInfo.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { RouteAnimation } from "../animations/RouteAnimation";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
@@ -9,17 +10,9 @@ function CocktailInfo({ location }) {
     return (
       <motion.div
         className="cocktail-info"
-        initial={{
-          opacity: 0,
-          x: "200vw",
-          transition: { ease: "easeInOut", duration: 0.5 },
-        }}
-        animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
-        exit={{
-          opacity: 0,
-          x: "200vw",
-          transition: { ease: "easeInOut", duration: 0.5 },
-        }}
+        initial={RouteAnimation.infoInitial}
+        animate={RouteAnimation.animate}
+        exit={RouteAnimation.infoExit}
       >
         <h1>{cocktail.cocktailName}</h1>
         <img id="cocktail-info-image" src={cocktail.image}></img>

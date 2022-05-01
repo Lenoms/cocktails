@@ -22,7 +22,7 @@ initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter basename="/cocktails">
+  <BrowserRouter>
     <React.StrictMode>
       <App />
     </React.StrictMode>

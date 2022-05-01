@@ -16,6 +16,7 @@ function App() {
 
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
+          <Route path="/cocktails" element={<TriedList />} />
           <Route exact path="/cocktails/tried" element={<TriedList />} />
           <Route exact path="/cocktails/untried" element={<UntriedList />} />
           <Route exact path="/cocktails/create" element={<CreateCocktail />} />

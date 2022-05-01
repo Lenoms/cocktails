@@ -1,10 +1,12 @@
 MVP Stuff
 
-- Implement untried item and untried list
-- Moving between tried/untried list
-- Make tried page home page
 - Sorting (alphabetical and grade)
 - Make whole thing nicer
+- Editing. I think this is one thing we really want. Make whole update form nicer, and allow for 
+  partial fields in create form. Like when you click the tick in untried list item it just takes you
+  to full update form. I think thats fine. 
+- searching
+- ingredients
 
 Upcoming features
 
