@@ -48,11 +48,12 @@ function UpdateCocktailInfo({ location }) {
             progresspercent={progresspercent}
           ></UploadForm>
 
+          {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+
           <button disabled={!imgUrl} className="submit-button" type="submit">
             Update
           </button>
         </form>
-        {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
       </motion.div>
     );
   }

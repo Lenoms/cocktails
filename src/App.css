@@ -12,3 +12,13 @@ body {
   width: 100%;
   margin: 0;
 }
+
+.form-input-field-container{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 10px 0;
+}
+
+.form-input-field{
+  height: 30px;
+}

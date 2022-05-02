@@ -19,7 +19,15 @@
 }
 
 .submit-button{
+    margin-top: 5%;
     width: 50%;
     height: 30px;
     background-color: aquamarine;
+}
+
+.checkbox{
+    transform: scale(1.5);
+    margin: 3px;
+    position: relative;
+    left: 2px
 }

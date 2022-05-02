@@ -15,14 +15,16 @@ function CreateCocktail() {
 
   function addCocktail() {
     var name = document.getElementById("cocktail-name").value;
-    if (tried) {
-      var grade = document.getElementById("cocktail-grade").value;
-      var notes = document.getElementById("cocktail-notes").value;
-      CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
-      navigate("/cocktails/tried");
-    } else {
-      CocktailService.writeUntriedToDatabase(name);
-      navigate("/cocktails/untried");
+    if (name) {
+      if (tried) {
+        var grade = document.getElementById("cocktail-grade").value;
+        var notes = document.getElementById("cocktail-notes").value;
+        CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
+        navigate("/cocktails/tried");
+      } else {
+        CocktailService.writeUntriedToDatabase(name);
+        navigate("/cocktails/untried");
+      }
     }
   }
 
@@ -43,17 +45,24 @@ function CreateCocktail() {
     >
       <h1>Add Cocktail</h1>
       <form className="cocktail-form" onSubmit={addCocktail}>
-        <label className="form-label" htmlFor="cocktail-name">
-          Cocktail Name
-        </label>
-        <input
-          className="form-input-field"
-          type="text"
-          id="cocktail-name"
-          name="cocktail-name"
-        ></input>
+        <div className="form-input-field-container">
+          <label className="form-label" htmlFor="cocktail-name">
+            Cocktail Name
+          </label>
+          <input
+            className="form-input-field"
+            type="text"
+            id="cocktail-name"
+            name="cocktail-name"
+          ></input>
+        </div>
         <label htmlFor="tried">Tried?</label>
-        <input type="checkbox" id="tried" onChange={checkboxClicked}></input>
+        <input
+          type="checkbox"
+          id="tried"
+          onChange={checkboxClicked}
+          className="checkbox"
+        ></input>
         {tried && (
           <>
             <UploadForm
@@ -64,6 +73,8 @@ function CreateCocktail() {
           </>
         )}
 
+        {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+
         <button
           disabled={!imgUrl && tried}
           className="submit-button"
@@ -72,7 +83,6 @@ function CreateCocktail() {
           Add
         </button>
       </form>
-      {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
     </motion.div>
   );
 }
