@@ -1,0 +1,13 @@
+.upload-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.grade-selector{
+    height: 30px;
+}
+
+.notes-field{
+    resize: none;
+    font-size: large;
+}
