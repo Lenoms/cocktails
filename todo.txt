@@ -12,3 +12,9 @@ Upcoming features
 
 -Ingredients and bar stock
 -Sorting by ingredient
+
+- Sort out untried list item to show notes/ingredients
+- Test everything to do with creation and updating and test nothing breaks
+- A bit of refactoring till we're happy
+- UI (big one)
+- search feature

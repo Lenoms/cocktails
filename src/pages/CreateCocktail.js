@@ -14,12 +14,13 @@ function CreateCocktail() {
   const [tried, setTried] = useState(false);
   const [ingredients, setIngredients] = useState([]);
 
-  function addCocktail() {
+  function addCocktail(e) {
+    e.preventDefault();
     var name = document.getElementById("cocktail-name").value;
+    var notes = document.getElementById("cocktail-notes").value;
     if (name) {
       if (tried) {
         var grade = document.getElementById("cocktail-grade").value;
-        var notes = document.getElementById("cocktail-notes").value;
         CocktailService.writeTriedToDatabase(
           name,
           grade,
@@ -29,9 +30,11 @@ function CreateCocktail() {
         );
         navigate("/cocktails/tried");
       } else {
-        CocktailService.writeUntriedToDatabase(name);
+        CocktailService.writeUntriedToDatabase(name, notes, ingredients);
         navigate("/cocktails/untried");
       }
+    } else {
+      showValidationError();
     }
   }
 
@@ -54,6 +57,12 @@ function CreateCocktail() {
       ingredients.filter((eachIngredient) => eachIngredient !== ingredient)
     );
   }
+
+  function showValidationError() {
+    document.getElementById("validation-message").removeAttribute("hidden");
+    console.log("Called!");
+  }
+
   return (
     <motion.div
       className="create-cocktail"
@@ -73,6 +82,9 @@ function CreateCocktail() {
             id="cocktail-name"
             name="cocktail-name"
           ></input>
+          <p id="validation-message" hidden style={{ color: "red", margin: 0 }}>
+            Cocktail name cannot be empty!
+          </p>
         </div>
         <label htmlFor="tried">Tried?</label>
         <input

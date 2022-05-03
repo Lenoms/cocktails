@@ -11,42 +11,52 @@ function UpdateCocktailInfo({ location }) {
     let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
     const [progresspercent, setProgresspercent] = useState(0);
-    let defaultImgUrl = null;
-    if (cocktail.image) {
-      defaultImgUrl = cocktail.image;
-    }
+
+    // Setting up imgUrl
+    let defaultImgUrl = cocktail.image ? cocktail.image : null;
     const [imgUrl, setImgUrl] = useState(defaultImgUrl);
+
+    // Setting up tried
     let defaultTried = location.state.tried;
     const [tried, setTried] = useState(defaultTried);
-    let defaultIngredients = [];
-    if (cocktail.ingredients) {
-      defaultIngredients = cocktail.ingredients;
-    }
+
+    // Setting up ingredients
+    let defaultIngredients = cocktail.ingredients ? cocktail.ingredients : [];
     const [ingredients, setIngredients] = useState(defaultIngredients);
 
-    function updateCocktail() {
-      var grade = document.getElementById("cocktail-grade").value;
+    function updateCocktail(e) {
+      e.preventDefault();
+
+      // Get new values
+      var newName = document.getElementById("cocktail-name").value;
       var notes = document.getElementById("cocktail-notes").value;
-      var name = cocktail.cocktailName;
+
       const db = getDatabase();
-      if (defaultTried) {
-        remove(databaseRef(db, "cocktails/tried/" + name));
+      if (newName.length != 0) {
+        if (defaultTried) {
+          remove(databaseRef(db, "cocktails/tried/" + cocktail.cocktailName));
+        } else {
+          remove(databaseRef(db, "cocktails/untried/" + cocktail.cocktailName));
+        }
+        if (tried) {
+          var grade = document.getElementById("cocktail-grade").value;
+          CocktailService.writeTriedToDatabase(
+            newName,
+            grade,
+            notes,
+            ingredients,
+            imgUrl
+          );
+          navigate("/cocktails/tried");
+        } else {
+          CocktailService.writeUntriedToDatabase(newName, notes, ingredients);
+          navigate("/cocktails/untried");
+        }
       } else {
-        remove(databaseRef(db, "cocktails/untried/" + name));
+        showValidationError();
       }
-      if (tried) {
-        CocktailService.writeTriedToDatabase(
-          name,
-          grade,
-          notes,
-          ingredients,
-          imgUrl
-        );
-      } else {
-        CocktailService.writeUntriedToDatabase(name);
-      }
-      navigate("/cocktails/tried");
     }
+
     function uploadImage(event) {
       CocktailService.uploadImage(event, setProgresspercent, setImgUrl);
     }
@@ -67,6 +77,11 @@ function UpdateCocktailInfo({ location }) {
         ingredients.filter((eachIngredient) => eachIngredient !== ingredient)
       );
     }
+
+    function showValidationError() {
+      document.getElementById("validation-message").removeAttribute("hidden");
+    }
+
     return (
       <motion.div
         className="create-cocktail"
@@ -95,6 +110,13 @@ function UpdateCocktailInfo({ location }) {
               name="cocktail-name"
               defaultValue={cocktail.cocktailName}
             ></input>
+            <p
+              id="validation-message"
+              hidden
+              style={{ color: "red", margin: 0 }}
+            >
+              Cocktail name cannot be empty!
+            </p>
           </div>
           <label htmlFor="tried">Tried?</label>
           <input
@@ -114,6 +136,7 @@ function UpdateCocktailInfo({ location }) {
               type="text"
               id="cocktail-notes"
               name="cocktail-notes"
+              defaultValue={cocktail.cocktailNotes}
             ></textarea>
           </div>
 

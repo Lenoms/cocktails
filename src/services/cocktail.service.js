@@ -31,15 +31,15 @@ const CocktailService = {
       ingredients: ingredients,
       image: imgUrl,
     });
-    console.log("wrote to database?");
   },
 
-  writeUntriedToDatabase: function (cocktailName) {
+  writeUntriedToDatabase: function (cocktailName, cocktailNotes, ingredients) {
     const db = getDatabase();
     set(databaseRef(db, "cocktails/untried/" + cocktailName), {
       cocktailName: cocktailName,
+      cocktailNotes: cocktailNotes,
+      ingredients: ingredients,
     });
-    console.log("wrote to database?");
   },
 
   uploadImage: function (event, setProgresspercent, setImgUrl) {
