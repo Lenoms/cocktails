@@ -1,7 +1,12 @@
 import React from "react";
 import "./UploadForm.css";
 
-function UploadForm({ uploadImage, imgUrl, progresspercent }) {
+function UploadForm({
+  uploadImage,
+  imgUrl,
+  progresspercent,
+  cocktail = { cocktailNotes: "" },
+}) {
   return (
     <div className="upload-form">
       <div className="form-input-field-container">
@@ -14,6 +19,7 @@ function UploadForm({ uploadImage, imgUrl, progresspercent }) {
           type="text"
           id="cocktail-notes"
           name="cocktail-notes"
+          defaultValue={cocktail.cocktailNotes}
         ></textarea>
       </div>
       <div className="form-input-field-container">

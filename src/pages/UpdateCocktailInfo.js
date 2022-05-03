@@ -11,19 +11,37 @@ function UpdateCocktailInfo({ location }) {
     let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
     const [progresspercent, setProgresspercent] = useState(0);
-    const [imgUrl, setImgUrl] = useState(null);
+    let defaultImgUrl = null;
+    if (cocktail.image) {
+      defaultImgUrl = cocktail.image;
+    }
+    const [imgUrl, setImgUrl] = useState(defaultImgUrl);
+    let defaultTried = location.state.tried;
+    const [tried, setTried] = useState(defaultTried);
 
     function updateCocktail() {
       var grade = document.getElementById("cocktail-grade").value;
       var notes = document.getElementById("cocktail-notes").value;
       var name = cocktail.cocktailName;
-      CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
       const db = getDatabase();
-      remove(databaseRef(db, "cocktails/untried/" + name));
+      if (defaultTried) {
+        remove(databaseRef(db, "cocktails/tried/" + name));
+      } else {
+        remove(databaseRef(db, "cocktails/untried/" + name));
+      }
+      if (tried) {
+        CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
+      } else {
+        CocktailService.writeUntriedToDatabase(name);
+      }
       navigate("/cocktails/tried");
     }
     function uploadImage(event) {
       CocktailService.uploadImage(event, setProgresspercent, setImgUrl);
+    }
+
+    function checkboxClicked(e) {
+      setTried(!tried);
     }
     return (
       <motion.div
@@ -42,15 +60,39 @@ function UpdateCocktailInfo({ location }) {
       >
         <h1>Update {cocktail.cocktailName}</h1>
         <form className="cocktail-form" onSubmit={updateCocktail}>
-          <UploadForm
-            uploadImage={uploadImage}
-            imgUrl={imgUrl}
-            progresspercent={progresspercent}
-          ></UploadForm>
-
+          <div className="form-input-field-container">
+            <label className="form-label" htmlFor="cocktail-name">
+              Cocktail Name
+            </label>
+            <input
+              className="form-input-field"
+              type="text"
+              id="cocktail-name"
+              name="cocktail-name"
+              defaultValue={cocktail.cocktailName}
+            ></input>
+          </div>
+          <label htmlFor="tried">Tried?</label>
+          <input
+            type="checkbox"
+            id="tried"
+            onChange={checkboxClicked}
+            className="checkbox"
+            checked={tried}
+          ></input>
+          {tried && (
+            <>
+              <UploadForm
+                uploadImage={uploadImage}
+                imgUrl={imgUrl}
+                progresspercent={progresspercent}
+                cocktail={cocktail}
+              ></UploadForm>
+            </>
+          )}
           {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
 
-          <button disabled={!imgUrl} className="submit-button" type="submit">
+          <button className="submit-button" type="submit">
             Update
           </button>
         </form>

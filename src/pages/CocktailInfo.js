@@ -1,12 +1,19 @@
 import React from "react";
 import "./CocktailInfo.css";
 import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RouteAnimation } from "../animations/RouteAnimation";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
+    let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
+
+    const editCocktail = () => {
+      navigate("/cocktails/update", {
+        state: { cocktailItem: cocktail, tried: true },
+      });
+    };
     return (
       <motion.div
         className="cocktail-info"
@@ -20,6 +27,7 @@ function CocktailInfo({ location }) {
         <div className="cocktail-description">
           Notes: {cocktail.cocktailNotes}{" "}
         </div>
+        <button onClick={editCocktail}>Edit</button>
       </motion.div>
     );
   } else {

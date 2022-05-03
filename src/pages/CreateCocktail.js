@@ -76,7 +76,7 @@ function CreateCocktail() {
         {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
 
         <button
-          disabled={!imgUrl && tried}
+          disabled={progresspercent != 0 && !imgUrl}
           className="submit-button"
           type="submit"
         >

@@ -16,7 +16,9 @@ function UntriedCocktailItem({ item }) {
     remove(ref(db, "cocktails/untried/" + cocktailName));
   };
   const triedCocktail = () => {
-    navigate("/cocktails/update", { state: { cocktailItem: item } });
+    navigate("/cocktails/update", {
+      state: { cocktailItem: item, tried: false },
+    });
   };
   return (
     <div className="untried-cocktail-item-body">
