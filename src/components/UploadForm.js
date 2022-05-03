@@ -5,23 +5,12 @@ function UploadForm({
   uploadImage,
   imgUrl,
   progresspercent,
+  setIngredients,
+  ingredients,
   cocktail = { cocktailNotes: "" },
 }) {
   return (
     <div className="upload-form">
-      <div className="form-input-field-container">
-        <label className="form-label" htmlFor="cocktail-notes">
-          Notes:
-        </label>
-        <textarea
-          className="notes-field"
-          rows={4}
-          type="text"
-          id="cocktail-notes"
-          name="cocktail-notes"
-          defaultValue={cocktail.cocktailNotes}
-        ></textarea>
-      </div>
       <div className="form-input-field-container">
         <label className="form-label" htmlFor="cocktail-grade">
           Cocktail Grade
@@ -37,6 +26,7 @@ function UploadForm({
           <option value="F">F</option>
         </select>
       </div>
+
       <div className="form-input-field-container">
         <input
           type="file"

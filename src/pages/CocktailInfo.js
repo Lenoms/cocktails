@@ -27,6 +27,16 @@ function CocktailInfo({ location }) {
         <div className="cocktail-description">
           Notes: {cocktail.cocktailNotes}{" "}
         </div>
+        <ul>
+          {cocktail.ingredients &&
+            cocktail.ingredients.map(function (ingredient) {
+              return (
+                <div className="ingredients-list-item" key={ingredient}>
+                  <li>{ingredient}</li>
+                </div>
+              );
+            })}
+        </ul>
         <button onClick={editCocktail}>Edit</button>
       </motion.div>
     );

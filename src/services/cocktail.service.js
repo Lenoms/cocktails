@@ -20,6 +20,7 @@ const CocktailService = {
     cocktailName,
     cocktailGrade,
     cocktailNotes,
+    ingredients,
     imgUrl
   ) {
     const db = getDatabase();
@@ -27,6 +28,7 @@ const CocktailService = {
       cocktailName: cocktailName,
       cocktailGrade: cocktailGrade,
       cocktailNotes: cocktailNotes,
+      ingredients: ingredients,
       image: imgUrl,
     });
     console.log("wrote to database?");

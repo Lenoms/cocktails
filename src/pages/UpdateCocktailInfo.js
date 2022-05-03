@@ -18,6 +18,11 @@ function UpdateCocktailInfo({ location }) {
     const [imgUrl, setImgUrl] = useState(defaultImgUrl);
     let defaultTried = location.state.tried;
     const [tried, setTried] = useState(defaultTried);
+    let defaultIngredients = [];
+    if (cocktail.ingredients) {
+      defaultIngredients = cocktail.ingredients;
+    }
+    const [ingredients, setIngredients] = useState(defaultIngredients);
 
     function updateCocktail() {
       var grade = document.getElementById("cocktail-grade").value;
@@ -30,7 +35,13 @@ function UpdateCocktailInfo({ location }) {
         remove(databaseRef(db, "cocktails/untried/" + name));
       }
       if (tried) {
-        CocktailService.writeTriedToDatabase(name, grade, notes, imgUrl);
+        CocktailService.writeTriedToDatabase(
+          name,
+          grade,
+          notes,
+          ingredients,
+          imgUrl
+        );
       } else {
         CocktailService.writeUntriedToDatabase(name);
       }
@@ -42,6 +53,19 @@ function UpdateCocktailInfo({ location }) {
 
     function checkboxClicked(e) {
       setTried(!tried);
+    }
+
+    function addIngredient(e) {
+      e.preventDefault();
+      let ingredient = document.getElementById("cocktail-ingredients").value;
+      setIngredients([...ingredients, ingredient]);
+      document.getElementById("cocktail-ingredients").value = "";
+    }
+
+    function deleteIngredient(ingredient) {
+      setIngredients(
+        ingredients.filter((eachIngredient) => eachIngredient !== ingredient)
+      );
     }
     return (
       <motion.div
@@ -80,19 +104,65 @@ function UpdateCocktailInfo({ location }) {
             className="checkbox"
             checked={tried}
           ></input>
+          <div className="form-input-field-container">
+            <label className="form-label" htmlFor="cocktail-notes">
+              Notes:
+            </label>
+            <textarea
+              className="notes-field"
+              rows={4}
+              type="text"
+              id="cocktail-notes"
+              name="cocktail-notes"
+            ></textarea>
+          </div>
+
+          <div className="form-input-field-container">
+            <label className="form-label" htmlFor="cocktail-ingredients">
+              Ingredients
+            </label>
+            <div className="add-ingredients">
+              <input
+                type="text"
+                name="cocktail-ingredients"
+                id="cocktail-ingredients"
+              ></input>
+              <button onClick={addIngredient}>Add Ingredient</button>
+            </div>
+            <ul>
+              {ingredients.map(function (ingredient) {
+                return (
+                  <div className="ingredients-list-item" key={ingredient}>
+                    <li>
+                      {ingredient}
+                      <span onClick={() => deleteIngredient(ingredient)}>
+                        Delete
+                      </span>
+                    </li>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
           {tried && (
             <>
               <UploadForm
                 uploadImage={uploadImage}
                 imgUrl={imgUrl}
                 progresspercent={progresspercent}
+                setIngredients={setIngredients}
+                ingredients={ingredients}
                 cocktail={cocktail}
               ></UploadForm>
             </>
           )}
           {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
 
-          <button className="submit-button" type="submit">
+          <button
+            disabled={progresspercent != 0 && !imgUrl}
+            className="submit-button"
+            type="submit"
+          >
             Update
           </button>
         </form>
