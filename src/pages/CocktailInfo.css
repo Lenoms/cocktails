@@ -1,10 +1,11 @@
 .cocktail-info{
-    position: absolute;
+    position: relative;
     height: 100%;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 5%;
+    padding-bottom: 20px;
 }
 @media (min-width: 600px) {
     .cocktail-info{
@@ -20,6 +21,7 @@
 
 #cocktail-info-image{
     width: 80%;
+    margin-bottom: 10px;
 }
 
 .cocktail-grade{
@@ -28,6 +30,23 @@
 
 .cocktail-description{
     width: 80%;
-    font-size: larger;
-    margin-bottom: 20px;
+    align-items: center;
+
+}
+
+.cocktail-ingredients{
+    width: 80%;
+}
+
+.cocktail-edit-button-container{
+    width: 80%;
+    padding-bottom: 30px;
+}
+
+.cocktail-edit-button{
+    height: 30px;
+    width: 30%;
+    border: none;
+    background-color: rgb(21,0,47);
+    color: white;
 }

@@ -23,21 +23,29 @@ function CocktailInfo({ location }) {
       >
         <h1>{cocktail.cocktailName}</h1>
         <img id="cocktail-info-image" src={cocktail.image}></img>
-        <h1 className="cocktail-grade">Grade: {cocktail.cocktailGrade}</h1>
+        <h4 className="cocktail-grade">Grade: {cocktail.cocktailGrade}</h4>
         <div className="cocktail-description">
-          Notes: {cocktail.cocktailNotes}{" "}
+          <h5>Notes:</h5>
+          <p>{cocktail.cocktailNotes ? cocktail.cocktailNotes : "N/A"} </p>
         </div>
-        <ul>
-          {cocktail.ingredients &&
-            cocktail.ingredients.map(function (ingredient) {
-              return (
-                <div className="ingredients-list-item" key={ingredient}>
-                  <li>{ingredient}</li>
-                </div>
-              );
-            })}
-        </ul>
-        <button onClick={editCocktail}>Edit</button>
+        <div className="cocktail-ingredients">
+          <h5>Ingredients:</h5>
+          <ul>
+            {cocktail.ingredients &&
+              cocktail.ingredients.map(function (ingredient) {
+                return (
+                  <div className="ingredients-list-item" key={ingredient}>
+                    <li>{ingredient}</li>
+                  </div>
+                );
+              })}
+          </ul>
+        </div>
+        <div className="cocktail-edit-button-container">
+          <button className="cocktail-edit-button" onClick={editCocktail}>
+            Edit
+          </button>
+        </div>
       </motion.div>
     );
   } else {
