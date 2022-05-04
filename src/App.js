@@ -12,8 +12,9 @@ function App() {
   let location = useLocation();
   return (
     <div className="App">
-      <Header />
-
+      <div className="app-header">
+        <Header />
+      </div>
       <div className="app-body">
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
