@@ -1,9 +1,9 @@
 MVP Stuff
 
-- UI (big one)
-- search feature
+- Searching finish that off
+- UI of other pages
+- Add a footer? for a rise up menu which has other upcoming features (bar, about?, etc idk)
 
 Upcoming features
 
--Ingredients and bar stock
--Sorting by ingredient
+- Bar
