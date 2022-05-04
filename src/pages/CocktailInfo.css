@@ -1,6 +1,7 @@
 .cocktail-info{
     position: absolute;
-    top: 20%;
+    height: 100%;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

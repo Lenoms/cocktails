@@ -8,7 +8,10 @@
     background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(255,255,255,1) 100%);
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
+    position: relative;
+    z-index: 10;
 }
+
 
 .cocktail-name{
     width: 30%;

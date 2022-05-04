@@ -1,12 +1,25 @@
 .untried-cocktail-item-body{
     display: flex;
     align-items: center;
+    position: relative;
     width: 100%;
-    height: 15%;
     background: rgb(199,199,199);
     background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(255,255,255,1) 100%);
     border-top: 1px inset grey;
     border-bottom: 1px solid grey;
+    z-index: 10;
+}
+
+@media (min-height: 550px) {
+    .untried-cocktail-item-body{
+        height: 15%;
+    }
+}
+
+@media (max-height: 550px) {
+    .untried-cocktail-item-body{
+        height: 30%;
+    }
 }
 
 .border-left{

@@ -5,6 +5,7 @@
     color: white;
     justify-content: space-between;
     position: relative;
+    z-index: 0;
 }
 
 .image-container{
@@ -18,6 +19,7 @@
 }
 
 .image-container img {
+    position: relative;
     height: 80%;
     z-index: 0;
 }

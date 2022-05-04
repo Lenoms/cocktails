@@ -14,24 +14,30 @@ function App() {
     <div className="App">
       <Header />
 
-      <AnimatePresence>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/cocktails" element={<TriedList />} />
-          <Route exact path="/cocktails/tried" element={<TriedList />} />
-          <Route exact path="/cocktails/untried" element={<UntriedList />} />
-          <Route exact path="/cocktails/create" element={<CreateCocktail />} />
-          <Route
-            exact
-            path="/cocktails/info"
-            element={<CocktailInfo location={location} />}
-          />
-          <Route
-            exact
-            path="/cocktails/update"
-            element={<UpdateCocktailInfo location={location} />}
-          />
-        </Routes>
-      </AnimatePresence>
+      <div className="app-body">
+        <AnimatePresence>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/cocktails" element={<TriedList />} />
+            <Route exact path="/cocktails/tried" element={<TriedList />} />
+            <Route exact path="/cocktails/untried" element={<UntriedList />} />
+            <Route
+              exact
+              path="/cocktails/create"
+              element={<CreateCocktail />}
+            />
+            <Route
+              exact
+              path="/cocktails/info"
+              element={<CocktailInfo location={location} />}
+            />
+            <Route
+              exact
+              path="/cocktails/update"
+              element={<UpdateCocktailInfo location={location} />}
+            />
+          </Routes>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
