@@ -23,18 +23,6 @@ body {
   z-index: 10;
 }
 
-@media (min-height: 350px) {
-  .app-body{
-      height: 80%;
-  }
-}
-
-@media (max-height: 350px) {
-  .app-body{
-      height: 60%;
-  }
-}
-
 
 .form-input-field-container{
   display: flex;
