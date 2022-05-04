@@ -81,6 +81,7 @@ function CreateCocktail() {
             type="text"
             id="cocktail-name"
             name="cocktail-name"
+            autoComplete="off"
           ></input>
           <p id="validation-message" hidden style={{ color: "red", margin: 0 }}>
             Cocktail name cannot be empty!

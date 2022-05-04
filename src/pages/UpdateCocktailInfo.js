@@ -109,6 +109,7 @@ function UpdateCocktailInfo({ location }) {
               id="cocktail-name"
               name="cocktail-name"
               defaultValue={cocktail.cocktailName}
+              autoComplete="off"
             ></input>
             <p
               id="validation-message"
