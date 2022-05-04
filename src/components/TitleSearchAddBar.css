@@ -6,6 +6,18 @@
     justify-content: space-between;
 }
 
+.image-container{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    height: 80%;
+}
+
 @media (min-width: 600px) {
     .title-search-add{
         width: 50%;
@@ -16,10 +28,6 @@
     .title-search-add{
         width: 100%;
     }
-}
-
-.header-title{
-    width: 30%;
 }
 
 .search-add{

@@ -11,7 +11,10 @@ function TitleSearchAddBar() {
   }
   return (
     <div className="title-search-add">
-      <h1 className="header-title">Cocktails</h1>
+      <div className="image-container">
+        {" "}
+        <img src={process.env.PUBLIC_URL + "/cocktail.png"} />
+      </div>
       <div className="search-add">
         <div className="search-bar">
           <div className="search-icon-box" onClick={submitSearch}>
