@@ -11,14 +11,3 @@
     flex-direction: column;
 }
 
-@media (min-height: 550px) {
-    .header-body{
-        height: 20%;
-    }
-}
-
-@media (max-height: 550px) {
-    .header-body{
-        height: 40%;
-    }
-}
