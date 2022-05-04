@@ -1,20 +1,9 @@
 MVP Stuff
 
-- Sorting (alphabetical and grade)
-- Make whole thing nicer
-- Editing. I think this is one thing we really want. Make whole update form nicer, and allow for 
-  partial fields in create form. Like when you click the tick in untried list item it just takes you
-  to full update form. I think thats fine. 
-- searching
-- ingredients
+- UI (big one)
+- search feature
 
 Upcoming features
 
 -Ingredients and bar stock
 -Sorting by ingredient
-
-- Sort out untried list item to show notes/ingredients
-- Test everything to do with creation and updating and test nothing breaks
-- A bit of refactoring till we're happy
-- UI (big one)
-- search feature

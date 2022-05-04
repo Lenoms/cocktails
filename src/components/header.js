@@ -1,11 +1,12 @@
 import React from "react";
 import "./Header.css";
 import Navbar from "./Navbar.js";
+import TitleSearchAddBar from "./TitleSearchAddBar";
 
 function Header() {
   return (
     <div className="header-body">
-      <h1 className="header-title">Cocktails</h1>
+      <TitleSearchAddBar />
       <Navbar />
     </div>
   );

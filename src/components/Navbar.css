@@ -1,20 +1,32 @@
 .nav-bar{
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 30%;
+}
+
+@media (min-width: 600px) {
+    .nav-bar{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-bar{
+        width: 100%;
+    }
 }
 
 .nav-buttons{
-    width: 20%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
-    border: 1px solid black;
 }
 
 .nav-button{
-    width:50%;
+    width:49.5%;
     height: 100%;
-    background-color: rgb(154,154,154);
+    background-color: whitesmoke;
+    border: none;
 }

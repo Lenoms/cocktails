@@ -29,6 +29,7 @@ function UntriedCocktailItem({ item }) {
   };
   return (
     <div className="untried-cocktail-item-body">
+      <div className="border-left"></div>
       <div className="name-notes-and-ingredients">
         <h3 className="cocktail-untried-name">{cocktailName}</h3>
         <p className="cocktail-paragraph-info">{item.cocktailNotes}</p>

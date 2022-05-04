@@ -3,7 +3,6 @@ import "./Navbar.css";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
-import AddButton from "../components/AddButton";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -17,13 +16,13 @@ function Navbar() {
         >
           <CheckCircleIcon />
         </button>
+        <div style={{ width: "1%" }}></div>
         <button
           className="nav-button"
           onClick={() => navigate("/cocktails/untried")}
         >
           <ListAltIcon />
         </button>
-        <AddButton></AddButton>
       </div>
     </div>
   );
