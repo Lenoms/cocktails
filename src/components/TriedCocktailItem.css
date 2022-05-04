@@ -4,8 +4,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: rgb(154,154,154);
-    background: linear-gradient(135deg, rgba(154,154,154,1) 0%, rgba(255,255,255,1) 100%);
+    background: rgb(199,199,199);
+    background: linear-gradient(90deg, rgba(199,199,199,1) 0%, rgba(255,255,255,1) 100%);
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
 }
@@ -21,4 +21,5 @@
 
 .delete-button{
     border: none;
+    background: none;
 }
