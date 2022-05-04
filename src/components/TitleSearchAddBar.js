@@ -4,15 +4,25 @@ import "./TitleSearchAddBar.css";
 import SearchIcon from "@mui/icons-material/Search";
 
 function TitleSearchAddBar() {
+  function submitSearch(e) {
+    e.preventDefault();
+    let searchQuery = document.getElementById("search-bar-input").value;
+    console.log(searchQuery);
+  }
   return (
     <div className="title-search-add">
       <h1 className="header-title">Cocktails</h1>
       <div className="search-add">
         <div className="search-bar">
-          <div className="search-icon-box">
+          <div className="search-icon-box" onClick={submitSearch}>
             <SearchIcon />
           </div>
-          <input className="search-bar-input"></input>
+          <form
+            onSubmit={submitSearch}
+            style={{ width: "90%", height: "100%" }}
+          >
+            <input className="search-bar-input" id="search-bar-input"></input>
+          </form>
         </div>
         <AddButton></AddButton>
       </div>
