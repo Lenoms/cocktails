@@ -21,6 +21,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: 0;
   z-index: 10;
@@ -37,10 +38,10 @@ body {
 
 @media (max-height: 550px) {
   .app-header{
-      height: 30%;
+      height: 33%;
   }
   .app-body{
-    height: 70%;
+    height: 67%;
   }
 }
 

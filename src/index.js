@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 //import * as firebase from 'firebase';
 import { initializeApp } from "firebase/app";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const firebaseConfig = {
   apiKey: "AIzaSyA8DLy1n5YJZuTDXfQMWwzo6hkQiuPJcLM",
   authDomain: "cocktails-aec8a.firebaseapp.com",

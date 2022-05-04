@@ -28,8 +28,8 @@ function TriedCocktailItem({ item }) {
   };
   return (
     <Card className="tried-cocktail-item-body" onClick={cocktailClicked}>
-      <h3 className="cocktail-name">{cocktailName}</h3>
-      <h3>{cocktailGrade}</h3>
+      <h4 className="cocktail-name">{cocktailName}</h4>
+      <h4>{cocktailGrade}</h4>
       <img id="cocktail-image" src={cocktailImageUrl}></img>
       <button className="delete-button" onClick={deleteCocktail}>
         <DeleteIcon />

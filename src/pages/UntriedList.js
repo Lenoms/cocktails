@@ -4,6 +4,7 @@ import { getDatabase, ref, get, child } from "firebase/database";
 import UntriedCocktailItem from "../components/UntriedCocktailItem";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
+import { Spinner } from "react-bootstrap";
 
 function UntriedList() {
   let [data, setData] = useState([]);
@@ -27,11 +28,7 @@ function UntriedList() {
   });
 
   if (loading) {
-    return (
-      <div>
-        <h1>Loading!</h1>
-      </div>
-    );
+    return <Spinner animation="border" />;
   } else {
     return (
       <motion.div

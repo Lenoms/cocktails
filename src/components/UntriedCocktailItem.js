@@ -31,7 +31,7 @@ function UntriedCocktailItem({ item }) {
     <div className="untried-cocktail-item-body">
       <div className="border-left"></div>
       <div className="name-notes-and-ingredients">
-        <h3 className="cocktail-untried-name">{cocktailName}</h3>
+        <h5 className="cocktail-untried-name">{cocktailName}</h5>
         <p className="cocktail-paragraph-info">{item.cocktailNotes}</p>
         <p className="cocktail-paragraph-info">{ingredientsString}</p>
       </div>
