@@ -8,6 +8,8 @@
     border-top: 1px inset grey;
     border-bottom: 1px solid grey;
     z-index: 10;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 @media (min-height: 550px) {
