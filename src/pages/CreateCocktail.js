@@ -6,6 +6,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import UploadForm from "../components/UploadForm";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import "./CreateUpdate.css";
 
 function CreateCocktail() {
   const navigate = useNavigate();
@@ -117,22 +120,26 @@ function CreateCocktail() {
               name="cocktail-ingredients"
               id="cocktail-ingredients"
             ></input>
-            <button onClick={addIngredient}>Add Ingredient</button>
+            <button className="add-ingredient-button" onClick={addIngredient}>
+              <AddIcon fontSize="large" />
+            </button>
           </div>
-          <ul>
+          <div>
             {ingredients.map(function (ingredient) {
               return (
-                <div className="ingredients-list-item" key={ingredient}>
-                  <li>
-                    {ingredient}
+                <div key={ingredient}>
+                  <li className="ingredients-list-item">
+                    <div className="ingredients-list-item-name">
+                      {ingredient}
+                    </div>
                     <span onClick={() => deleteIngredient(ingredient)}>
-                      Delete
+                      <DeleteIcon />
                     </span>
                   </li>
                 </div>
               );
             })}
-          </ul>
+          </div>
         </div>
         {tried && (
           <>
@@ -140,8 +147,6 @@ function CreateCocktail() {
               uploadImage={uploadImage}
               imgUrl={imgUrl}
               progresspercent={progresspercent}
-              setIngredients={setIngredients}
-              ingredients={ingredients}
             ></UploadForm>
           </>
         )}

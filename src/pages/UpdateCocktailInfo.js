@@ -5,6 +5,10 @@ import { getDatabase, ref as databaseRef, remove } from "firebase/database";
 import CocktailService from "../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
 import UploadForm from "../components/UploadForm";
+import "./UpdateCocktailInfo.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import "./CreateUpdate.css";
 
 function UpdateCocktailInfo({ location }) {
   if (!!location.state) {
@@ -84,7 +88,7 @@ function UpdateCocktailInfo({ location }) {
 
     return (
       <motion.div
-        className="create-cocktail"
+        className="update-cocktail"
         initial={{
           opacity: 0,
           x: "-200vw",
@@ -151,22 +155,26 @@ function UpdateCocktailInfo({ location }) {
                 name="cocktail-ingredients"
                 id="cocktail-ingredients"
               ></input>
-              <button onClick={addIngredient}>Add Ingredient</button>
+              <button className="add-ingredient-button" onClick={addIngredient}>
+                <AddIcon fontSize="large" />
+              </button>
             </div>
-            <ul>
+            <div>
               {ingredients.map(function (ingredient) {
                 return (
-                  <div className="ingredients-list-item" key={ingredient}>
-                    <li>
-                      {ingredient}
+                  <div key={ingredient}>
+                    <li className="ingredients-list-item">
+                      <div className="ingredients-list-item-name">
+                        {ingredient}
+                      </div>
                       <span onClick={() => deleteIngredient(ingredient)}>
-                        Delete
+                        <DeleteIcon />
                       </span>
                     </li>
                   </div>
                 );
               })}
-            </ul>
+            </div>
           </div>
           {tried && (
             <>
@@ -174,13 +182,10 @@ function UpdateCocktailInfo({ location }) {
                 uploadImage={uploadImage}
                 imgUrl={imgUrl}
                 progresspercent={progresspercent}
-                setIngredients={setIngredients}
-                ingredients={ingredients}
-                cocktail={cocktail}
               ></UploadForm>
             </>
           )}
-          {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+          {imgUrl && <img src={imgUrl} alt="uploaded file" />}
 
           <button
             disabled={progresspercent != 0 && !imgUrl}

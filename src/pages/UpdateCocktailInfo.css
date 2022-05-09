@@ -1,0 +1,20 @@
+.update-cocktail{
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+@media (min-width: 600px) {
+    .update-cocktail{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .update-cocktail{
+        width: 100%;
+    }
+}

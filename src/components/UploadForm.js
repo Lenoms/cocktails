@@ -1,14 +1,7 @@
 import React from "react";
 import "./UploadForm.css";
 
-function UploadForm({
-  uploadImage,
-  imgUrl,
-  progresspercent,
-  setIngredients,
-  ingredients,
-  cocktail = { cocktailNotes: "" },
-}) {
+function UploadForm({ uploadImage, imgUrl, progresspercent }) {
   return (
     <div className="upload-form">
       <div className="form-input-field-container">

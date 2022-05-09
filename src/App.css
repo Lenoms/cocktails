@@ -55,3 +55,8 @@ body {
 .form-input-field{
   height: 30px;
 }
+
+.form-label{
+  font-size: large;
+  font-weight: bold;
+}
