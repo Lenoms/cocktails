@@ -1,7 +1,7 @@
 import React from "react";
 import "./UntriedCocktailItem.css";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import EditIcon from "@mui/icons-material/Edit";
 import { getDatabase, ref, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function UntriedCocktailItem({ item }) {
       </div>
       <div className="untried-cocktail-item-buttons">
         <button className="update-button" onClick={updateCocktail}>
-          <CheckCircleIcon />
+          <EditIcon />
         </button>
         <button className="delete-button" onClick={deleteCocktail}>
           <DeleteIcon />

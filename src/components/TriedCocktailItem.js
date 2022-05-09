@@ -9,7 +9,9 @@ import { Card } from "@mui/material";
 function TriedCocktailItem({ item }) {
   const navigate = useNavigate();
   let cocktailName = item.cocktailName;
-  let cocktailGrade = item.cocktailGrade;
+  let danielGrade = parseInt(item.danielGrade);
+  let daniGrade = parseInt(item.daniGrade);
+  let overallGrade = (danielGrade + daniGrade) / 2;
   let cocktailImageUrl = item.image;
 
   const deleteCocktail = (e) => {
@@ -29,7 +31,7 @@ function TriedCocktailItem({ item }) {
   return (
     <Card className="tried-cocktail-item-body" onClick={cocktailClicked}>
       <h4 className="cocktail-name">{cocktailName}</h4>
-      <h4>{cocktailGrade}</h4>
+      <h4>{overallGrade}</h4>
       <img id="cocktail-image" src={cocktailImageUrl}></img>
       <button className="delete-button" onClick={deleteCocktail}>
         <DeleteIcon />

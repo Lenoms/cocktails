@@ -23,10 +23,12 @@ function CreateCocktail() {
     var notes = document.getElementById("cocktail-notes").value;
     if (name) {
       if (tried) {
-        var grade = document.getElementById("cocktail-grade").value;
+        var daniel_grade = document.getElementById("daniel-grade").value;
+        var dani_grade = document.getElementById("dani-grade").value;
         CocktailService.writeTriedToDatabase(
           name,
-          grade,
+          daniel_grade,
+          dani_grade,
           notes,
           ingredients,
           imgUrl
@@ -90,7 +92,9 @@ function CreateCocktail() {
             Cocktail name cannot be empty!
           </p>
         </div>
-        <label htmlFor="tried">Tried?</label>
+        <label className="form-label" htmlFor="tried">
+          Tried?
+        </label>
         <input
           type="checkbox"
           id="tried"

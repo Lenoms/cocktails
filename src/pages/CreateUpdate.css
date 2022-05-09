@@ -57,3 +57,8 @@
 .ingredients-list-item-name{
     width: 40%;
 }
+
+.notes-field{
+    resize: none;
+    font-size: large;
+}

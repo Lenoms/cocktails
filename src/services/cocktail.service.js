@@ -18,7 +18,8 @@ import {
 const CocktailService = {
   writeTriedToDatabase: function (
     cocktailName,
-    cocktailGrade,
+    danielGrade,
+    daniGrade,
     cocktailNotes,
     ingredients,
     imgUrl
@@ -26,7 +27,8 @@ const CocktailService = {
     const db = getDatabase();
     set(databaseRef(db, "cocktails/tried/" + cocktailName), {
       cocktailName: cocktailName,
-      cocktailGrade: cocktailGrade,
+      danielGrade: danielGrade,
+      daniGrade: daniGrade,
       cocktailNotes: cocktailNotes,
       ingredients: ingredients,
       image: imgUrl,

@@ -49,6 +49,9 @@
     width: 30%;
     border: none;
     background-color: rgb(45,0,125);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
 }
 

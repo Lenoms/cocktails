@@ -1,23 +1,38 @@
 import React from "react";
 import "./UploadForm.css";
 
-function UploadForm({ uploadImage, imgUrl, progresspercent }) {
+function UploadForm({ uploadImage, imgUrl, progresspercent, defaultGrades }) {
   return (
     <div className="upload-form">
       <div className="form-input-field-container">
-        <label className="form-label" htmlFor="cocktail-grade">
-          Cocktail Grade
-        </label>
-        <select
-          className="grade-selector"
-          name="cocktail-grade"
-          id="cocktail-grade"
-        >
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="F">F</option>
-        </select>
+        <div className="grades-container">
+          <div className="grade-container">
+            <label className="form-label" htmlFor="cocktail-grade">
+              Daniel Grade
+            </label>
+            <input
+              className="grade-number-selector"
+              type="number"
+              min="1"
+              max="100"
+              id="daniel-grade"
+              defaultValue={defaultGrades ? defaultGrades[0] : 0}
+            ></input>
+          </div>
+          <div className="grade-container">
+            <label className="form-label" htmlFor="cocktail-grade">
+              Dani Grade
+            </label>
+            <input
+              className="grade-number-selector"
+              type="number"
+              min="1"
+              max="100"
+              id="dani-grade"
+              defaultValue={defaultGrades ? defaultGrades[1] : 0}
+            ></input>
+          </div>
+        </div>
       </div>
 
       <div className="form-input-field-container">

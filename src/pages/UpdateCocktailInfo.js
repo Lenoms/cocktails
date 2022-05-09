@@ -5,16 +5,18 @@ import { getDatabase, ref as databaseRef, remove } from "firebase/database";
 import CocktailService from "../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
 import UploadForm from "../components/UploadForm";
-import "./UpdateCocktailInfo.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import "./CreateUpdate.css";
+import "./UpdateCocktailInfo.css";
 
 function UpdateCocktailInfo({ location }) {
   if (!!location.state) {
     let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
     const [progresspercent, setProgresspercent] = useState(0);
+
+    let default_grades = [cocktail.danielGrade, cocktail.daniGrade];
 
     // Setting up imgUrl
     let defaultImgUrl = cocktail.image ? cocktail.image : null;
@@ -43,10 +45,12 @@ function UpdateCocktailInfo({ location }) {
           remove(databaseRef(db, "cocktails/untried/" + cocktail.cocktailName));
         }
         if (tried) {
-          var grade = document.getElementById("cocktail-grade").value;
+          var daniel_grade = document.getElementById("daniel-grade").value;
+          var dani_grade = document.getElementById("dani-grade").value;
           CocktailService.writeTriedToDatabase(
             newName,
-            grade,
+            daniel_grade,
+            dani_grade,
             notes,
             ingredients,
             imgUrl
@@ -123,7 +127,9 @@ function UpdateCocktailInfo({ location }) {
               Cocktail name cannot be empty!
             </p>
           </div>
-          <label htmlFor="tried">Tried?</label>
+          <label className="form-label" htmlFor="tried">
+            Tried?
+          </label>
           <input
             type="checkbox"
             id="tried"
@@ -182,6 +188,7 @@ function UpdateCocktailInfo({ location }) {
                 uploadImage={uploadImage}
                 imgUrl={imgUrl}
                 progresspercent={progresspercent}
+                defaultGrades={default_grades}
               ></UploadForm>
             </>
           )}

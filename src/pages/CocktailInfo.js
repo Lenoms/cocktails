@@ -3,6 +3,7 @@ import "./CocktailInfo.css";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RouteAnimation } from "../animations/RouteAnimation";
+import EditIcon from "@mui/icons-material/Edit";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
@@ -43,7 +44,7 @@ function CocktailInfo({ location }) {
         </div>
         <div className="cocktail-edit-button-container">
           <button className="cocktail-edit-button" onClick={editCocktail}>
-            Edit
+            <EditIcon />
           </button>
         </div>
       </motion.div>
