@@ -7,9 +7,12 @@ import CreateCocktail from "./pages/CreateCocktail";
 import { AnimatePresence } from "framer-motion";
 import CocktailInfo from "./pages/CocktailInfo";
 import UpdateCocktailInfo from "./pages/UpdateCocktailInfo";
+import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
   let location = useLocation();
+
   return (
     <div className="App">
       <div className="app-header">
@@ -38,6 +41,9 @@ function App() {
             />
           </Routes>
         </AnimatePresence>
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );

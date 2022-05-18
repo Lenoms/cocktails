@@ -1,0 +1,15 @@
+.footer-body{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: purple;
+    transition: height ease-in-out 200ms;
+}
+
+.footer-showing{
+    height: 100%;
+}
+  
+.footer-hiding{
+    height: 20%;
+}
