@@ -10,6 +10,10 @@ function CocktailInfo({ location }) {
     let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
 
+    let danielGrade = parseInt(cocktail.danielGrade);
+    let daniGrade = parseInt(cocktail.daniGrade);
+    let overallGrade = (danielGrade + daniGrade) / 2;
+
     const editCocktail = () => {
       navigate("/cocktails/update", {
         state: { cocktailItem: cocktail, tried: true },
@@ -24,7 +28,7 @@ function CocktailInfo({ location }) {
       >
         <h1>{cocktail.cocktailName}</h1>
         <img id="cocktail-info-image" src={cocktail.image}></img>
-        <h4 className="cocktail-grade">Grade: {cocktail.cocktailGrade}</h4>
+        <h4 className="cocktail-grade">Grade: {overallGrade}</h4>
         <div className="cocktail-description">
           <h5>Notes:</h5>
           <p>{cocktail.cocktailNotes ? cocktail.cocktailNotes : "N/A"} </p>
