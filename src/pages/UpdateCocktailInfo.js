@@ -192,7 +192,13 @@ function UpdateCocktailInfo({ location }) {
               ></UploadForm>
             </>
           )}
-          {imgUrl && <img src={imgUrl} alt="uploaded file" />}
+          {imgUrl && (
+            <img
+              className="create-update-image"
+              src={imgUrl}
+              alt="uploaded file"
+            />
+          )}
 
           <button
             disabled={progresspercent != 0 && !imgUrl}

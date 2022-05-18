@@ -62,3 +62,8 @@
     resize: none;
     font-size: large;
 }
+
+.create-update-image{
+    width: 80%;
+    height: auto;
+}

@@ -155,7 +155,13 @@ function CreateCocktail() {
           </>
         )}
 
-        {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
+        {imgUrl && (
+          <img
+            className="create-update-image"
+            src={imgUrl}
+            alt="uploaded file"
+          />
+        )}
 
         <button
           disabled={progresspercent != 0 && !imgUrl}
