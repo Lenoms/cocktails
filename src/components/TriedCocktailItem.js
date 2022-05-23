@@ -31,7 +31,7 @@ function TriedCocktailItem({ item }) {
   return (
     <Card className="tried-cocktail-item-body" onClick={cocktailClicked}>
       <h4 className="cocktail-name">{cocktailName}</h4>
-      <h4>{overallGrade}</h4>
+      <h4 className="tried-cocktail-item-grade">{overallGrade}</h4>
       <img id="cocktail-image" src={cocktailImageUrl}></img>
       <button className="delete-button" onClick={deleteCocktail}>
         <DeleteIcon />

@@ -13,6 +13,9 @@ import { useState } from "react";
 function App() {
   let location = useLocation();
 
+  const [sortBy, setSortBy] = useState("Alphabetical");
+  // const [footerActiveContainer, setFooterActiveContainer] = useState(false);
+
   return (
     <div className="App">
       <div className="app-header">
@@ -21,8 +24,12 @@ function App() {
       <div className="app-body">
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
-            <Route path="/cocktails" element={<TriedList />} />
-            <Route exact path="/cocktails/tried" element={<TriedList />} />
+            <Route path="/cocktails" element={<TriedList sortBy={sortBy} />} />
+            <Route
+              exact
+              path="/cocktails/tried"
+              element={<TriedList sortBy={sortBy} />}
+            />
             <Route exact path="/cocktails/untried" element={<UntriedList />} />
             <Route
               exact
@@ -43,7 +50,7 @@ function App() {
         </AnimatePresence>
       </div>
       <div className="footer">
-        <Footer />
+        <Footer setSortBy={setSortBy} />
       </div>
     </div>
   );

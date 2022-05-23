@@ -5,9 +5,10 @@ import TriedCocktailItem from "../components/TriedCocktailItem";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
+import { sortList } from "../services/sorter.service";
 
-function TriedList() {
-  let [data, setData] = useState([]);
+function TriedList({ sortBy }) {
+  const [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +26,12 @@ function TriedList() {
         });
     }
     fetchCocktails();
-  });
+  }, []);
+
+  useEffect(() => {
+    var sortedList = sortList(data, sortBy);
+    setData(sortedList.slice());
+  }, [sortBy]);
 
   if (loading) {
     return <Spinner animation="border" />;
