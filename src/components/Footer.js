@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Footer.css";
 import "../animations/bubbles.css";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 function Footer({ setSortBy }) {
   const [activeFooter, setActiveFooter] = useState(false);
@@ -19,6 +20,16 @@ function Footer({ setSortBy }) {
     low: { y: 0 },
     high: { y: -40, rotate: 360 },
   };
+
+  let location = useLocation();
+  if (
+    location.pathname == "/cocktails/info" ||
+    location.pathname == "/cocktails/create" ||
+    location.pathname == "/cocktails/update"
+  ) {
+    return null;
+  }
+
   return (
     <div
       className={
@@ -27,17 +38,17 @@ function Footer({ setSortBy }) {
           : "footer-container footer-container-down"
       }
     >
-      <div class="bubbles">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+      <div className="bubbles">
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
       </div>
       <div className="footer-cocktail-image-container">
         <motion.img
