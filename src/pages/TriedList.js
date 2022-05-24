@@ -10,7 +10,7 @@ import { searchQueryMatch } from "../services/search.service";
 
 function TriedList({ sortBy, searchQuery }) {
   const [data, setData] = useState([]);
-  const [searchQueryTerm, setSearchQueryTerm] = useState(searchQuery);
+  const [searchQueryTerm, setSearchQueryTerm] = useState();
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +28,8 @@ function TriedList({ sortBy, searchQuery }) {
         });
     }
     fetchCocktails();
-    console.log(searchQuery);
+    console.log("Search query from tried List: ", searchQuery);
+    setSearchQueryTerm(searchQuery);
   }, []);
 
   useEffect(() => {
