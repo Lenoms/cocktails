@@ -28,6 +28,7 @@ function TriedList({ sortBy, searchQuery }) {
         });
     }
     fetchCocktails();
+    console.log(searchQuery);
   }, []);
 
   useEffect(() => {
