@@ -1,20 +1,23 @@
 export function searchQueryMatch(searchQuery, cocktail) {
-  console.log(searchQuery, cocktail);
-  if (isSubString(searchQuery.toLowerCase(), cocktail.key.toLowerCase())) {
-    return true;
-  }
+  if (searchQuery != undefined) {
+    if (isSubString(searchQuery.toLowerCase(), cocktail.key.toLowerCase())) {
+      return true;
+    }
 
-  let ingredients = cocktail.props.item.ingredients;
+    let ingredients = cocktail.props.item.ingredients;
 
-  if (ingredients) {
-    for (let i = 0; i < ingredients.length; i++) {
-      if (checkIngredient(searchQuery, ingredients[i])) {
-        return true;
+    if (ingredients) {
+      for (let i = 0; i < ingredients.length; i++) {
+        if (checkIngredient(searchQuery, ingredients[i])) {
+          return true;
+        }
       }
     }
-  }
 
-  return false;
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function isSubString(s1, s2) {
