@@ -18,6 +18,7 @@ function App() {
 
   function searchSubmitted(searchQuery) {
     setSearchQuery(searchQuery);
+    console.log("Search query in app: ", searchQuery);
   }
 
   return (

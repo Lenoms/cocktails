@@ -11,6 +11,7 @@ function TitleSearchAddBar({ searchSubmitted }) {
     e.preventDefault();
     let searchQuery = document.getElementById("search-bar-input").value;
     searchSubmitted(searchQuery);
+    console.log("Search query in titlesearchadd bar: ", searchQuery);
   }
 
   const variants = {
