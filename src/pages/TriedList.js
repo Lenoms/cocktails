@@ -10,6 +10,7 @@ import { searchQueryMatch } from "../services/search.service";
 
 function TriedList({ sortBy, searchQuery }) {
   const [data, setData] = useState([]);
+  const [searchQueryTerm, setSearchQueryTerm] = useState(searchQuery);
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function TriedList({ sortBy, searchQuery }) {
   }, [sortBy]);
 
   function filterCallback(item) {
-    return searchQueryMatch(searchQuery, item);
+    return searchQueryMatch(searchQueryTerm, item);
   }
 
   if (loading) {
