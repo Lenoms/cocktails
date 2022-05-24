@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
 import { sortList } from "../services/sorter.service";
+import { searchQueryMatch } from "../services/search.service";
 
-function TriedList({ sortBy }) {
+function TriedList({ sortBy, searchQuery }) {
   const [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
 
@@ -33,6 +34,10 @@ function TriedList({ sortBy }) {
     setData(sortedList.slice());
   }, [sortBy]);
 
+  function filterCallback(item) {
+    return searchQueryMatch(searchQuery, item);
+  }
+
   if (loading) {
     return <Spinner animation="border" />;
   } else {
@@ -43,14 +48,16 @@ function TriedList({ sortBy }) {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
       >
-        {data.map(function (item) {
-          return (
-            <TriedCocktailItem
-              key={item.cocktailName}
-              item={item}
-            ></TriedCocktailItem>
-          );
-        })}
+        {data
+          .map(function (item) {
+            return (
+              <TriedCocktailItem
+                key={item.cocktailName}
+                item={item}
+              ></TriedCocktailItem>
+            );
+          })
+          .filter((item) => filterCallback(item))}
       </motion.div>
     );
   }

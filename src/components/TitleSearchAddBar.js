@@ -5,12 +5,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-function TitleSearchAddBar() {
+function TitleSearchAddBar({ searchSubmitted }) {
   const [isLow, setIsLow] = useState(true);
   function submitSearch(e) {
     e.preventDefault();
     let searchQuery = document.getElementById("search-bar-input").value;
-    console.log(searchQuery);
+    searchSubmitted(searchQuery);
   }
 
   const variants = {
