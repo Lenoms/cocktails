@@ -28,14 +28,16 @@ function TriedList({ sortBy, searchQuery }) {
         });
     }
     fetchCocktails();
-    console.log("Search query from tried List: ", searchQuery);
-    setSearchQueryTerm(searchQuery);
   }, []);
 
   useEffect(() => {
     var sortedList = sortList(data, sortBy);
     setData(sortedList.slice());
   }, [sortBy]);
+
+  useEffect(() => {
+    setSearchQueryTerm(searchQuery);
+  }, [searchQuery]);
 
   function filterCallback(item) {
     return searchQueryMatch(searchQueryTerm, item);

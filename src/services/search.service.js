@@ -1,5 +1,5 @@
 export function searchQueryMatch(searchQuery, cocktail) {
-  console.log(searchQuery, cocktail);
+  //console.log(searchQuery, cocktail);
   if (searchQuery != undefined) {
     if (isSubString(searchQuery.toLowerCase(), cocktail.key.toLowerCase())) {
       return true;

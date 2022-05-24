@@ -14,11 +14,10 @@ function App() {
   let location = useLocation();
 
   const [sortBy, setSortBy] = useState("Alphabetical");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState();
 
   function searchSubmitted(searchQuery) {
     setSearchQuery(searchQuery);
-    console.log("Search query in app: ", searchQuery);
   }
 
   return (
@@ -29,7 +28,10 @@ function App() {
       <div className="app-body">
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
-            <Route path="/cocktails" element={<TriedList sortBy={sortBy} />} />
+            <Route
+              path="/cocktails"
+              element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
+            />
             <Route
               exact
               path="/cocktails/tried"
