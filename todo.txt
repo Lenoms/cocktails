@@ -1,9 +1,15 @@
-MVP Stuff
+QOL Changes
 
-- Searching finish that off
-- UI of other pages
-- Add a footer? for a rise up menu which has other upcoming features (bar, about?, etc idk)
+- Delete confirmation modal
+- Security updates on database
+- Fix footer floating above page on phone when hit search bar
+- Raise bottom cocktail item to be above footer
+- Make info ui nicer?
 
-Upcoming features
+features
 
 - Bar
+- Searching and sorting on untried list
+- Cocktail method field
+- Measurements in ingredients field
+- Show overall grade/daniel grade/dani grade. I.e. the user can switch which one is shown.
