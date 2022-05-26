@@ -37,10 +37,10 @@ function UntriedCocktailItem({ item }) {
       </div>
       <div className="untried-cocktail-item-buttons">
         <button className="update-button" onClick={updateCocktail}>
-          <EditIcon />
+          <EditIcon style={{ color: "black" }} />
         </button>
         <button className="delete-button" onClick={deleteCocktail}>
-          <DeleteIcon />
+          <DeleteIcon style={{ color: "black" }} />
         </button>
       </div>
     </div>

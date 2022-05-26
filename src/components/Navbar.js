@@ -14,14 +14,14 @@ function Navbar() {
           className="nav-button"
           onClick={() => navigate("/cocktails/tried")}
         >
-          <CheckCircleIcon />
+          <CheckCircleIcon style={{ color: "black" }} />
         </button>
         <div style={{ width: "1%" }}></div>
         <button
           className="nav-button"
           onClick={() => navigate("/cocktails/untried")}
         >
-          <ListAltIcon />
+          <ListAltIcon style={{ color: "black" }} />
         </button>
       </div>
     </div>

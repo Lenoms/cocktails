@@ -32,7 +32,7 @@ function TitleSearchAddBar({ searchSubmitted }) {
       <div className="search-add">
         <div className="search-bar">
           <div className="search-icon-box" onClick={submitSearch}>
-            <SearchIcon />
+            <SearchIcon style={{ color: "white" }} />
           </div>
           <form
             onSubmit={submitSearch}
