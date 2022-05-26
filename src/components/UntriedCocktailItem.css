@@ -3,8 +3,8 @@
     align-items: center;
     position: relative;
     width: 100%;
-    background: rgb(255,255,255);
-    background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,220,228,1) 100%);
+    background: rgb(255,232,232);
+    background: linear-gradient(270deg, rgba(255,232,232,1) 0%, rgba(255,220,228,1) 100%);
     border-top: 1px inset grey;
     border-bottom: 1px solid grey;
     z-index: 10;
