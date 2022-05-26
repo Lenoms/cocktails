@@ -14,8 +14,8 @@ function TitleSearchAddBar({ searchSubmitted }) {
   }
 
   const variants = {
-    low: { y: 35 },
-    high: { y: -15 },
+    low: { y: 45 },
+    high: { y: 0 },
   };
   return (
     <div className="title-search-add">
@@ -27,7 +27,7 @@ function TitleSearchAddBar({ searchSubmitted }) {
         onClick={() => setIsLow(!isLow)}
       >
         {" "}
-        <img src={process.env.PUBLIC_URL + "/cocktail.png"} />
+        <img src={process.env.PUBLIC_URL + "/cocktail6.png"} />
       </motion.div>
       <div className="search-add">
         <div className="search-bar">

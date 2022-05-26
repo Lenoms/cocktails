@@ -29,7 +29,11 @@ function TriedCocktailItem({ item }) {
     navigate("/cocktails/info", { state: { cocktailItem: item } });
   };
   return (
-    <Card className="tried-cocktail-item-body" onClick={cocktailClicked}>
+    <Card
+      className="tried-cocktail-item-body"
+      onClick={cocktailClicked}
+      style={{ backgroundColor: "#FFFDC7" }}
+    >
       <h4 className="cocktail-name">{cocktailName}</h4>
       <h4 className="tried-cocktail-item-grade">{overallGrade}</h4>
       <img id="cocktail-image" src={cocktailImageUrl}></img>
