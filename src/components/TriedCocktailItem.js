@@ -32,13 +32,14 @@ function TriedCocktailItem({ item }) {
     <Card
       className="tried-cocktail-item-body"
       onClick={cocktailClicked}
-      style={{ backgroundColor: "#FFFDC7" }}
+      style={{ backgroundColor: "#FFE5B0" }}
     >
+      <div className="border-tried-left"></div>
       <h4 className="cocktail-name">{cocktailName}</h4>
       <h4 className="tried-cocktail-item-grade">{overallGrade}</h4>
       <img id="cocktail-image" src={cocktailImageUrl}></img>
       <button className="delete-button" onClick={deleteCocktail}>
-        <DeleteIcon style={{ color: "black" }} />
+        <DeleteIcon style={{ color: "orange" }} />
       </button>
     </Card>
   );

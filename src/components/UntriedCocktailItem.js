@@ -29,7 +29,7 @@ function UntriedCocktailItem({ item }) {
   };
   return (
     <div className="untried-cocktail-item-body">
-      <div className="border-left"></div>
+      <div className="border-untried-left"></div>
       <div className="name-notes-and-ingredients">
         <h5 className="cocktail-untried-name">{cocktailName}</h5>
         <p className="cocktail-paragraph-info">{item.cocktailNotes}</p>
@@ -37,10 +37,10 @@ function UntriedCocktailItem({ item }) {
       </div>
       <div className="untried-cocktail-item-buttons">
         <button className="update-button" onClick={updateCocktail}>
-          <EditIcon style={{ color: "black" }} />
+          <EditIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
         <button className="delete-button" onClick={deleteCocktail}>
-          <DeleteIcon style={{ color: "black" }} />
+          <DeleteIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
       </div>
     </div>
