@@ -27,7 +27,7 @@ function TitleSearchAddBar({ searchSubmitted }) {
         onClick={() => setIsLow(!isLow)}
       >
         {" "}
-        <img src={process.env.PUBLIC_URL + "/cocktail6.png"} />
+        <img src={process.env.PUBLIC_URL + "/cocktail8.png"} />
       </motion.div>
       <div className="search-add">
         <div className="search-bar">
