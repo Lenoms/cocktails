@@ -28,7 +28,12 @@ function CocktailInfo({ location }) {
       >
         <h1>{cocktail.cocktailName}</h1>
         <img id="cocktail-info-image" src={cocktail.image}></img>
-        <h4 className="cocktail-grade">Grade: {overallGrade}</h4>
+        <div className="cocktail-info-grades-container">
+          <h4 className="cocktail-grade">Grade: {overallGrade}</h4>
+          <h6>
+            Daniel: {danielGrade}, Dani: {daniGrade}
+          </h6>
+        </div>
         <div className="cocktail-description">
           <h5>Notes:</h5>
           <p>{cocktail.cocktailNotes ? cocktail.cocktailNotes : "N/A"} </p>
