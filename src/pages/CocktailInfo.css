@@ -40,13 +40,18 @@
     width: 80%;
 }
 
-.cocktail-edit-button-container{
+.cocktail-buttons-container{
     width: 80%;
+    height: 80px;
+    min-height: 80px;
+    display: flex;
+    position: relative;
     padding-bottom: 30px;
+    justify-content: space-between;
 }
 
 .cocktail-edit-button{
-    height: 40px;
+    height: 100%;
     width: 30%;
     border: none;
     background-color: orange;
@@ -58,4 +63,13 @@
 
 .cocktail-edit-button:hover{
     background-color: pink;
+}
+
+.cocktail-delete-button{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
 }

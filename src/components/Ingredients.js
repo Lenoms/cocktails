@@ -64,6 +64,7 @@ function Ingredients({ ingredients, setIngredients }) {
           <option>1</option>
           <option>1½</option>
           <option>2</option>
+          <option>2½</option>
           <option>3</option>
         </select>
         <select

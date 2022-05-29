@@ -31,14 +31,10 @@
 
 #cocktail-image{
     height: 90%;
+    margin-right: 2%;
     aspect-ratio: 1;
 }
 
-.delete-button{
-    border: none;
-    background: none;
-    margin-right: 2%;
-}
 
 .tried-cocktail-item-grade{
     width: 12%;

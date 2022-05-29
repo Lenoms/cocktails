@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CocktailInfo.css";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { getDatabase, ref, remove } from "firebase/database";
+import DeleteModal from "../components/DeleteModal";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
     let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
+    const [hideDeleteModal, setHideDeleteModal] = useState(true);
 
     let danielGrade = parseInt(cocktail.danielGrade);
     let daniGrade = parseInt(cocktail.daniGrade);
@@ -19,6 +23,20 @@ function CocktailInfo({ location }) {
         state: { cocktailItem: cocktail, tried: true },
       });
     };
+
+    const deleteCocktail = (e) => {
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
+      const db = getDatabase();
+      remove(ref(db, "cocktails/tried/" + cocktail.cocktailName));
+      navigate("/cocktails/tried");
+    };
+
+    const showDeleteModal = () => {
+      setHideDeleteModal(false);
+    };
+
     return (
       <motion.div
         className="cocktail-info"
@@ -51,10 +69,19 @@ function CocktailInfo({ location }) {
               })}
           </ul>
         </div>
-        <div className="cocktail-edit-button-container">
+        <div className="cocktail-buttons-container">
           <button className="cocktail-edit-button" onClick={editCocktail}>
             <EditIcon />
           </button>
+          <button className="cocktail-delete-button" onClick={showDeleteModal}>
+            <DeleteIcon style={{ color: "black" }} />
+          </button>
+          {!hideDeleteModal && (
+            <DeleteModal
+              confirmDelete={deleteCocktail}
+              handleCancel={() => setHideDeleteModal(true)}
+            />
+          )}
         </div>
       </motion.div>
     );
