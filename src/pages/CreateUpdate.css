@@ -12,14 +12,14 @@
     margin-top: 5%;
     width: 30%;
     height: 40px;
-    background-color: rgb(45,0,125);
+    background-color: orange;
     margin-bottom: 30px;
     border: none;
     color: white;
 }
 
 .submit-button:hover {
-    background-color: rgb(74, 1, 201);
+    background-color: pink;
 }
 
 .checkbox{
@@ -27,39 +27,6 @@
     margin: 3px;
     position: relative;
     left: 2px
-}
-
-.add-ingredient-button {
-    height: 100%;
-    aspect-ratio: 1;
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-}
-
-.add-ingredients{
-    margin-bottom: 10px;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-}
-
-.add-ingredients-input{
-    width: 40%;
-}
-
-.ingredients-measure-dropdown{
-    width: 20%;
-}
-
-.ingredients-list-item{
-    display: flex;
-}
-  
-.ingredients-list-item-name{
-    width: 40%;
 }
 
 .notes-field{

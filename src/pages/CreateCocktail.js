@@ -6,9 +6,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import UploadForm from "../components/UploadForm";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 import "./CreateUpdate.css";
+import Ingredients from "../components/Ingredients";
+import AddIcon from "@mui/icons-material/Add";
 
 function CreateCocktail() {
   const navigate = useNavigate();
@@ -49,29 +49,6 @@ function CreateCocktail() {
 
   function checkboxClicked(e) {
     setTried(!tried);
-  }
-
-  // prettier-ignore
-  function addIngredient(e) {
-    e.preventDefault();
-    let ingredientName = document.getElementById("cocktail-ingredients").value;
-    let amount = document.getElementById("ingredients-measure-dropdown-amount").value;
-    let measure = document.getElementById("ingredients-measure-dropdown-measure").value;
-    let ingredient;
-    if (amount === "Amount" || measure === "Measure") {
-      ingredient = ingredientName;
-    } else {
-      ingredient = `${amount} ${measure} ${ingredientName}`;
-    }
-    setIngredients([...ingredients, ingredient]);
-    document.getElementById("cocktail-ingredients").value = "";
-    document.getElementById("ingredients-measure-dropdown-amount").value ="Amount";
-    document.getElementById("ingredients-measure-dropdown-measure").value ="Measure";
-  }
-  function deleteIngredient(ingredient) {
-    setIngredients(
-      ingredients.filter((eachIngredient) => eachIngredient !== ingredient)
-    );
   }
 
   function showValidationError() {
@@ -125,69 +102,10 @@ function CreateCocktail() {
           ></textarea>
         </div>
 
-        <div className="form-input-field-container">
-          <label className="form-label" htmlFor="cocktail-ingredients">
-            Ingredients
-          </label>
-          <div className="add-ingredients">
-            <input
-              type="text"
-              name="cocktail-ingredients"
-              className="add-ingredients-input"
-              id="cocktail-ingredients"
-            ></input>
-            <select
-              className="ingredients-measure-dropdown"
-              defaultValue={"Amount"}
-              id="ingredients-measure-dropdown-amount"
-            >
-              <option hidden disabled>
-                Amount
-              </option>
-              <option>¼</option>
-              <option>½</option>
-              <option>¾</option>
-              <option>1</option>
-              <option>1½</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
-            <select
-              className="ingredients-measure-dropdown"
-              defaultValue={"Measure"}
-              id="ingredients-measure-dropdown-measure"
-            >
-              <option hidden disabled>
-                Measure
-              </option>
-              <option>oz</option>
-              <option>dash</option>
-              <option>cup</option>
-              <option>teaspoon</option>
-              <option>tablespoon</option>
-              <option>unit</option>
-            </select>
-            <button className="add-ingredient-button" onClick={addIngredient}>
-              <AddIcon fontSize="large" />
-            </button>
-          </div>
-          <div>
-            {ingredients.map(function (ingredient) {
-              return (
-                <div key={ingredient}>
-                  <li className="ingredients-list-item">
-                    <div className="ingredients-list-item-name">
-                      {ingredient}
-                    </div>
-                    <span onClick={() => deleteIngredient(ingredient)}>
-                      <DeleteIcon />
-                    </span>
-                  </li>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <Ingredients
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
         {tried && (
           <>
             <UploadForm
@@ -211,7 +129,7 @@ function CreateCocktail() {
           className="submit-button"
           type="submit"
         >
-          Add
+          <AddIcon style={{ color: "white" }} />
         </button>
       </form>
     </motion.div>
