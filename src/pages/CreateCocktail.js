@@ -63,8 +63,8 @@ function CreateCocktail() {
       animate={RouteAnimation.animate}
       exit={RouteAnimation.exit}
     >
-      <h1>Add Cocktail</h1>
       <form className="cocktail-form" onSubmit={addCocktail}>
+        <h1>Add Cocktail</h1>
         <div className="form-input-field-container">
           <label className="form-label" htmlFor="cocktail-name">
             Cocktail Name

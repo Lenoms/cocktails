@@ -91,8 +91,8 @@ function UpdateCocktailInfo({ location }) {
           transition: { ease: "easeInOut", duration: 0.5 },
         }}
       >
-        <h1>Update {cocktail.cocktailName}</h1>
         <form className="cocktail-form" onSubmit={updateCocktail}>
+          <h1>Update {cocktail.cocktailName}</h1>
           <div className="form-input-field-container">
             <label className="form-label" htmlFor="cocktail-name">
               Cocktail Name
