@@ -21,27 +21,27 @@
 }
 
 #cocktail-info-image{
-    width: 80%;
+    width: 100%;
     height: auto;
     margin-bottom: 10px;
 }
 
 .cocktail-info-grades-container{
-    width: 80%;
+    width: 100%;
 }
 
 .cocktail-description{
-    width: 80%;
+    width: 100%;
     align-items: center;
 
 }
 
 .cocktail-ingredients{
-    width: 80%;
+    width: 100%;
 }
 
 .cocktail-buttons-container{
-    width: 80%;
+    width: 100%;
     height: 80px;
     min-height: 80px;
     display: flex;
@@ -52,13 +52,14 @@
 
 .cocktail-edit-button{
     height: 100%;
-    width: 30%;
+    width: 60%;
     border: none;
     background-color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    border-radius: 5px;
 }
 
 .cocktail-edit-button:hover{
