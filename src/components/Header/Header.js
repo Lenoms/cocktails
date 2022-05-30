@@ -1,8 +1,8 @@
 import React from "react";
 import "./Header.css";
-import "../animations/bubbles.css";
-import Navbar from "./Navbar.js";
-import TitleSearchAddBar from "./TitleSearchAddBar";
+import "../../animations/bubbles.css";
+import Navbar from "../Navbar/Navbar";
+import TitleSearchAddBar from "../TitleSearchAddBar/TitleSearchAddBar";
 
 function Header({ searchSubmitted }) {
   return (

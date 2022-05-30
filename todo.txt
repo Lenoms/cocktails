@@ -10,6 +10,7 @@ features
 
 - Bar
 - Searching and sorting on untried list
+- Clearing search
 - Cocktail method field
 - Measurements in ingredients field
 - Show overall grade/daniel grade/dani grade. I.e. the user can switch which one is shown.

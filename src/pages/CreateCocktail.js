@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
-import UploadForm from "../components/UploadForm";
+import UploadForm from "../components/UploadForm/UploadForm";
 import "./CreateUpdate.css";
-import Ingredients from "../components/Ingredients";
+import Ingredients from "../components/Ingredients/Ingredients";
 import AddIcon from "@mui/icons-material/Add";
 
 function CreateCocktail() {

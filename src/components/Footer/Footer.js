@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Footer.css";
-import "../animations/bubbles.css";
+import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 

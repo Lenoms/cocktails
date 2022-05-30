@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
-import UntriedCocktailItem from "../components/UntriedCocktailItem";
+import UntriedCocktailItem from "../components/UntriedCocktailItem/UntriedCocktailItem";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";

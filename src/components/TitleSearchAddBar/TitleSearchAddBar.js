@@ -1,5 +1,5 @@
 import React from "react";
-import AddButton from "../components/AddButton";
+import AddButton from "../AddButton/AddButton";
 import "./TitleSearchAddBar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { motion } from "framer-motion";

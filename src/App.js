@@ -1,5 +1,4 @@
 import "./App.css";
-import Header from "./components/Header";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import TriedList from "./pages/TriedList";
 import UntriedList from "./pages/UntriedList";
@@ -7,7 +6,8 @@ import CreateCocktail from "./pages/CreateCocktail";
 import { AnimatePresence } from "framer-motion";
 import CocktailInfo from "./pages/CocktailInfo";
 import UpdateCocktailInfo from "./pages/UpdateCocktailInfo";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 import { useState } from "react";
 
 function App() {

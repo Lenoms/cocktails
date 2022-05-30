@@ -6,7 +6,7 @@ import { RouteAnimation } from "../animations/RouteAnimation";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getDatabase, ref, remove } from "firebase/database";
-import DeleteModal from "../components/DeleteModal";
+import DeleteModal from "../components/DeleteModal/DeleteModal";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
