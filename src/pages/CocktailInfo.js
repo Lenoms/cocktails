@@ -76,13 +76,13 @@ function CocktailInfo({ location }) {
           <button className="cocktail-delete-button" onClick={showDeleteModal}>
             <DeleteIcon style={{ color: "black" }} />
           </button>
-          {!hideDeleteModal && (
-            <DeleteModal
-              confirmDelete={deleteCocktail}
-              handleCancel={() => setHideDeleteModal(true)}
-            />
-          )}
         </div>
+        {!hideDeleteModal && (
+          <DeleteModal
+            confirmDelete={deleteCocktail}
+            handleCancel={() => setHideDeleteModal(true)}
+          />
+        )}
       </motion.div>
     );
   } else {

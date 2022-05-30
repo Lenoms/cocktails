@@ -1,18 +1,18 @@
 import React from "react";
+import "./DeleteModal.css";
 
 function DeleteModal({ confirmDelete, handleCancel }) {
   return (
-    <div>
-      <h2>Confirm Delete?</h2>
-      <button
-        style={{ width: "40%", marginRight: "10px" }}
-        onClick={confirmDelete}
-      >
-        Yes
-      </button>
-      <button style={{ width: "40%" }} onClick={handleCancel}>
-        No
-      </button>
+    <div className="delete-modal-container">
+      <h5 className="delete-modal-message">Confirm Delete?</h5>
+      <div className="delete-modal-buttons-container">
+        <button className="delete-modal-button" onClick={confirmDelete}>
+          Yes
+        </button>
+        <button className="delete-modal-button" onClick={handleCancel}>
+          No
+        </button>
+      </div>
     </div>
   );
 }
