@@ -26,7 +26,6 @@
     z-index: 1;
 }
 
-
 .footer-nav-bar{
     width: 100%;
     display: flex;
@@ -39,9 +38,10 @@
 .footer-cocktail-image-container{
     height: 100%;
     display: flex;
+    width: 0%;
     justify-content: right;
     position: relative;
-    left: 20px;
+    left: 25%;
     bottom: 50%;
 }
 
@@ -52,5 +52,9 @@
 
 .footer-sorter{
     height: 100%;
+    background-color: orange;
+    color: white;
     border-radius: 5%;
+    outline: none;
+    border: none;
 }
