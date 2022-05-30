@@ -57,7 +57,7 @@ function Footer({ setSortBy }) {
           variants={variants}
           transition={{ type: "spring" }}
           className="footer-cocktail-image"
-          src={process.env.PUBLIC_URL + "/cocktail7.png"}
+          src={process.env.PUBLIC_URL + "/cocktail-footer.png"}
         />
       </div>
       <div className="footer-body">
