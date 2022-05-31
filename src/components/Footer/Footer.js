@@ -18,7 +18,7 @@ function Footer({ setSortBy }) {
 
   const variants = {
     low: { y: 0 },
-    high: { y: -40, rotate: 360 },
+    high: { y: "-20%", rotate: 360 },
   };
 
   let location = useLocation();

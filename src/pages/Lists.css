@@ -1,7 +1,5 @@
 .list{
     height: 100%;
-    position: absolute;
-    bottom: 0;
     z-index: 10;
 }
 @media (min-width: 600px) {

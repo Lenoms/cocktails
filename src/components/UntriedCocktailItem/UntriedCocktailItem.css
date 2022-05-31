@@ -13,7 +13,7 @@
 
 @media (min-height: 550px) {
     .untried-cocktail-item-body{
-        height: 18%;
+        height: 19%;
     }
 }
 
@@ -45,6 +45,11 @@
 }
 
 .update-button{
+    border: none;
+    background: none;
+}
+
+.delete-button{
     border: none;
     background: none;
 }

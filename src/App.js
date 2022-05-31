@@ -22,44 +22,51 @@ function App() {
 
   return (
     <div className="App">
-      <div className="app-header">
-        <Header searchSubmitted={searchSubmitted} />
+      <div className="app-header-and-body">
+        <div className="app-header">
+          <Header searchSubmitted={searchSubmitted} />
+        </div>
+        <div className="app-body">
+          <AnimatePresence>
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/cocktails"
+                element={
+                  <TriedList sortBy={sortBy} searchQuery={searchQuery} />
+                }
+              />
+              <Route
+                exact
+                path="/cocktails/tried"
+                element={
+                  <TriedList sortBy={sortBy} searchQuery={searchQuery} />
+                }
+              />
+              <Route
+                exact
+                path="/cocktails/untried"
+                element={<UntriedList searchQuery={searchQuery} />}
+              />
+              <Route
+                exact
+                path="/cocktails/create"
+                element={<CreateCocktail />}
+              />
+              <Route
+                exact
+                path="/cocktails/info"
+                element={<CocktailInfo location={location} />}
+              />
+              <Route
+                exact
+                path="/cocktails/update"
+                element={<UpdateCocktailInfo location={location} />}
+              />
+            </Routes>
+          </AnimatePresence>
+        </div>
       </div>
-      <div className="app-body">
-        <AnimatePresence>
-          <Routes location={location} key={location.pathname}>
-            <Route
-              path="/cocktails"
-              element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
-            />
-            <Route
-              exact
-              path="/cocktails/tried"
-              element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
-            />
-            <Route
-              exact
-              path="/cocktails/untried"
-              element={<UntriedList searchQuery={searchQuery} />}
-            />
-            <Route
-              exact
-              path="/cocktails/create"
-              element={<CreateCocktail />}
-            />
-            <Route
-              exact
-              path="/cocktails/info"
-              element={<CocktailInfo location={location} />}
-            />
-            <Route
-              exact
-              path="/cocktails/update"
-              element={<UpdateCocktailInfo location={location} />}
-            />
-          </Routes>
-        </AnimatePresence>
-      </div>
+
       <div className="footer">
         <Footer setSortBy={setSortBy} />
       </div>

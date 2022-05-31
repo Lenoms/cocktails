@@ -3,7 +3,6 @@ html,
 .App {
   height: 100%;
   width: 100%;
-  display: flex;
   justify-content: center;
 }
 
@@ -11,6 +10,13 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
+}
+
+.app-header-and-body{
+  height: 97%;
+  width: 100%;
+  margin: 0;
+  overflow: auto;
 }
 
 .app-header{
@@ -22,7 +28,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   bottom: 0;
   z-index: 10;
 }
@@ -32,7 +37,7 @@ body {
       height: 20%;
   }
   .app-body{
-    height: 80%;
+    height: 77%;
   }
 }
 
@@ -63,7 +68,7 @@ body {
 
 .footer{
   position: fixed;
-  bottom: -13%;
+  bottom: -12%;
   display: flex;
   width: 100%;
   z-index: 100;
