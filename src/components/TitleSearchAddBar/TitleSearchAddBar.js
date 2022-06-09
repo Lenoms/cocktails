@@ -2,6 +2,7 @@ import React from "react";
 import AddButton from "../AddButton/AddButton";
 import "./TitleSearchAddBar.css";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -11,6 +12,11 @@ function TitleSearchAddBar({ searchSubmitted }) {
     e.preventDefault();
     let searchQuery = document.getElementById("search-bar-input").value;
     searchSubmitted(searchQuery);
+  }
+
+  function clearSearchBar() {
+    document.getElementById("search-bar-input").value = "";
+    searchSubmitted("");
   }
 
   const variants = {
@@ -36,13 +42,24 @@ function TitleSearchAddBar({ searchSubmitted }) {
           </div>
           <form
             onSubmit={submitSearch}
-            style={{ width: "90%", height: "100%" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
             <input
               autoComplete="off"
               className="search-bar-input"
               id="search-bar-input"
             ></input>
+            {document.getElementById("search-bar-input") &&
+              document.getElementById("search-bar-input").value != "" && (
+                <div className="search-clear-icon" onClick={clearSearchBar}>
+                  <ClearIcon style={{ color: "rgb(248, 128, 148)" }} />
+                </div>
+              )}
           </form>
         </div>
         <AddButton></AddButton>
