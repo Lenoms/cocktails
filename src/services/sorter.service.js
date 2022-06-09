@@ -21,7 +21,6 @@ function sortByOverallGrade(data) {
   let sortedData = data.sort((a, b) =>
     getOverall(a) < getOverall(b) ? 1 : -1
   );
-  console.log(`Sorted data in service: ${sortedData}`);
   return sortedData;
 }
 
