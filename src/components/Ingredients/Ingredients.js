@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import ScaleIcon from "@mui/icons-material/Scale";
 import "./Ingredients.css";
 
 function Ingredients({ ingredients, setIngredients }) {
@@ -74,7 +73,6 @@ function Ingredients({ ingredients, setIngredients }) {
         >
           <option hidden disabled>
             Measure
-            <ScaleIcon />
           </option>
           <option>oz</option>
           <option>dash</option>

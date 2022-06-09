@@ -2,7 +2,6 @@ QOL Changes
 
 - Security updates on database
 - Make info ui nicer?
-- Maintain sort after navigating
 
 features
 
