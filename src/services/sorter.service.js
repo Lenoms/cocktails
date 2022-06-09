@@ -21,6 +21,7 @@ function sortByOverallGrade(data) {
   let sortedData = data.sort((a, b) =>
     getOverall(a) < getOverall(b) ? 1 : -1
   );
+  console.log(`Sorted data in service: ${sortedData}`);
   return sortedData;
 }
 
@@ -28,7 +29,6 @@ function getOverall(cocktail) {
   let danielGrade = cocktail.danielGrade;
   let daniGrade = cocktail.daniGrade;
   let overallGrade = (parseInt(daniGrade) + parseInt(danielGrade)) / 2;
-  console.log(cocktail.cocktailName, overallGrade);
   return overallGrade;
 }
 

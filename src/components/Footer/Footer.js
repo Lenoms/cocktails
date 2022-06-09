@@ -4,7 +4,7 @@ import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
-function Footer({ setSortBy }) {
+function Footer({ setSortBy, sortBy }) {
   const [activeFooter, setActiveFooter] = useState(false);
 
   function toggleFooter() {
@@ -12,8 +12,8 @@ function Footer({ setSortBy }) {
   }
 
   function handleSortSelect() {
-    let sortBy = document.getElementById("sorter").value;
-    setSortBy(sortBy);
+    let sortBySelected = document.getElementById("sorter").value;
+    setSortBy(sortBySelected);
   }
 
   const variants = {
@@ -68,7 +68,7 @@ function Footer({ setSortBy }) {
               name="sorter"
               id="sorter"
               className="footer-sorter"
-              defaultValue={"Alphabetical"}
+              defaultValue={sortBy}
             >
               <option>Alphabetical</option>
               <option>Overall Grade</option>

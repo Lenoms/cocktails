@@ -68,7 +68,7 @@ function App() {
       </div>
 
       <div className="footer">
-        <Footer setSortBy={setSortBy} />
+        <Footer setSortBy={setSortBy} sortBy={sortBy} />
       </div>
     </div>
   );

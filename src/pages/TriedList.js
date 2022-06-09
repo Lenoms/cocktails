@@ -10,6 +10,7 @@ import { searchQueryMatch } from "../services/search.service";
 
 function TriedList({ sortBy, searchQuery }) {
   const [data, setData] = useState([]);
+  const [displayList, setDisplayList] = useState([]);
   const [searchQueryTerm, setSearchQueryTerm] = useState();
   let [loading, setLoading] = useState(true);
 
@@ -32,8 +33,8 @@ function TriedList({ sortBy, searchQuery }) {
 
   useEffect(() => {
     var sortedList = sortList(data, sortBy);
-    setData(sortedList.slice());
-  }, [sortBy]);
+    setDisplayList(sortedList.slice());
+  }, [sortBy, data]);
 
   useEffect(() => {
     setSearchQueryTerm(searchQuery);
@@ -53,12 +54,13 @@ function TriedList({ sortBy, searchQuery }) {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
       >
-        {data
+        {displayList
           .map(function (item) {
             return (
               <TriedCocktailItem
                 key={item.cocktailName}
                 item={item}
+                sortBy={sortBy}
               ></TriedCocktailItem>
             );
           })
