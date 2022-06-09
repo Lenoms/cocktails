@@ -1,10 +1,8 @@
 QOL Changes
 
-- Delete confirmation modal
 - Security updates on database
-- Fix footer floating above page on phone when hit search bar
-- Raise bottom cocktail item to be above footer
 - Make info ui nicer?
+- Maintain sort after navigating
 
 features
 

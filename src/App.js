@@ -27,7 +27,7 @@ function App() {
           <Header searchSubmitted={searchSubmitted} />
         </div>
         <div className="app-body">
-          <AnimatePresence>
+          <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>
               <Route
                 path="/cocktails"
