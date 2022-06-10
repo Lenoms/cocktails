@@ -5,10 +5,12 @@ import UntriedCocktailItem from "../components/UntriedCocktailItem/UntriedCockta
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
+import { searchQueryMatch } from "../services/search.service";
 
-function UntriedList() {
+function UntriedList({ searchQuery }) {
   let [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
+  const [searchQueryTerm, setSearchQueryTerm] = useState();
 
   useEffect(() => {
     function fetchCocktails() {
@@ -27,6 +29,14 @@ function UntriedList() {
     fetchCocktails();
   });
 
+  useEffect(() => {
+    setSearchQueryTerm(searchQuery);
+  }, [searchQuery]);
+
+  function filterCallback(item) {
+    return searchQueryMatch(searchQueryTerm, item);
+  }
+
   if (loading) {
     return <Spinner animation="border" />;
   } else {
@@ -37,14 +47,16 @@ function UntriedList() {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
       >
-        {data.map(function (item) {
-          return (
-            <UntriedCocktailItem
-              key={item.cocktailName}
-              item={item}
-            ></UntriedCocktailItem>
-          );
-        })}
+        {data
+          .map(function (item) {
+            return (
+              <UntriedCocktailItem
+                key={item.cocktailName}
+                item={item}
+              ></UntriedCocktailItem>
+            );
+          })
+          .filter((item) => filterCallback(item))}
       </motion.div>
     );
   }
