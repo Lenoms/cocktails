@@ -1,13 +1,13 @@
 import React from "react";
 import "./CreateCocktail.css";
-import CocktailService from "../services/cocktail.service";
+import CocktailService from "../../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { RouteAnimation } from "../animations/RouteAnimation";
-import UploadForm from "../components/UploadForm/UploadForm";
+import { RouteAnimation } from "../../animations/RouteAnimation";
+import UploadForm from "../../components/UploadForm/UploadForm";
 import "./CreateUpdate.css";
-import Ingredients from "../components/Ingredients/Ingredients";
+import Ingredients from "../../components/Ingredients/Ingredients";
 import AddIcon from "@mui/icons-material/Add";
 
 function CreateCocktail() {

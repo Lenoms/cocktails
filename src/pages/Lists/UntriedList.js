@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./Lists.css";
 import { getDatabase, ref, get, child } from "firebase/database";
-import TriedCocktailItem from "../components/TriedCocktailItem/TriedCocktailItem";
+import UntriedCocktailItem from "../../components/UntriedCocktailItem/UntriedCocktailItem";
 import { motion } from "framer-motion";
-import { RouteAnimation } from "../animations/RouteAnimation";
+import { RouteAnimation } from "../../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
-import { sortList } from "../services/sorter.service";
-import { searchQueryMatch } from "../services/search.service";
+import { searchQueryMatch } from "../../services/search.service";
 
-function TriedList({ sortBy, searchQuery }) {
-  const [data, setData] = useState([]);
-  const [displayList, setDisplayList] = useState([]);
-  const [searchQueryTerm, setSearchQueryTerm] = useState();
+function UntriedList({ searchQuery }) {
+  let [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
+  const [searchQueryTerm, setSearchQueryTerm] = useState();
 
   useEffect(() => {
-    async function fetchCocktails() {
+    function fetchCocktails() {
       const dbRef = ref(getDatabase());
-      get(child(dbRef, "cocktails/tried"))
+      get(child(dbRef, "cocktails/untried"))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setData(Object.values(snapshot.val()));
@@ -29,12 +27,7 @@ function TriedList({ sortBy, searchQuery }) {
         });
     }
     fetchCocktails();
-  }, []);
-
-  useEffect(() => {
-    var sortedList = sortList(data, sortBy);
-    setDisplayList(sortedList.slice());
-  }, [sortBy, data]);
+  });
 
   useEffect(() => {
     setSearchQueryTerm(searchQuery);
@@ -54,14 +47,13 @@ function TriedList({ sortBy, searchQuery }) {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
       >
-        {displayList
+        {data
           .map(function (item) {
             return (
-              <TriedCocktailItem
+              <UntriedCocktailItem
                 key={item.cocktailName}
                 item={item}
-                sortBy={sortBy}
-              ></TriedCocktailItem>
+              ></UntriedCocktailItem>
             );
           })
           .filter((item) => filterCallback(item))}
@@ -70,4 +62,4 @@ function TriedList({ sortBy, searchQuery }) {
   }
 }
 
-export default TriedList;
+export default UntriedList;

@@ -2,12 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { getDatabase, ref as databaseRef, remove } from "firebase/database";
-import CocktailService from "../services/cocktail.service";
+import CocktailService from "../../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
-import UploadForm from "../components/UploadForm/UploadForm";
+import UploadForm from "../../components/UploadForm/UploadForm";
 import "./CreateUpdate.css";
 import "./UpdateCocktailInfo.css";
-import Ingredients from "../components/Ingredients/Ingredients";
+import Ingredients from "../../components/Ingredients/Ingredients";
 
 function UpdateCocktailInfo({ location }) {
   if (!!location.state) {

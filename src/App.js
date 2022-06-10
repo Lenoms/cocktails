@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import TriedList from "./pages/TriedList";
-import UntriedList from "./pages/UntriedList";
-import CreateCocktail from "./pages/CreateCocktail";
+import TriedList from "./pages/Lists/TriedList";
+import UntriedList from "./pages/Lists/UntriedList";
+import CreateCocktail from "./pages/CreateAndUpdateCocktail/CreateCocktail";
 import { AnimatePresence } from "framer-motion";
-import CocktailInfo from "./pages/CocktailInfo";
-import UpdateCocktailInfo from "./pages/UpdateCocktailInfo";
+import CocktailInfo from "./pages/CocktailInfo/CocktailInfo";
+import UpdateCocktailInfo from "./pages/CreateAndUpdateCocktail/UpdateCocktailInfo";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { useState } from "react";
