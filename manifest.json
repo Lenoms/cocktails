@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "cocktail-old.png",
+      "src": "cocktail-touch-icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "cocktail-old.png",
+      "src": "cocktail-touch-icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
