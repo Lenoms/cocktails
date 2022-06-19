@@ -34,6 +34,20 @@ function TriedList({ sortBy, searchQuery }) {
   useEffect(() => {
     var sortedList = sortList(data, sortBy);
     setDisplayList(sortedList.slice());
+
+    // Analytics stuff interested.
+    // let daniel_sum = 0;
+    // let dani_sum = 0;
+    // for (let i = 0; i < data.length; i++) {
+    //   daniel_sum += parseInt(data[i].danielGrade);
+    //   dani_sum += parseInt(data[i].daniGrade);
+    // }
+
+    // console.log(
+    //   `Daniel Total Grade: ${daniel_sum}${
+    //     daniel_sum / data.length
+    //   }, Dani Total Grade: ${dani_sum}${dani_sum / data.length}`
+    // );
   }, [sortBy, data]);
 
   useEffect(() => {

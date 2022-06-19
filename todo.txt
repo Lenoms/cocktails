@@ -3,6 +3,9 @@ QOL Changes
 - Security updates on database
 - Make info ui nicer?
 
+- Something to look into in the future is image optimisation and lazy loading. If it starts to get too slow to load the 
+- tried list.
+
 features
 
 - Bar

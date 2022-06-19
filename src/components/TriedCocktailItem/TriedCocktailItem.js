@@ -48,7 +48,7 @@ function TriedCocktailItem({ item, sortBy }) {
       >
         {gradeToShow}
       </h4>
-      <img id="cocktail-image" src={cocktailImageUrl}></img>
+      <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>
     </Card>
   );
 }
