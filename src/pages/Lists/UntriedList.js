@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { RouteAnimation } from "../../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
 import { searchQueryMatch } from "../../services/search.service";
+import { downloadBackUp } from "../../services/backup.service";
 
 function UntriedList({ searchQuery }) {
   let [data, setData] = useState([]);

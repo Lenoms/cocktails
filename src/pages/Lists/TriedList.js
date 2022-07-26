@@ -7,6 +7,7 @@ import { RouteAnimation } from "../../animations/RouteAnimation";
 import { Spinner } from "react-bootstrap";
 import { sortList } from "../../services/sorter.service";
 import { searchQueryMatch } from "../../services/search.service";
+import { downloadBackUp } from "../../services/backup.service";
 
 function TriedList({ sortBy, searchQuery }) {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ function TriedList({ sortBy, searchQuery }) {
     var sortedList = sortList(data, sortBy);
     setDisplayList(sortedList.slice());
 
-    // Analytics stuff interested.
+    //Analytics stuff interested.
     // let daniel_sum = 0;
     // let dani_sum = 0;
     // for (let i = 0; i < data.length; i++) {
@@ -44,10 +45,17 @@ function TriedList({ sortBy, searchQuery }) {
     // }
 
     // console.log(
-    //   `Daniel Total Grade: ${daniel_sum}${
+    //   `Daniel Total Grade: ${daniel_sum}, Avg: ${
     //     daniel_sum / data.length
-    //   }, Dani Total Grade: ${dani_sum}${dani_sum / data.length}`
+    //   }, Dani Total Grade: ${dani_sum}, Avg: ${dani_sum / data.length}`
     // );
+
+    // console.log("Data: ", data);
+
+    // TO BACK UP
+    // if (data.length != 0) {
+    //   downloadBackUp(data);
+    // }
   }, [sortBy, data]);
 
   useEffect(() => {
