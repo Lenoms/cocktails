@@ -48,7 +48,7 @@ function TriedList({ sortBy, searchQuery }) {
     // if (cocktails.length != 0) {
     //   downloadBackUp(cocktails);
     // }
-  }, []);
+  }, [cocktails]);
 
   if (loading) {
     return <Spinner animation="border" />;
