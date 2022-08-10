@@ -1,5 +1,6 @@
 import React from "react";
 import "./UploadForm.css";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 function UploadForm({ uploadImage, imgUrl, progresspercent, defaultGrades }) {
   return (
@@ -36,10 +37,14 @@ function UploadForm({ uploadImage, imgUrl, progresspercent, defaultGrades }) {
       </div>
 
       <div className="form-input-field-container">
+        <label for="pic" class="custom-file-upload">
+          <AddAPhotoIcon />
+        </label>
         <input
           type="file"
           id="pic"
           name="pic"
+          hidden
           accept=".jpg, .jpeg, .png"
           onChange={uploadImage}
         ></input>

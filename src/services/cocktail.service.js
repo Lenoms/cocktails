@@ -3,6 +3,7 @@ import {
   ref as databaseRef,
   onValue,
   update,
+  remove,
   set,
   get,
   child,
@@ -16,6 +17,40 @@ import {
 } from "firebase/storage";
 
 const CocktailService = {
+  getTriedCocktails: function () {
+    return new Promise(function (resolve, reject) {
+      const dbRef = databaseRef(getDatabase());
+      get(child(dbRef, "cocktails/tried"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            resolve(snapshot.val());
+          } else {
+            console.log("No data available");
+            resolve([]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  },
+  getUntriedCocktails: function () {
+    return new Promise(function (resolve, reject) {
+      const dbRef = databaseRef(getDatabase());
+      get(child(dbRef, "cocktails/untried"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            resolve(snapshot.val());
+          } else {
+            console.log("No data available");
+            resolve([]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  },
   writeTriedToDatabase: function (
     cocktailName,
     danielGrade,
@@ -43,6 +78,13 @@ const CocktailService = {
       ingredients: ingredients,
     });
   },
+  deleteCocktail: function (cocktailName) {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+    const db = getDatabase();
+    remove(databaseRef(db, "cocktails/tried/" + cocktailName));
+  },
 
   uploadImage: function (event, setProgresspercent, setImgUrl) {
     const storage = getStorage();
@@ -64,6 +106,22 @@ const CocktailService = {
           setImgUrl(downloadURL);
         });
       }
+    );
+  },
+  printAnalytics: function (data) {
+    let daniel_sum = 0;
+    let dani_sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      daniel_sum += parseInt(data[i].danielGrade);
+      dani_sum += parseInt(data[i].daniGrade);
+    }
+
+    console.log(
+      `Daniel Total Grade: ${daniel_sum}, Average: ${daniel_sum / data.length}`
+    );
+
+    console.log(
+      `Dani Total Grade: ${dani_sum}, Average: ${dani_sum / data.length}`
     );
   },
 };

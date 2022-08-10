@@ -38,3 +38,17 @@
     width: 100%;
     height: auto;
 }
+
+.tried-checkbox-container{
+    display: flex;
+    margin: 10px 0 10px 0;
+    align-items: center;
+}
+
+.tried-text{
+    font-size: large;
+    font-weight: bold;
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+}

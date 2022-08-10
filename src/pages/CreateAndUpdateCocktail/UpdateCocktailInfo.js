@@ -113,16 +113,16 @@ function UpdateCocktailInfo({ location }) {
               Cocktail name cannot be empty!
             </p>
           </div>
-          <label className="form-label" htmlFor="tried">
-            Tried?
-          </label>
-          <input
-            type="checkbox"
-            id="tried"
-            onChange={checkboxClicked}
-            className="checkbox"
-            checked={tried}
-          ></input>
+          <div className="tried-checkbox-container">
+            <div className="tried-text">Tried?</div>
+            <input
+              type="checkbox"
+              id="tried"
+              onChange={checkboxClicked}
+              className="checkbox"
+              checked={tried}
+            ></input>
+          </div>
           <div className="form-input-field-container">
             <label className="form-label" htmlFor="cocktail-notes">
               Notes:

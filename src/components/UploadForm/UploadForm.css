@@ -17,3 +17,34 @@
     width: 40%;
     height: 40px;
 }
+
+.custom-file-upload{
+    margin-top: 5%;
+    width: 50%;
+    height: 35px;
+    background: rgb(255,243,147);
+    background: linear-gradient(90deg, rgba(255,243,147,1) 0%, rgba(255,175,194,1) 46%, rgba(255,243,147,1) 90%);
+    margin-bottom: 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+    
+.custom-file-upload:hover {
+    background-color: pink;
+}
+
+.innerbar{
+    color: rgb(97, 0, 97);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    background: rgb(255,243,147);
+    background: linear-gradient(90deg, rgba(255,243,147,1) 0%, rgba(255,175,194,1) 46%, rgba(255,243,147,1) 90%);
+}
+    
+

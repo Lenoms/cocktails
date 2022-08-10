@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { RouteAnimation } from "../../animations/RouteAnimation";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getDatabase, ref, remove } from "firebase/database";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import CocktailService from "../../services/cocktail.service";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
@@ -25,11 +25,7 @@ function CocktailInfo({ location }) {
     };
 
     const deleteCocktail = (e) => {
-      if (!e) var e = window.event;
-      e.cancelBubble = true;
-      if (e.stopPropagation) e.stopPropagation();
-      const db = getDatabase();
-      remove(ref(db, "cocktails/tried/" + cocktail.cocktailName));
+      CocktailService.deleteCocktail(cocktail.cocktailName);
       navigate("/cocktails/tried");
     };
 
