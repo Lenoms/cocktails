@@ -74,6 +74,7 @@ function Footer({ setSortBy, sortBy }) {
               <option>Overall Grade</option>
               <option>Daniel Grade</option>
               <option>Dani Grade</option>
+              <option>Date Created</option>
             </select>
           </div>
         ) : (

@@ -31,7 +31,8 @@ function CreateCocktail() {
           dani_grade,
           notes,
           ingredients,
-          imgUrl
+          imgUrl,
+          null
         );
         navigate("/cocktails/tried");
       } else {

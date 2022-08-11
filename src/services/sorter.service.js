@@ -7,6 +7,8 @@ export function sortList(data, sortBy) {
     return sortByDanielGrade(data);
   } else if (sortBy == "Dani Grade") {
     return sortByDaniGrade(data);
+  } else if (sortBy == "Date Created") {
+    return sortByDateCreated(data);
   }
 }
 
@@ -41,6 +43,13 @@ function sortByDanielGrade(data) {
 function sortByDaniGrade(data) {
   let sortedData = data.sort((a, b) =>
     parseInt(a.daniGrade) < parseInt(b.daniGrade) ? 1 : -1
+  );
+  return sortedData;
+}
+
+function sortByDateCreated(data) {
+  let sortedData = data.sort((a, b) =>
+    parseInt(a.date[0]) < parseInt(b.date[0]) ? 1 : -1
   );
   return sortedData;
 }

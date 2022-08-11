@@ -37,7 +37,7 @@ function UploadForm({ uploadImage, imgUrl, progresspercent, defaultGrades }) {
       </div>
 
       <div className="form-input-field-container">
-        <label for="pic" class="custom-file-upload">
+        <label htmlFor="pic" className="custom-file-upload">
           <AddAPhotoIcon />
         </label>
         <input

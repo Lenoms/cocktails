@@ -57,17 +57,33 @@ const CocktailService = {
     daniGrade,
     cocktailNotes,
     ingredients,
-    imgUrl
+    imgUrl,
+    date
   ) {
     const db = getDatabase();
-    set(databaseRef(db, "cocktails/tried/" + cocktailName), {
-      cocktailName: cocktailName,
-      danielGrade: danielGrade,
-      daniGrade: daniGrade,
-      cocktailNotes: cocktailNotes,
-      ingredients: ingredients,
-      image: imgUrl,
-    });
+    const currentDate = getDateArray();
+    if (date != null) {
+      set(databaseRef(db, "cocktails/tried/" + cocktailName), {
+        cocktailName: cocktailName,
+        danielGrade: danielGrade,
+        daniGrade: daniGrade,
+        cocktailNotes: cocktailNotes,
+        ingredients: ingredients,
+        image: imgUrl,
+        date: date,
+        dateModified: currentDate,
+      });
+    } else {
+      set(databaseRef(db, "cocktails/tried/" + cocktailName), {
+        cocktailName: cocktailName,
+        danielGrade: danielGrade,
+        daniGrade: daniGrade,
+        cocktailNotes: cocktailNotes,
+        ingredients: ingredients,
+        image: imgUrl,
+        date: currentDate,
+      });
+    }
   },
 
   writeUntriedToDatabase: function (cocktailName, cocktailNotes, ingredients) {
@@ -125,5 +141,14 @@ const CocktailService = {
     );
   },
 };
+
+function getDateArray() {
+  let dateArray = [];
+  dateArray.push(Date.now());
+  var today = new Date();
+
+  dateArray.push(today.toLocaleDateString("en-US"));
+  return dateArray;
+}
 
 export default CocktailService;

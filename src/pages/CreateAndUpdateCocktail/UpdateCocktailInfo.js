@@ -31,6 +31,7 @@ function UpdateCocktailInfo({ location }) {
 
     function updateCocktail(e) {
       e.preventDefault();
+      var date = cocktail.date;
 
       // Get new values
       var newName = document.getElementById("cocktail-name").value;
@@ -52,7 +53,8 @@ function UpdateCocktailInfo({ location }) {
             dani_grade,
             notes,
             ingredients,
-            imgUrl
+            imgUrl,
+            date
           );
           navigate("/cocktails/tried");
         } else {
