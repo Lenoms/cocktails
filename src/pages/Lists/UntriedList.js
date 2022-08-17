@@ -3,10 +3,10 @@ import "./Lists.css";
 import UntriedCocktailItem from "../../components/UntriedCocktailItem/UntriedCocktailItem";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../../animations/RouteAnimation";
-import { Spinner } from "react-bootstrap";
 import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function UntriedList({ searchQuery }) {
   let [cocktails, setCocktails] = useState([]);
@@ -40,7 +40,7 @@ function UntriedList({ searchQuery }) {
   }, []);
 
   if (loading) {
-    return <Spinner animation="border" />;
+    return <LoadingSpinner />;
   } else {
     return (
       <motion.div

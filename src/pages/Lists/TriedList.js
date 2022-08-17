@@ -3,11 +3,11 @@ import "./Lists.css";
 import TriedCocktailItem from "../../components/TriedCocktailItem/TriedCocktailItem";
 import { motion } from "framer-motion";
 import { RouteAnimation } from "../../animations/RouteAnimation";
-import { Spinner } from "react-bootstrap";
 import { sortList } from "../../services/sorter.service";
 import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function TriedList({ sortBy, searchQuery }) {
   const [cocktails, setCocktails] = useState([]);
@@ -51,7 +51,7 @@ function TriedList({ sortBy, searchQuery }) {
   }, [cocktails]);
 
   if (loading) {
-    return <Spinner animation="border" />;
+    return <LoadingSpinner />;
   } else {
     return (
       <motion.div
