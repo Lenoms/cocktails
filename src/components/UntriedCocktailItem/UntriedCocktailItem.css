@@ -9,6 +9,7 @@
     z-index: 10;
     overflow-x: hidden;
     overflow-y: auto;
+    min-height: 120px;
 }
 
 @media (min-height: 550px) {
@@ -36,6 +37,7 @@
     flex-direction: column;
     height: 100%;
     padding: 10px;
+    text-overflow: ellipsis;
 }
 
 .untried-cocktail-item-buttons{
@@ -61,7 +63,9 @@
 
 .cocktail-paragraph-info{
     margin: 0;
+    width: 100%;
     font-size: small;
     color: grey;
+    line-height: 1.4;
     word-wrap: break-word;
 }

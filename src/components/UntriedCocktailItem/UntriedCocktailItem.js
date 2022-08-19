@@ -32,8 +32,18 @@ function UntriedCocktailItem({ item }) {
       <div className="border-untried-left"></div>
       <div className="name-notes-and-ingredients">
         <h5 className="cocktail-untried-name">{cocktailName}</h5>
-        <p className="cocktail-paragraph-info">{item.cocktailNotes}</p>
-        <p className="cocktail-paragraph-info">{ingredientsString}</p>
+        <div className="cocktail-paragraph-info">{ingredientsString}</div>
+        <div
+          className="cocktail-paragraph-info"
+          style={{
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            height: "20px",
+          }}
+        >
+          {item.cocktailNotes}
+        </div>
       </div>
       <div className="untried-cocktail-item-buttons">
         <button className="update-button" onClick={updateCocktail}>
