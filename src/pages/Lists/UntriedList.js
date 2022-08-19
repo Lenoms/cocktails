@@ -37,7 +37,7 @@ function UntriedList({ searchQuery }) {
     // if (cocktails.length != 0) {
     //   downloadBackUp(cocktails);
     // }
-  }, []);
+  }, [cocktails]);
 
   if (loading) {
     return <LoadingSpinner />;

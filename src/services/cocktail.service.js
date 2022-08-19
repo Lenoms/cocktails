@@ -132,12 +132,18 @@ const CocktailService = {
       dani_sum += parseInt(data[i].daniGrade);
     }
 
+    console.log(`TOTAL COCKTAILS: ${data.length} `);
+
     console.log(
-      `Daniel Total Grade: ${daniel_sum}, Average: ${daniel_sum / data.length}`
+      `Daniel Total Grade: ${daniel_sum}, Average: ${(
+        daniel_sum / data.length
+      ).toPrecision(4)}`
     );
 
     console.log(
-      `Dani Total Grade: ${dani_sum}, Average: ${dani_sum / data.length}`
+      `Dani Total Grade: ${dani_sum}, Average: ${(
+        dani_sum / data.length
+      ).toPrecision(4)}`
     );
   },
 };
