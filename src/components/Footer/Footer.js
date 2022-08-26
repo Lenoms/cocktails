@@ -3,6 +3,7 @@ import "./Footer.css";
 import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import LogoutButton from "../LogButtons/LogoutButton";
 
 function Footer({ setSortBy, sortBy }) {
   const [activeFooter, setActiveFooter] = useState(false);
@@ -76,6 +77,7 @@ function Footer({ setSortBy, sortBy }) {
               <option>Dani Grade</option>
               <option>Date Created</option>
             </select>
+            <LogoutButton size={["90px", "100%"]} />
           </div>
         ) : (
           ""

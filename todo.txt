@@ -14,3 +14,6 @@ features
 - Bar
 - Searching and sorting on untried list
 
+
+Auth0 Returns a sub in the user object. Can use this to extend app to other users if we want.
+

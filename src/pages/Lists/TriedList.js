@@ -8,6 +8,7 @@ import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function TriedList({ sortBy, searchQuery }) {
   const [cocktails, setCocktails] = useState([]);
