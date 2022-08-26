@@ -8,16 +8,26 @@
     background-color: rgb(254, 213, 220);
 }
 
+.login-page-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (min-width: 600px) {
-    .login-page-cocktail-image{
+    .login-page-image-container{
         width: 20%;
     }
 }
 
 @media (max-width: 600px) {
-    .login-page-cocktail-image{
+    .login-page-image-container{
         width: 50%;
     }
+}
+
+.login-page-cocktail-image{
+    width: 100%;
 }
 
 
