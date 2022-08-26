@@ -16,6 +16,11 @@ function AppRoutes({ sortBy, searchQuery }) {
       <Routes location={location} key={location.pathname}>
         <Route
           exact
+          path="/cocktails"
+          element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
+        />
+        <Route
+          exact
           path="/cocktails/tried"
           element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
         />
