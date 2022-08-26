@@ -8,9 +8,18 @@
     background-color: rgb(254, 213, 220);
 }
 
-.login-page-cocktail-image{
-    width: 50%;
+@media (min-width: 600px) {
+    .login-page-cocktail-image{
+        width: 20%;
+    }
 }
+
+@media (max-width: 600px) {
+    .login-page-cocktail-image{
+        width: 50%;
+    }
+}
+
 
 .logout-box{
     display: flex;
