@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./UntriedCocktailItem.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { getDatabase, ref, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
-function UntriedCocktailItem({ item }) {
+function UntriedCocktailItem({ item, refreshList }) {
   const navigate = useNavigate();
+  const [hideDeleteModal, setHideDeleteModal] = useState(true);
   let cocktailName = item.cocktailName;
   let ingredientsString = "";
   for (var i = 0; i < item.ingredients?.length; i++) {
@@ -21,12 +23,19 @@ function UntriedCocktailItem({ item }) {
     if (e.stopPropagation) e.stopPropagation();
     const db = getDatabase();
     remove(ref(db, "cocktails/untried/" + cocktailName));
+    setHideDeleteModal(true);
+    refreshList();
   };
   const updateCocktail = () => {
     navigate("/cocktails/update", {
       state: { cocktailItem: item, tried: false },
     });
   };
+
+  const showDeleteModal = () => {
+    setHideDeleteModal(false);
+  };
+
   return (
     <div className="untried-cocktail-item-body">
       <div className="border-untried-left"></div>
@@ -49,10 +58,17 @@ function UntriedCocktailItem({ item }) {
         <button className="update-button" onClick={updateCocktail}>
           <EditIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
-        <button className="delete-button" onClick={deleteCocktail}>
+        <button className="delete-button" onClick={showDeleteModal}>
           <DeleteIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
       </div>
+      {!hideDeleteModal && (
+        <DeleteModal
+          confirmDelete={deleteCocktail}
+          handleCancel={() => setHideDeleteModal(true)}
+          deleteString={cocktailName}
+        />
+      )}
     </div>
   );
 }

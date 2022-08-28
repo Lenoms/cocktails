@@ -81,6 +81,7 @@ function CocktailInfo({ location }) {
           <DeleteModal
             confirmDelete={deleteCocktail}
             handleCancel={() => setHideDeleteModal(true)}
+            deleteString={cocktail.cocktailName}
           />
         )}
       </motion.div>

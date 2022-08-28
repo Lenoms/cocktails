@@ -21,15 +21,33 @@ function UntriedList({ searchQuery }) {
     });
   }, []);
 
+  const refreshList = () => {
+    setLoading(true);
+    CocktailService.getUntriedCocktails().then((data) => {
+      setCocktails(Object.values(data));
+      setLoading(false);
+    });
+  };
+
   // Set search term
   useEffect(() => {
     setSearchQueryTerm(searchQuery);
   }, [searchQuery]);
 
+  useEffect(() => {
+    let list_element = document.getElementById("untried-list-container");
+    if (list_element) {
+      console.log(list_element.style);
+      list_element.style.cssText = null;
+
+      console.log("yeah done");
+    }
+  }, [loading]);
+
   // Filter function for search query
-  function filterCallback(item) {
+  const filterCallback = (item) => {
     return searchQueryMatch(searchQueryTerm, item);
-  }
+  };
 
   // Bonus stuff
   useEffect(() => {
@@ -45,6 +63,7 @@ function UntriedList({ searchQuery }) {
     return (
       <motion.div
         className="list"
+        id="untried-list-container"
         initial={RouteAnimation.initial}
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
@@ -55,6 +74,7 @@ function UntriedList({ searchQuery }) {
               <UntriedCocktailItem
                 key={item.cocktailName}
                 item={item}
+                refreshList={refreshList}
               ></UntriedCocktailItem>
             );
           })
