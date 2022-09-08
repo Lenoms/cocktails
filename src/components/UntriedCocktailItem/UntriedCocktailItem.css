@@ -8,24 +8,13 @@
     z-index: 10;
     overflow-x: hidden;
     overflow-y: auto;
-    min-height: 120px;
-}
-
-@media (min-height: 550px) {
-    .untried-cocktail-item-body{
-        height: 19%;
-    }
-}
-
-@media (max-height: 550px) {
-    .untried-cocktail-item-body{
-        height: 30%;
-    }
+    height: 20%;
+    min-height: 100px;
 }
 
 .border-untried-left{
     height: 100%;
-    width: 10px;
+    min-width: 10px;
     margin-right: 10px;
     background-color: rgb(248, 128, 148);
 }

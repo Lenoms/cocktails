@@ -37,17 +37,17 @@ function TriedCocktailItem({ item, sortBy }) {
     >
       <div className="border-tried-left"></div>
       <h4 className="cocktail-name">{cocktailName}</h4>
-      <h4
+      <h5
         className="tried-cocktail-item-grade"
         style={{
           color:
             sortBy == "Daniel Grade" || sortBy == "Dani Grade"
               ? "#FF1493"
-              : "black",
+              : "#565656",
         }}
       >
         {gradeToShow}
-      </h4>
+      </h5>
       <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>
     </Card>
   );

@@ -4,10 +4,12 @@ QOL Changes
 - Make info ui nicer?
 
 - Something to look into in the future is image optimisation and lazy loading. If it starts to get too slow to load the 
-- tried list.
+  tried list.
+
+
 
 - Scroll height remembering
-- Make untried list cap word count
+- More validation on upsert (cant have characters like '.' in title)
 
 features
 
