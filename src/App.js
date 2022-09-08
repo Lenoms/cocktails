@@ -32,7 +32,7 @@ const AppMain = ({ searchQuery, searchSubmitted, sortBy, setSortBy }) => {
 function App() {
   const [sortBy, setSortBy] = useState("Alphabetical");
   const [searchQuery, setSearchQuery] = useState();
-  const { isAuthenticated, user, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
   const [loginTried, setLoginTried] = useState(false);
 
   function searchSubmitted(searchQuery) {

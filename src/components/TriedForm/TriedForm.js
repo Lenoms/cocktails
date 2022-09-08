@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./TriedForm.css";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CocktailService from "../../services/cocktail.service";
