@@ -34,16 +34,6 @@ function UntriedList({ searchQuery }) {
     setSearchQueryTerm(searchQuery);
   }, [searchQuery]);
 
-  useEffect(() => {
-    let list_element = document.getElementById("untried-list-container");
-    if (list_element) {
-      console.log(list_element.style);
-      list_element.style.cssText = null;
-
-      console.log("yeah done");
-    }
-  }, [loading]);
-
   // Filter function for search query
   const filterCallback = (item) => {
     return searchQueryMatch(searchQueryTerm, item);

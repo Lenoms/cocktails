@@ -5,10 +5,8 @@ import { motion } from "framer-motion";
 import { RouteAnimation } from "../../animations/RouteAnimation";
 import { sortList } from "../../services/sorter.service";
 import { searchQueryMatch } from "../../services/search.service";
-import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function TriedList({ sortBy, searchQuery }) {
   const [cocktails, setCocktails] = useState([]);
@@ -45,7 +43,7 @@ function TriedList({ sortBy, searchQuery }) {
     //Analytics stuff interested.
     CocktailService.printAnalytics(cocktails);
 
-    // TO BACK UP
+    // // TO BACK UP
     // if (cocktails.length != 0) {
     //   downloadBackUp(cocktails);
     // }

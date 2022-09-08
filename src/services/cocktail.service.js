@@ -61,6 +61,9 @@ const CocktailService = {
     date
   ) {
     const db = getDatabase();
+    if (cocktailName == "") {
+      return;
+    }
     const currentDate = getDateArray();
     if (date != null) {
       set(databaseRef(db, "cocktails/tried/" + cocktailName), {
@@ -102,7 +105,7 @@ const CocktailService = {
     remove(databaseRef(db, "cocktails/tried/" + cocktailName));
   },
 
-  uploadImage: function (event, setProgresspercent, setImgUrl) {
+  uploadImage: function (event, setProgresspercent, setImgUrl, setIsUploading) {
     const storage = getStorage();
     const storageRef = ref(storage, `images/${event.target.files[0].name}`);
     const uploadTask = uploadBytesResumable(storageRef, event.target.files[0]);
@@ -120,6 +123,7 @@ const CocktailService = {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImgUrl(downloadURL);
+          setIsUploading(false);
         });
       }
     );
