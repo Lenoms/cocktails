@@ -20,8 +20,8 @@ function TitleSearchAddBar({ searchSubmitted }) {
   }
 
   const variants = {
-    low: { y: 45 },
-    high: { y: 0 },
+    low: { y: 40 },
+    high: { y: 10 },
   };
   return (
     <div className="title-search-add">

@@ -64,7 +64,14 @@ function TriedForm({ setImgUrl, imgUrl, setIsUploading, defaultGrades }) {
         ></input>
         {!imgUrl && (
           <div className="outerbar">
-            <div className="innerbar" style={{ width: `${progresspercent}%` }}>
+            <div
+              className="innerbar"
+              style={{
+                width: `${progresspercent}%`,
+                position: "relative",
+                left: progresspercent === 0 ? "10px" : "0px",
+              }}
+            >
               {progresspercent}%
             </div>
           </div>

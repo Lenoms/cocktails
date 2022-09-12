@@ -38,6 +38,11 @@
     background-color: pink;
 }
 
+.outerbar{
+    display: flex;
+    justify-content: left;
+}
+
 .innerbar{
     color: rgb(97, 0, 97);
     font-weight: bold;
