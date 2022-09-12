@@ -59,6 +59,7 @@ function UntriedList({ searchQuery }) {
         exit={RouteAnimation.exit}
       >
         {cocktails
+          .filter((item) => filterCallback(item))
           .map(function (item) {
             return (
               <UntriedCocktailItem
@@ -67,8 +68,7 @@ function UntriedList({ searchQuery }) {
                 refreshList={refreshList}
               ></UntriedCocktailItem>
             );
-          })
-          .filter((item) => filterCallback(item))}
+          })}
       </motion.div>
     );
   }

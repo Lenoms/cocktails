@@ -1,22 +1,17 @@
-html,
-#root,
-.App {
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  min-width: 300px;
+
+html{
+  overflow: auto;
 }
 
-body {
+html, body, #root, .App{
   height: 100%;
-  width: 100%;
-  margin: 0;
 }
 
 .app-header-and-body{
   height: 97%;
   width: 100%;
   margin: 0;
+  scroll-behavior: smooth;
   overflow: auto;
 }
 

@@ -7,11 +7,14 @@ import { sortList } from "../../services/sorter.service";
 import { searchQueryMatch } from "../../services/search.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import PaginationBar from "../../components/PaginationBar/PaginationBar";
 
 function TriedList({ sortBy, searchQuery }) {
   const [cocktails, setCocktails] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [searchQueryTerm, setSearchQueryTerm] = useState();
+  const [pageSize, setPageSize] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(true);
 
   // Get cocktails
@@ -24,19 +27,26 @@ function TriedList({ sortBy, searchQuery }) {
 
   // Sort
   useEffect(() => {
-    var sortedList = sortList(cocktails, sortBy);
-    setDisplayList(sortedList.slice());
+    setCocktails(sortList(cocktails, sortBy));
+    refreshCocktails();
   }, [sortBy, cocktails]);
 
   // Set search term
   useEffect(() => {
     setSearchQueryTerm(searchQuery);
+    setCurrentPage(1);
+    refreshCocktails();
   }, [searchQuery]);
 
   // Filter function for search term
-  function filterCallback(item) {
+  const filterBySearchTerm = (item) => {
+    if (!searchQueryTerm || !item) return true;
     return searchQueryMatch(searchQueryTerm, item);
-  }
+  };
+
+  const refreshCocktails = () => {
+    setDisplayList([...cocktails]);
+  };
 
   // Bonus stuff
   useEffect(() => {
@@ -60,6 +70,8 @@ function TriedList({ sortBy, searchQuery }) {
         exit={RouteAnimation.exit}
       >
         {displayList
+          .filter((item) => filterBySearchTerm(item))
+          .slice((currentPage - 1) * pageSize, currentPage * pageSize)
           .map(function (item) {
             return (
               <TriedCocktailItem
@@ -68,8 +80,15 @@ function TriedList({ sortBy, searchQuery }) {
                 sortBy={sortBy}
               ></TriedCocktailItem>
             );
-          })
-          .filter((item) => filterCallback(item))}
+          })}
+        <PaginationBar
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItemCount={
+            displayList.filter((item) => filterBySearchTerm(item)).length
+          }
+          pageSize={pageSize}
+        />
       </motion.div>
     );
   }

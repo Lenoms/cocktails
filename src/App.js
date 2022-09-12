@@ -11,7 +11,7 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 const AppMain = ({ searchQuery, searchSubmitted, sortBy, setSortBy }) => {
   return (
     <div className="App">
-      <div className="app-header-and-body">
+      <div className="app-header-and-body" id="app-header-and-body">
         <div className="app-header">
           <Header searchSubmitted={searchSubmitted} />
         </div>
@@ -45,7 +45,7 @@ function App() {
     }
   }, []);
 
-  if (!isLoading) {
+  if (!isLoading || true) {
     if (isAuthenticated) {
       return (
         <AppMain
