@@ -10,6 +10,7 @@ function TitleSearchAddBar({ searchSubmitted }) {
   const [isLow, setIsLow] = useState(true);
   function submitSearch(e) {
     e.preventDefault();
+    document.activeElement.blur();
     let searchQuery = document.getElementById("search-bar-input").value;
     searchSubmitted(searchQuery);
   }
