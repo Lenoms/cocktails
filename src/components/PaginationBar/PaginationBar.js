@@ -35,8 +35,6 @@ function PaginationBar({
   };
   return (
     <div className="pagination-bar-container">
-      <div style={{ width: "40%" }}></div>
-      <div className="pagination-page-label">{currentPage}</div>
       <div className="pagination-buttons">
         <button className="pagination-button" onClick={jumpFirstPage}>
           <FirstPageIcon />
@@ -44,6 +42,7 @@ function PaginationBar({
         <button className="pagination-button" onClick={decrementPage}>
           <NavigateBeforeIcon />
         </button>
+        <div className="pagination-page-label">{currentPage}</div>
         <button className="pagination-button" onClick={incrementPage}>
           <NavigateNextIcon />
         </button>

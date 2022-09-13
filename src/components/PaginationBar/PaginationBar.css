@@ -10,13 +10,14 @@
     z-index: 11;
 }
 .pagination-page-label{
-    width: 20%;
+    width: 10%;
     height: 100%;
     color: white;
     font-size: small;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(255, 193, 78);
 }
 
 .pagination-buttons{
