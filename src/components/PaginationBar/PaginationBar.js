@@ -12,9 +12,10 @@ function PaginationBar({
   pageSize,
 }) {
   const el = document.getElementById("app-header-and-body");
+  const max_pages = Math.floor(totalItemCount / pageSize) + 1;
   const incrementPage = () => {
     console.log(currentPage, totalItemCount);
-    if (!(currentPage > Math.floor(totalItemCount / pageSize))) {
+    if (!(currentPage >= max_pages)) {
       setCurrentPage(currentPage + 1);
       el.scrollTo(0, 0);
     }
@@ -42,7 +43,9 @@ function PaginationBar({
         <button className="pagination-button" onClick={decrementPage}>
           <NavigateBeforeIcon />
         </button>
-        <div className="pagination-page-label">{currentPage}</div>
+        <div className="pagination-page-label">
+          {currentPage}/{max_pages}
+        </div>
         <button className="pagination-button" onClick={incrementPage}>
           <NavigateNextIcon />
         </button>
