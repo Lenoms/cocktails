@@ -6,15 +6,16 @@ html{
 html, body, #root, .App{
   height: 100%;
   min-height: 600px;
-  overflow: auto;
+  min-width: 400px;
+  overflow: hidden;
 }
 
 .app-header-and-body{
   height: 97%;
   width: 100%;
   margin: 0;
-  scroll-behavior: smooth;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .app-header{
@@ -49,7 +50,8 @@ html, body, #root, .App{
 }
 
 .footer{
-  position: fixed;
+  position: absolute;
+  top: 97%;
   display: flex;
   width: 100%;
   z-index: 100;

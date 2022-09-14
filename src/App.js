@@ -45,7 +45,7 @@ function App() {
     }
   }, []);
 
-  if (!isLoading) {
+  if (!isLoading || true) {
     if (isAuthenticated) {
       return (
         <AppMain
