@@ -4,8 +4,9 @@ import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import LogoutButton from "../LogButtons/LogoutButton";
+import FilterButton from "./FilterButton";
 
-function Footer({ setSortBy, sortBy }) {
+function Footer({ setSortBy, sortBy, setFilterOn }) {
   const [activeFooter, setActiveFooter] = useState(false);
 
   function toggleFooter() {
@@ -77,7 +78,8 @@ function Footer({ setSortBy, sortBy }) {
               <option>Dani Grade</option>
               <option>Date Created</option>
             </select>
-            <LogoutButton size={["90px", "100%"]} />
+            <FilterButton setFilterOn={setFilterOn} />
+            <LogoutButton size={["20%", "50%"]} />
           </div>
         ) : (
           ""

@@ -7,19 +7,33 @@ import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { hasUnownedIngredient } from "../../services/filter.services";
 
-function UntriedList({ searchQuery }) {
+function UntriedList({ searchQuery, filterOn }) {
   let [cocktails, setCocktails] = useState([]);
+  const [displayList, setDisplayList] = useState([]);
   let [loading, setLoading] = useState(true);
   const [searchQueryTerm, setSearchQueryTerm] = useState();
 
   // Get cocktails
   useEffect(() => {
     CocktailService.getUntriedCocktails().then((data) => {
-      setCocktails(Object.values(data));
-      setLoading(false);
+      const cocktailList = Object.values(data);
+      if (filterOn) {
+        CocktailService.getUnownedIngredients().then((data) => {
+          setCocktails(
+            cocktailList.filter(
+              (cocktail) => !hasUnownedIngredient(cocktail, Object.values(data))
+            )
+          );
+          setLoading(false);
+        });
+      } else {
+        setCocktails(cocktailList);
+        setLoading(false);
+      }
     });
-  }, []);
+  }, [filterOn]);
 
   const refreshList = () => {
     setLoading(true);
@@ -35,9 +49,20 @@ function UntriedList({ searchQuery }) {
   }, [searchQuery]);
 
   // Filter function for search query
-  const filterCallback = (item) => {
+  const filterBySearchTerm = (item) => {
     return searchQueryMatch(searchQueryTerm, item);
   };
+
+  // useEffect(() => {
+  //   if (filterUnowned) {
+  //     if (cocktails.length > 0) {
+  //       CocktailService.getUnownedIngredients().then((data) => {
+  //         setDisplayList(filterByUnownedList(cocktails, data));
+  //         setLoading(false);
+  //       });
+  //     }
+  //   }
+  // }, [cocktails, filterUnowned]);
 
   // Bonus stuff
   useEffect(() => {
@@ -59,7 +84,7 @@ function UntriedList({ searchQuery }) {
         exit={RouteAnimation.exit}
       >
         {cocktails
-          .filter((item) => filterCallback(item))
+          .filter((item) => filterBySearchTerm(item))
           .map(function (item) {
             return (
               <UntriedCocktailItem

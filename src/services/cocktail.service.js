@@ -128,6 +128,29 @@ const CocktailService = {
       }
     );
   },
+  getUnownedIngredients: function () {
+    return new Promise(function (resolve, reject) {
+      const dbRef = databaseRef(getDatabase());
+      get(child(dbRef, "cocktails/unownedIngredients"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            resolve(snapshot.val());
+          } else {
+            console.log("No data available");
+            resolve([]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  },
+  addUnownedIngredient: function (ingredient) {
+    const db = getDatabase();
+    set(databaseRef(db, "cocktails/unownedIngredients/" + ingredient), {
+      ingredient: ingredient,
+    });
+  },
   printAnalytics: function (data) {
     let daniel_sum = 0;
     let dani_sum = 0;

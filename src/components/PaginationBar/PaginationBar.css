@@ -34,6 +34,9 @@
     border-radius: 0 0 10% 10%;
     background-color: orange;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagination-button:hover{
