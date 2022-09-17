@@ -16,12 +16,24 @@ function AppRoutes({ sortBy, searchQuery, filterOn }) {
       <Route
         exact
         path="/cocktails"
-        element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
+        element={
+          <TriedList
+            sortBy={sortBy}
+            searchQuery={searchQuery}
+            filterOn={filterOn}
+          />
+        }
       />
       <Route
         exact
         path="/cocktails/tried"
-        element={<TriedList sortBy={sortBy} searchQuery={searchQuery} />}
+        element={
+          <TriedList
+            sortBy={sortBy}
+            searchQuery={searchQuery}
+            filterOn={filterOn}
+          />
+        }
       />
       <Route
         exact

@@ -8,8 +8,9 @@ import { searchQueryMatch } from "../../services/search.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import PaginationBar from "../../components/PaginationBar/PaginationBar";
+import { hasUnownedIngredient } from "../../services/filter.services";
 
-function TriedList({ sortBy, searchQuery }) {
+function TriedList({ sortBy, searchQuery, filterOn }) {
   const [cocktails, setCocktails] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [searchQueryTerm, setSearchQueryTerm] = useState();
@@ -20,10 +21,22 @@ function TriedList({ sortBy, searchQuery }) {
   // Get cocktails
   useEffect(() => {
     CocktailService.getTriedCocktails().then((data) => {
-      setCocktails(Object.values(data));
-      setLoading(false);
+      const cocktailList = Object.values(data);
+      if (filterOn) {
+        CocktailService.getUnownedIngredients().then((data) => {
+          setCocktails(
+            cocktailList.filter(
+              (cocktail) => !hasUnownedIngredient(cocktail, Object.values(data))
+            )
+          );
+          setLoading(false);
+        });
+      } else {
+        setCocktails(cocktailList);
+        setLoading(false);
+      }
     });
-  }, []);
+  }, [filterOn]);
 
   // Sort
   useEffect(() => {

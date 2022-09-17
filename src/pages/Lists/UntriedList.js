@@ -11,7 +11,6 @@ import { hasUnownedIngredient } from "../../services/filter.services";
 
 function UntriedList({ searchQuery, filterOn }) {
   let [cocktails, setCocktails] = useState([]);
-  const [displayList, setDisplayList] = useState([]);
   let [loading, setLoading] = useState(true);
   const [searchQueryTerm, setSearchQueryTerm] = useState();
 
