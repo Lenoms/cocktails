@@ -61,7 +61,7 @@ function App() {
     }
   }, []);
 
-  if (!isLoading || true) {
+  if (!isLoading) {
     if (isAuthenticated) {
       return (
         <AppMain
