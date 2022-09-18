@@ -19,14 +19,14 @@ function UpdateCocktailInfo({ location }) {
       var date = defaultCocktail.date;
 
       const db = getDatabase();
+      const noSpecialCharactersKey = defaultCocktail.cocktailName.replace(
+        /[.$#[\]/]/g,
+        ""
+      );
       if (location.state.tried) {
-        remove(
-          databaseRef(db, "cocktails/tried/" + defaultCocktail.cocktailName)
-        );
+        remove(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey));
       } else {
-        remove(
-          databaseRef(db, "cocktails/untried/" + defaultCocktail.cocktailName)
-        );
+        remove(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey));
       }
       if (cocktailObject.tried) {
         CocktailService.writeTriedToDatabase(

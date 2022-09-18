@@ -60,13 +60,12 @@ const CocktailService = {
     imgUrl,
     date
   ) {
+    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
+    if (noSpecialCharactersKey.length == 0) return;
     const db = getDatabase();
-    if (cocktailName == "") {
-      return;
-    }
     const currentDate = getDateArray();
     if (date != null) {
-      set(databaseRef(db, "cocktails/tried/" + cocktailName), {
+      set(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey), {
         cocktailName: cocktailName,
         danielGrade: danielGrade,
         daniGrade: daniGrade,
@@ -77,7 +76,7 @@ const CocktailService = {
         dateModified: currentDate,
       });
     } else {
-      set(databaseRef(db, "cocktails/tried/" + cocktailName), {
+      set(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey), {
         cocktailName: cocktailName,
         danielGrade: danielGrade,
         daniGrade: daniGrade,
@@ -91,7 +90,9 @@ const CocktailService = {
 
   writeUntriedToDatabase: function (cocktailName, cocktailNotes, ingredients) {
     const db = getDatabase();
-    set(databaseRef(db, "cocktails/untried/" + cocktailName), {
+    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
+    if (noSpecialCharactersKey.length == 0) return;
+    set(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey), {
       cocktailName: cocktailName,
       cocktailNotes: cocktailNotes,
       ingredients: ingredients,
@@ -102,7 +103,8 @@ const CocktailService = {
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
     const db = getDatabase();
-    remove(databaseRef(db, "cocktails/tried/" + cocktailName));
+    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
+    remove(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey));
   },
 
   uploadImage: function (event, setProgresspercent, setImgUrl, setIsUploading) {
