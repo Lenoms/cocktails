@@ -29,7 +29,7 @@ function Footer({ setSortBy, sortBy, setFilterOn }) {
     location.pathname == "/cocktails/create" ||
     location.pathname == "/cocktails/update"
   ) {
-    setActiveFooter(false);
+    if (activeFooter) setActiveFooter(false);
     return (
       <div
         className={
