@@ -104,6 +104,7 @@ const CocktailService = {
     if (e.stopPropagation) e.stopPropagation();
     const db = getDatabase();
     const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
+    if (noSpecialCharactersKey.length == 0) return;
     remove(databaseRef(db, `cocktails/${list}/${noSpecialCharactersKey}`));
   },
 
