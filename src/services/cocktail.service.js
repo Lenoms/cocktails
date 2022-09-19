@@ -1,8 +1,6 @@
 import {
   getDatabase,
   ref as databaseRef,
-  onValue,
-  update,
   remove,
   set,
   get,
