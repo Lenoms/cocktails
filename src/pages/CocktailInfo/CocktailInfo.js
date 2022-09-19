@@ -25,7 +25,7 @@ function CocktailInfo({ location }) {
     };
 
     const deleteCocktail = (e) => {
-      CocktailService.deleteCocktail(cocktail.cocktailName);
+      CocktailService.deleteCocktail(cocktail.cocktailName, "tried");
       navigate("/cocktails/tried");
     };
 

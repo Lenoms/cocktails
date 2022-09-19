@@ -5,6 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { getDatabase, ref, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import CocktailService from "../../services/cocktail.service";
 
 function UntriedCocktailItem({ item, refreshList }) {
   const navigate = useNavigate();
@@ -18,11 +19,7 @@ function UntriedCocktailItem({ item, refreshList }) {
     }
   }
   const deleteCocktail = (e) => {
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-    const db = getDatabase();
-    remove(ref(db, "cocktails/untried/" + cocktailName));
+    CocktailService.deleteCocktail(cocktailName, "untried");
     setHideDeleteModal(true);
     refreshList();
   };

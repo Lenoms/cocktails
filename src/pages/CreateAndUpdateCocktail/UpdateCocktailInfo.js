@@ -18,15 +18,10 @@ function UpdateCocktailInfo({ location }) {
     function updateCocktail(cocktailObject) {
       var date = defaultCocktail.date;
 
-      const db = getDatabase();
-      const noSpecialCharactersKey = defaultCocktail.cocktailName.replace(
-        /[.$#[\]/]/g,
-        ""
-      );
       if (location.state.tried) {
-        remove(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey));
+        CocktailService.deleteCocktail(defaultCocktail.cocktailName, "tried");
       } else {
-        remove(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey));
+        CocktailService.deleteCocktail(defaultCocktail.cocktailName, "untried");
       }
       if (cocktailObject.tried) {
         CocktailService.writeTriedToDatabase(

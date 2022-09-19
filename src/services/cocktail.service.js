@@ -98,13 +98,13 @@ const CocktailService = {
       ingredients: ingredients,
     });
   },
-  deleteCocktail: function (cocktailName) {
+  deleteCocktail: function (cocktailName, list) {
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
     const db = getDatabase();
     const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
-    remove(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey));
+    remove(databaseRef(db, `cocktails/${list}/${noSpecialCharactersKey}`));
   },
 
   uploadImage: function (event, setProgresspercent, setImgUrl, setIsUploading) {
