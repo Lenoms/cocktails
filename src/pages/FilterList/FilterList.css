@@ -1,0 +1,48 @@
+.filter-list-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 10px 20px 10px;
+    gap: 10px;
+}
+
+@media (min-width: 600px) {
+    .filter-list-container{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .filter-list-container{
+        width: 100%;
+    }
+}
+
+.unowned-ingredients-list-container{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    border: 1px outset orange;
+}
+
+.add-unowned-ingredient-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+}
+
+#filter-list-ingredient-input{
+    width: 50%;
+    height: 100%;
+    border: 1px solid orange;
+}
+
+.filter-list-add-ingredient-button{
+    height: 100%;
+    width: 10%;
+    border: none;
+    cursor: pointer;
+    background-color: orange;
+}

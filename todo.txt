@@ -6,16 +6,18 @@ QOL Changes
 - Something to look into in the future is image optimisation and lazy loading. If it starts to get too slow to load the 
   tried list.
 
+- filtering UI looks like shit
+- Add proper keys to cocktails in db?
+- Fix the bug on mobile? where footer floats above bottom
 
+**CONTEXT**
+- Need some kind of app context to store filterOn, sortBy, and searchQuery. 
+Will make things nicer by not having to pass heaps around. Also will fix filterOn bug
 
 - Scroll height remembering
 - More validation on upsert (cant have characters like '.' in title)
 
 features
-
-- Bar
-- Searching and sorting on untried list
-
 
 Auth0 Returns a sub in the user object. Can use this to extend app to other users if we want.
 

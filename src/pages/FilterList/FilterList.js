@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { RouteAnimation } from "../../animations/RouteAnimation";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import "./FilterList.css";
+import AddUnownedIngredientButton from "./AddUnownedIngredientButton";
+import UnownedIngredients from "./UnownedIngredients";
 
 function FilterList() {
   const [unownedIngredients, setUnownedIngredients] = useState([]);
@@ -11,19 +14,8 @@ function FilterList() {
     CocktailService.getUnownedIngredients().then((data) => {
       setUnownedIngredients(Object.values(data));
       setLoading(false);
-      console.log(Object.values(data));
     });
   }, []);
-
-  const addUnownedIngredient = () => {
-    setLoading(true);
-    let ingredient = document.getElementById(
-      "filter-list-ingredient-input"
-    ).value;
-    CocktailService.addUnownedIngredient(ingredient);
-    document.getElementById("filter-list-ingredient-input").value = "";
-    refreshList();
-  };
 
   const refreshList = () => {
     CocktailService.getUnownedIngredients().then((data) => {
@@ -40,13 +32,14 @@ function FilterList() {
         initial={RouteAnimation.infoInitial}
         animate={RouteAnimation.animate}
         exit={RouteAnimation.infoExit}
+        className="filter-list-container"
       >
-        FilterList
-        {unownedIngredients.map((ingredient) => {
-          return <div key={ingredient.ingredient}>{ingredient.ingredient}</div>;
-        })}
-        <input id="filter-list-ingredient-input"></input>
-        <button onClick={addUnownedIngredient}></button>
+        <h1>Unowned Ingredients</h1>
+        <UnownedIngredients unownedIngredients={unownedIngredients} />
+        <AddUnownedIngredientButton
+          setLoading={setLoading}
+          refreshList={refreshList}
+        />
       </motion.div>
     );
   }
