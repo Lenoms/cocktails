@@ -17,6 +17,7 @@ Will make things nicer by not having to pass heaps around. Also will fix filterO
 - Scroll height remembering
 - More validation on upsert (cant have characters like '.' in title)
 
+- Think theres a bug where filter is on and try to load tried page. DOesn't load
 features
 
 Auth0 Returns a sub in the user object. Can use this to extend app to other users if we want.
