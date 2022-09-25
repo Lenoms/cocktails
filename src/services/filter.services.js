@@ -1,4 +1,5 @@
 export function hasUnownedIngredient(cocktail, unowned_list) {
+  if (!cocktail.ingredients) return false;
   for (const ingredient of cocktail.ingredients) {
     const split_ingredient = ingredient.split(" ");
     for (let i = 0; i < split_ingredient.length; i++) {
