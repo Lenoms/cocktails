@@ -88,7 +88,7 @@ function Footer({ setSortBy, sortBy, setFilterOn }) {
               <option>Date Created</option>
             </select>
             <FilterButton setFilterOn={setFilterOn} />
-            <LogoutButton size={["20%", "50%"]} />
+            <LogoutButton size={["10%", "50%"]} />
           </div>
         ) : (
           ""

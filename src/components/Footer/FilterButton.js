@@ -15,7 +15,7 @@ function FilterButton({ setFilterOn }) {
         className="filter-button"
         onClick={() => navigate("/cocktails/filter")}
       >
-        <FilterAltIcon />
+        <FilterAltIcon style={{ color: "black"}}/>
       </button>
       <Switch onChange={handleFilterToggle} />
     </div>
