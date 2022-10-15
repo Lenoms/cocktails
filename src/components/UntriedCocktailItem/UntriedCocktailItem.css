@@ -34,12 +34,7 @@
     justify-content: space-around;
 }
 
-.update-button{
-    border: none;
-    background: none;
-}
-
-.delete-button{
+.untried-cocktail-item-action-button{
     border: none;
     background: none;
 }

@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import "./UntriedCocktailItem.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { getDatabase, ref, remove } from "firebase/database";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import Recipe from "../Recipe/Recipe";
 import CocktailService from "../../services/cocktail.service";
 
 function UntriedCocktailItem({ item, refreshList }) {
   const navigate = useNavigate();
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
+  const [hideRecipe, setHideRecipe] = useState(true);
   let cocktailName = item.cocktailName;
   let ingredientsString = "";
   for (var i = 0; i < item.ingredients?.length; i++) {
@@ -27,6 +29,10 @@ function UntriedCocktailItem({ item, refreshList }) {
     navigate("/cocktails/update", {
       state: { cocktailItem: item, tried: false },
     });
+  };
+
+  const openRecipe = () => {
+    setHideRecipe(false);
   };
 
   const showDeleteModal = () => {
@@ -52,13 +58,28 @@ function UntriedCocktailItem({ item, refreshList }) {
         </div>
       </div>
       <div className="untried-cocktail-item-buttons">
-        <button className="update-button" onClick={updateCocktail}>
-          <EditIcon style={{ color: "rgb(248, 128, 148)" }} />
+        <button
+          className="untried-cocktail-item-action-button"
+          onClick={openRecipe}
+        >
+          <NoteAltIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
-        <button className="delete-button" onClick={showDeleteModal}>
+        <button
+          className="untried-cocktail-item-action-button"
+          onClick={showDeleteModal}
+        >
           <DeleteIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
       </div>
+      {!hideRecipe && (
+        <Recipe
+          handleClose={() => setHideRecipe(true)}
+          name={item.cocktailName}
+          ingredients={item.ingredients}
+          notes={item.cocktailNotes}
+          updateCocktail={updateCocktail}
+        ></Recipe>
+      )}
       {!hideDeleteModal && (
         <DeleteModal
           confirmDelete={deleteCocktail}
