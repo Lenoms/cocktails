@@ -59,7 +59,7 @@ function TriedList({ filterOn }) {
 
     setTimeout(() => {
       cocktailContext.setScrollHeight(0);
-    }, 200);
+    }, 2000);
   });
 
   useEffect(() => {
