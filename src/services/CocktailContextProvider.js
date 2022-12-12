@@ -6,7 +6,7 @@ function CocktailContextProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("Alphabetical");
   const [scrollHeight, setScrollHeight] = useState(0);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   const cocktailContextState = {
     searchTerm: searchTerm,
     setSearchTerm: setSearchTerm,

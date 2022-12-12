@@ -16,7 +16,6 @@ function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [pageSize, setPageSize] = useState(20);
-  const [scrollHeight, setScrollHeight] = useState(0);
   let [loading, setLoading] = useState(true);
   const cocktailContext = useCocktailContext();
   const [currentPage, setCurrentPage] = useState(1);

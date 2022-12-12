@@ -9,7 +9,6 @@ QOL Changes
 - filtering UI looks like shit
 - Add proper keys to cocktails in db?
 - Fix the bug on mobile? where footer floats above bottom
-- Fix bug where long notes/ingredients breaks the untried recipe modal
 
 **CONTEXT**
 - Need some kind of app context to store filterOn, sortBy, and searchQuery. 
