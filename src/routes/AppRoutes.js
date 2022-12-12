@@ -7,36 +7,24 @@ import UntriedList from "../pages/Lists/UntriedList";
 import CreateCocktail from "../pages/CreateAndUpdateCocktail/CreateCocktail";
 import FilterList from "../pages/FilterList/FilterList";
 
-function AppRoutes({ sortBy, searchQuery, filterOn }) {
+function AppRoutes({ filterOn }) {
   let location = useLocation();
   return (
     <Routes location={location} key={location.pathname}>
       <Route
         exact
         path="/cocktails"
-        element={
-          <TriedList
-            sortBy={sortBy}
-            searchQuery={searchQuery}
-            filterOn={filterOn}
-          />
-        }
+        element={<TriedList filterOn={filterOn} />}
       />
       <Route
         exact
         path="/cocktails/tried"
-        element={
-          <TriedList
-            sortBy={sortBy}
-            searchQuery={searchQuery}
-            filterOn={filterOn}
-          />
-        }
+        element={<TriedList filterOn={filterOn} />}
       />
       <Route
         exact
         path="/cocktails/untried"
-        element={<UntriedList searchQuery={searchQuery} filterOn={filterOn} />}
+        element={<UntriedList filterOn={filterOn} />}
       />
       <Route exact path="/cocktails/create" element={<CreateCocktail />} />
       <Route

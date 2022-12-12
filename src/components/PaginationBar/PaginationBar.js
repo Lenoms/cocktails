@@ -4,6 +4,8 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { scrollToHeight } from "../../services/scroll.service";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
 
 function PaginationBar({
   currentPage,
@@ -11,28 +13,32 @@ function PaginationBar({
   totalItemCount,
   pageSize,
 }) {
-  const el = document.getElementById("app-header-and-body");
-  const max_pages = Math.floor(totalItemCount / pageSize) + 1;
+  // Don't ask me about this formula. It works.
+  const max_pages = Math.floor(totalItemCount / (pageSize + 1)) + 1;
+  const cocktailContext = useCocktailContext();
   const incrementPage = () => {
-    console.log(currentPage, totalItemCount);
     if (!(currentPage >= max_pages)) {
+      cocktailContext.setPageNumber(currentPage + 1);
       setCurrentPage(currentPage + 1);
-      el.scrollTo(0, 0);
+      scrollToHeight(0, "smooth");
     }
   };
   const decrementPage = () => {
     if (currentPage > 1) {
+      cocktailContext.setPageNumber(currentPage - 1);
       setCurrentPage(currentPage - 1);
-      el.scrollTo(0, 0);
+      scrollToHeight(0, "smooth");
     }
   };
   const jumpFirstPage = () => {
+    cocktailContext.setPageNumber(1);
     setCurrentPage(1);
-    el.scrollTo(0, 0);
+    scrollToHeight(0, "smooth");
   };
   const jumpLastPage = () => {
+    cocktailContext.setPageNumber(Math.ceil(totalItemCount / pageSize));
     setCurrentPage(Math.ceil(totalItemCount / pageSize));
-    el.scrollTo(0, 0);
+    scrollToHeight(0, "smooth");
   };
   return (
     <div className="pagination-bar-container">

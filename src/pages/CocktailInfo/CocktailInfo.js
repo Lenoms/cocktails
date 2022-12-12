@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CocktailInfo.css";
 import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RouteAnimation } from "../../animations/RouteAnimation";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import CocktailService from "../../services/cocktail.service";
+import { scrollToHeight } from "../../services/scroll.service";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
@@ -32,6 +33,10 @@ function CocktailInfo({ location }) {
     const showDeleteModal = () => {
       setHideDeleteModal(false);
     };
+
+    useEffect(() => {
+      scrollToHeight(0);
+    }, []);
 
     return (
       <motion.div

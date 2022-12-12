@@ -4,7 +4,7 @@ import "../../animations/bubbles.css";
 import Navbar from "../Navbar/Navbar";
 import TitleSearchAddBar from "../TitleSearchAddBar/TitleSearchAddBar";
 
-function Header({ searchSubmitted }) {
+function Header() {
   return (
     <div className="header-body">
       <div className="bubbles">
@@ -19,7 +19,7 @@ function Header({ searchSubmitted }) {
         <div className="bubble"></div>
         <div className="bubble"></div>
       </div>
-      <TitleSearchAddBar searchSubmitted={searchSubmitted} />
+      <TitleSearchAddBar />
       <Navbar />
     </div>
   );

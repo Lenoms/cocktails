@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./TriedCocktailItem.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function TriedCocktailItem({ item, sortBy }) {
   let daniGrade = parseInt(item.daniGrade);
   let overallGrade = (danielGrade + daniGrade) / 2;
   let cocktailImageUrl = item.image;
+  const cocktailContext = useCocktailContext();
 
   const [gradeToShow, setGradeToShow] = useState(overallGrade);
 
@@ -27,6 +29,9 @@ function TriedCocktailItem({ item, sortBy }) {
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
+    cocktailContext.setScrollHeight(
+      document.getElementById("app-header-and-body").scrollTop
+    );
     navigate("/cocktails/info", { state: { cocktailItem: item } });
   };
   return (

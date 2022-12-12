@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Lists.css";
 import TriedCocktailItem from "../../components/TriedCocktailItem/TriedCocktailItem";
 import { motion } from "framer-motion";
@@ -9,14 +9,17 @@ import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import PaginationBar from "../../components/PaginationBar/PaginationBar";
 import { hasUnownedIngredient } from "../../services/filter.services";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
+import { scrollToHeight } from "../../services/scroll.service";
 
-function TriedList({ sortBy, searchQuery, filterOn }) {
+function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
   const [displayList, setDisplayList] = useState([]);
-  const [searchQueryTerm, setSearchQueryTerm] = useState();
   const [pageSize, setPageSize] = useState(20);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [scrollHeight, setScrollHeight] = useState(0);
   let [loading, setLoading] = useState(true);
+  const cocktailContext = useCocktailContext();
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Get cocktails
   useEffect(() => {
@@ -40,26 +43,29 @@ function TriedList({ sortBy, searchQuery, filterOn }) {
 
   // Sort
   useEffect(() => {
-    setCocktails(sortList(cocktails, sortBy));
-    refreshCocktails();
-  }, [sortBy, cocktails]);
-
-  // Set search term
-  useEffect(() => {
-    setSearchQueryTerm(searchQuery);
-    setCurrentPage(1);
-    refreshCocktails();
-  }, [searchQuery]);
+    setCocktails(sortList(cocktails, cocktailContext.sortBy));
+    setDisplayList([...cocktails]);
+  }, [cocktailContext.sortBy, cocktails]);
 
   // Filter function for search term
   const filterBySearchTerm = (item) => {
-    if (!searchQueryTerm || !item) return true;
-    return searchQueryMatch(searchQueryTerm, item);
+    if (!item) return true;
+    return searchQueryMatch(cocktailContext.searchTerm, item);
   };
 
-  const refreshCocktails = () => {
-    setDisplayList([...cocktails]);
-  };
+  useEffect(() => {
+    if (cocktailContext.scrollHeight !== 0) {
+      scrollToHeight(cocktailContext.scrollHeight);
+    }
+
+    setTimeout(() => {
+      cocktailContext.setScrollHeight(0);
+    }, 200);
+  });
+
+  useEffect(() => {
+    setCurrentPage(cocktailContext.pageNumber);
+  }, [cocktailContext.pageNumber]);
 
   // Bonus stuff
   useEffect(() => {
@@ -90,7 +96,7 @@ function TriedList({ sortBy, searchQuery, filterOn }) {
               <TriedCocktailItem
                 key={item.cocktailName}
                 item={item}
-                sortBy={sortBy}
+                sortBy={cocktailContext.sortBy}
               ></TriedCocktailItem>
             );
           })}

@@ -5,19 +5,25 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
 
 function TitleSearchAddBar({ searchSubmitted }) {
   const [isLow, setIsLow] = useState(true);
+  const cocktailContext = useCocktailContext();
   function submitSearch(e) {
     e.preventDefault();
     document.activeElement.blur();
+    cocktailContext.setScrollHeight(0);
+    cocktailContext.setPageNumber(1);
     let searchQuery = document.getElementById("search-bar-input").value;
-    searchSubmitted(searchQuery);
+    cocktailContext.setSearchTerm(searchQuery);
   }
 
   function clearSearchBar() {
     document.getElementById("search-bar-input").value = "";
-    searchSubmitted("");
+    cocktailContext.setScrollHeight(0);
+    cocktailContext.setPageNumber(1);
+    cocktailContext.setSearchTerm("");
   }
 
   const variants = {

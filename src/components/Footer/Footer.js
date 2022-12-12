@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import LogoutButton from "../LogButtons/LogoutButton";
 import FilterButton from "./FilterButton";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
 
-function Footer({ setSortBy, sortBy, setFilterOn }) {
+function Footer({ setFilterOn }) {
   const [activeFooter, setActiveFooter] = useState(false);
+  const cocktailContext = useCocktailContext();
 
   function toggleFooter() {
     setActiveFooter(!activeFooter);
@@ -15,7 +17,7 @@ function Footer({ setSortBy, sortBy, setFilterOn }) {
 
   function handleSortSelect() {
     let sortBySelected = document.getElementById("sorter").value;
-    setSortBy(sortBySelected);
+    cocktailContext.setSortBy(sortBySelected);
   }
 
   const variants = {
@@ -79,7 +81,7 @@ function Footer({ setSortBy, sortBy, setFilterOn }) {
               name="sorter"
               id="sorter"
               className="footer-sorter"
-              defaultValue={sortBy}
+              defaultValue={cocktailContext.sortBy}
             >
               <option>Alphabetical</option>
               <option>Overall Grade</option>

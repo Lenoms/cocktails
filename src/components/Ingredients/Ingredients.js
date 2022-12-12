@@ -2,6 +2,8 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import "./Ingredients.css";
+import { ListItemIcon, MenuItem, NativeSelect } from "@mui/material";
+import { Add } from "@mui/icons-material";
 
 function Ingredients({ ingredients, setIngredients }) {
   function addIngredient(e) {
@@ -49,11 +51,7 @@ function Ingredients({ ingredients, setIngredients }) {
           className="add-ingredients-input"
           id="cocktail-ingredients"
         ></input>
-        <select
-          className="ingredients-measure-dropdown"
-          defaultValue={"Amount"}
-          id="ingredients-measure-dropdown-amount"
-        >
+        <select defaultValue={"Amount"}>
           <option hidden disabled>
             Amount
           </option>
@@ -66,11 +64,7 @@ function Ingredients({ ingredients, setIngredients }) {
           <option>2½</option>
           <option>3</option>
         </select>
-        <select
-          className="ingredients-measure-dropdown"
-          defaultValue={"Measure"}
-          id="ingredients-measure-dropdown-measure"
-        >
+        <select defaultValue={"Measure"}>
           <option hidden disabled>
             Measure
           </option>

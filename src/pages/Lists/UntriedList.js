@@ -8,11 +8,12 @@ import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { hasUnownedIngredient } from "../../services/filter.services";
+import { useCocktailContext } from "../../services/CocktailContextProvider";
 
-function UntriedList({ searchQuery, filterOn }) {
+function UntriedList({ filterOn }) {
   let [cocktails, setCocktails] = useState([]);
   let [loading, setLoading] = useState(true);
-  const [searchQueryTerm, setSearchQueryTerm] = useState();
+  const cocktailContext = useCocktailContext();
 
   // Get cocktails
   useEffect(() => {
@@ -42,14 +43,10 @@ function UntriedList({ searchQuery, filterOn }) {
     });
   };
 
-  // Set search term
-  useEffect(() => {
-    setSearchQueryTerm(searchQuery);
-  }, [searchQuery]);
-
   // Filter function for search query
   const filterBySearchTerm = (item) => {
-    return searchQueryMatch(searchQueryTerm, item);
+    if (!item) return true;
+    return searchQueryMatch(cocktailContext.searchTerm, item);
   };
 
   // useEffect(() => {
