@@ -39,6 +39,12 @@
     width: 100%;
 }
 
+.cocktail-info-tags-container{
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
 .cocktail-date-created-container{
     width: 100%;
     display: flex;

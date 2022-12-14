@@ -19,7 +19,8 @@ function CreateCocktail() {
         cocktailObject.notes,
         cocktailObject.ingredients,
         cocktailObject.imgUrl,
-        null
+        null,
+        cocktailObject.tags
       );
       navigate("/cocktails/tried");
     } else {

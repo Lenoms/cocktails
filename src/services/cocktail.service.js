@@ -56,7 +56,8 @@ const CocktailService = {
     cocktailNotes,
     ingredients,
     imgUrl,
-    date
+    date,
+    tags
   ) {
     const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
     if (noSpecialCharactersKey.length == 0) return;
@@ -72,6 +73,7 @@ const CocktailService = {
         image: imgUrl,
         date: date,
         dateModified: currentDate,
+        tags: tags,
       });
     } else {
       set(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey), {
@@ -82,6 +84,7 @@ const CocktailService = {
         ingredients: ingredients,
         image: imgUrl,
         date: currentDate,
+        tags: tags,
       });
     }
   },

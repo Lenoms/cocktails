@@ -1,0 +1,14 @@
+.tried-tag{
+    width: 30%;
+    height: 16px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    display: flex;
+    font-weight: bold;
+    font-size: 11px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    max-width: 80px;
+
+}

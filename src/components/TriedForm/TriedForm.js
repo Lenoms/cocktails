@@ -3,8 +3,16 @@ import "./TriedForm.css";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CocktailService from "../../services/cocktail.service";
 import { useState } from "react";
+import TagSelector from "../Tags/TagSelector";
 
-function TriedForm({ setImgUrl, imgUrl, setIsUploading, defaultGrades }) {
+function TriedForm({
+  setImgUrl,
+  imgUrl,
+  setIsUploading,
+  defaultGrades,
+  tags,
+  setTags,
+}) {
   const [progresspercent, setProgresspercent] = useState(0);
 
   function uploadImage(event) {
@@ -47,6 +55,15 @@ function TriedForm({ setImgUrl, imgUrl, setIsUploading, defaultGrades }) {
               defaultValue={defaultGrades ? defaultGrades[1] : 0}
             ></input>
           </div>
+        </div>
+      </div>
+
+      <div className="form-input-field-container">
+        <label className="form-label" htmlFor="cocktail-tags">
+          Tags
+        </label>
+        <div className="form-tags-container">
+          <TagSelector handleSelectedTags={setTags} tags={tags} />
         </div>
       </div>
 

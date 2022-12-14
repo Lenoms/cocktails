@@ -31,7 +31,8 @@ function UpdateCocktailInfo({ location }) {
           cocktailObject.notes,
           cocktailObject.ingredients,
           cocktailObject.imgUrl,
-          date
+          date,
+          cocktailObject.tags
         );
         navigate("/cocktails/tried");
       } else {

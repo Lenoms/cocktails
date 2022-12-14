@@ -3,6 +3,7 @@ import "./TriedCocktailItem.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
+import Tag from "../Tags/Tag";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ function TriedCocktailItem({ item, sortBy }) {
   let overallGrade = (danielGrade + daniGrade) / 2;
   let cocktailImageUrl = item.image;
   const cocktailContext = useCocktailContext();
+
+  let tags = [];
+  console.log(item.tags);
+  if (item.tags) {
+    tags = item.tags;
+  }
 
   const [gradeToShow, setGradeToShow] = useState(overallGrade);
 
@@ -34,6 +41,23 @@ function TriedCocktailItem({ item, sortBy }) {
     );
     navigate("/cocktails/info", { state: { cocktailItem: item } });
   };
+
+  const getGradeBorderColour = (grade) => {
+    const gradientArray = [
+      "#FF0000",
+      "#FF0000",
+      "#FF0000",
+      "#FF0000",
+      "#E24200",
+      "#E27E00",
+      "#E2B600",
+      "#D2E200",
+      "#6BE200",
+      "#00E22D",
+    ];
+    const index = Math.floor(grade / 10);
+    return gradientArray[index];
+  };
   return (
     <Card
       className="tried-cocktail-item-body"
@@ -41,18 +65,29 @@ function TriedCocktailItem({ item, sortBy }) {
       style={{ backgroundColor: "#FFE5B0" }}
     >
       <div className="border-tried-left"></div>
-      <h4 className="cocktail-name">{cocktailName}</h4>
-      <h5
-        className="tried-cocktail-item-grade"
-        style={{
-          color:
-            sortBy == "Daniel Grade" || sortBy == "Dani Grade"
-              ? "#FF1493"
-              : "#565656",
-        }}
-      >
-        {gradeToShow}
-      </h5>
+      <div className="tried-cocktail-info-container">
+        <div className="tried-cocktail-name-grade">
+          <div className="cocktail-name">{cocktailName}</div>
+          <div
+            className="tried-cocktail-item-grade"
+            style={{
+              color:
+                sortBy == "Daniel Grade" || sortBy == "Dani Grade"
+                  ? "#FF1493"
+                  : "black",
+              borderColor: getGradeBorderColour(gradeToShow),
+            }}
+          >
+            {gradeToShow}
+          </div>
+        </div>
+        <div className="tried-cocktail-tags">
+          {tags.map((tag) => {
+            return <Tag tag={tag} />;
+          })}
+        </div>
+        <div className="tried-cocktail-date-created">{item.date[1]}</div>
+      </div>
       <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>
     </Card>
   );

@@ -7,6 +7,9 @@ import TriedForm from "../TriedForm/TriedForm";
 
 function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   const [tried, setTried] = useState(defaultCocktailObject?.tried);
+  const [tags, setTags] = useState(
+    defaultCocktailObject?.tags ? defaultCocktailObject?.tags : []
+  );
   const [imgUrl, setImgUrl] = useState(
     defaultCocktailObject?.image ? defaultCocktailObject.image : null
   );
@@ -43,7 +46,9 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
       daniel_grade: daniel_grade,
       dani_grade: dani_grade,
       imgUrl: imgUrl,
+      tags: tags,
     };
+    console.log(tags);
     addCocktail(newCocktail);
   };
 
@@ -112,6 +117,8 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
             imgUrl={imgUrl}
             setIsUploading={setIsUploading}
             defaultGrades={default_grades}
+            tags={tags}
+            setTags={setTags}
           ></TriedForm>
         </>
       )}

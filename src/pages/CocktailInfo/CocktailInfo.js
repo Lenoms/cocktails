@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import CocktailService from "../../services/cocktail.service";
 import { scrollToHeight } from "../../services/scroll.service";
+import Tag from "../../components/Tags/Tag";
 
 function CocktailInfo({ location }) {
   if (!!location.state) {
@@ -70,6 +71,14 @@ function CocktailInfo({ location }) {
               })}
           </ul>
         </div>
+
+        <div className="cocktail-info-tags-container">
+          {cocktail.tags &&
+            cocktail.tags.map((tag) => {
+              return <Tag tag={tag} />;
+            })}
+        </div>
+
         <div className="cocktail-date-created-container">
           <div style={{ marginRight: "5px", fontWeight: "bold" }}>Date: </div>
           <div style={{ color: "grey" }}>{cocktail.date[1]}</div>

@@ -18,6 +18,11 @@
     height: 40px;
 }
 
+.form-tags-container{
+    display: flex;
+    width: 100%;
+}
+
 .custom-file-upload{
     margin-top: 5%;
     width: 50%;

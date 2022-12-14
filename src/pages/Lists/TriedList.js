@@ -14,11 +14,11 @@ import { scrollToHeight } from "../../services/scroll.service";
 
 function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
-  const [displayList, setDisplayList] = useState([]);
-  const [pageSize, setPageSize] = useState(20);
-  let [loading, setLoading] = useState(true);
-  const cocktailContext = useCocktailContext();
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const cocktailContext = useCocktailContext();
+  const pageSize = 20;
 
   // Get cocktails
   useEffect(() => {
@@ -26,7 +26,7 @@ function TriedList({ filterOn }) {
       const cocktailList = Object.values(data);
       if (filterOn) {
         CocktailService.getUnownedIngredients().then((data) => {
-          setCocktails(
+          sortAndSetCocktails(
             cocktailList.filter(
               (cocktail) => !hasUnownedIngredient(cocktail, Object.values(data))
             )
@@ -34,7 +34,7 @@ function TriedList({ filterOn }) {
           setLoading(false);
         });
       } else {
-        setCocktails(cocktailList);
+        sortAndSetCocktails(cocktailList);
         setLoading(false);
       }
     });
@@ -42,9 +42,12 @@ function TriedList({ filterOn }) {
 
   // Sort
   useEffect(() => {
-    setCocktails(sortList(cocktails, cocktailContext.sortBy));
-    setDisplayList([...cocktails]);
-  }, [cocktailContext.sortBy, cocktails]);
+    sortAndSetCocktails(cocktails);
+  }, [cocktailContext.sortBy]);
+
+  const sortAndSetCocktails = (list) => {
+    setCocktails([...sortList(list, cocktailContext.sortBy)]);
+  };
 
   // Filter function for search term
   const filterBySearchTerm = (item) => {
@@ -52,6 +55,7 @@ function TriedList({ filterOn }) {
     return searchQueryMatch(cocktailContext.searchTerm, item);
   };
 
+  // Return user to previous scroll height
   useEffect(() => {
     if (cocktailContext.scrollHeight !== 0) {
       scrollToHeight(cocktailContext.scrollHeight);
@@ -62,6 +66,7 @@ function TriedList({ filterOn }) {
     }, 700);
   });
 
+  // Return user to page they were on
   useEffect(() => {
     setCurrentPage(cocktailContext.pageNumber);
   }, [cocktailContext.pageNumber]);
@@ -87,7 +92,7 @@ function TriedList({ filterOn }) {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.exit}
       >
-        {displayList
+        {cocktails
           .filter((item) => filterBySearchTerm(item))
           .slice((currentPage - 1) * pageSize, currentPage * pageSize)
           .map(function (item) {
@@ -103,7 +108,7 @@ function TriedList({ filterOn }) {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalItemCount={
-            displayList.filter((item) => filterBySearchTerm(item)).length
+            cocktails.filter((item) => filterBySearchTerm(item)).length
           }
           pageSize={pageSize}
         />
