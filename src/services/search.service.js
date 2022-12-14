@@ -50,7 +50,7 @@ function isSubString(s1, s2) {
 
 function checkIngredient(searchQuery, ingredient) {
   // Check full ingredient
-  if (searchQuery.toLowerCase() === ingredient.toLowerCase()) {
+  if (searchQuery.toLowerCase().trim() === ingredient.toLowerCase().trim()) {
     return true;
   }
 
@@ -66,7 +66,7 @@ function checkIngredient(searchQuery, ingredient) {
 
 function checkTags(query, tags) {
   for (let i = 0; i < tags.length; i++) {
-    if (tags[i] === query) {
+    if (tags[i] === query.toLowerCase().trim()) {
       return true;
     }
   }
