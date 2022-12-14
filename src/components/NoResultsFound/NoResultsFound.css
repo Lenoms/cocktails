@@ -1,0 +1,33 @@
+.no-results-found-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 230, 237);
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+    .no-results-found-container{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .no-results-found-container{
+        width: 100%;
+    }
+}
+
+.no-results-found-image{
+    height: 50%;
+}
+
+.no-results-found-image img{
+    height: 100%;
+}
+
+.no-results-found-message{
+    color: rgb(95, 94, 94);
+}

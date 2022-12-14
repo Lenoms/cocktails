@@ -11,6 +11,7 @@ import PaginationBar from "../../components/PaginationBar/PaginationBar";
 import { hasUnownedIngredient } from "../../services/filter.services";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
+import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
 
 function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
@@ -85,35 +86,39 @@ function TriedList({ filterOn }) {
   if (loading) {
     return <LoadingSpinner />;
   } else {
-    return (
-      <motion.div
-        className="list"
-        initial={RouteAnimation.initial}
-        animate={RouteAnimation.animate}
-        exit={RouteAnimation.exit}
-      >
-        {cocktails
-          .filter((item) => filterBySearchTerm(item))
-          .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-          .map(function (item) {
-            return (
-              <TriedCocktailItem
-                key={item.cocktailName}
-                item={item}
-                sortBy={cocktailContext.sortBy}
-              ></TriedCocktailItem>
-            );
-          })}
-        <PaginationBar
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalItemCount={
-            cocktails.filter((item) => filterBySearchTerm(item)).length
-          }
-          pageSize={pageSize}
-        />
-      </motion.div>
-    );
+    if (cocktails.filter((item) => filterBySearchTerm(item)).length === 0) {
+      return <NoResultsFound />;
+    } else {
+      return (
+        <motion.div
+          className="list"
+          initial={RouteAnimation.initial}
+          animate={RouteAnimation.animate}
+          exit={RouteAnimation.exit}
+        >
+          {cocktails
+            .filter((item) => filterBySearchTerm(item))
+            .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+            .map(function (item) {
+              return (
+                <TriedCocktailItem
+                  key={item.cocktailName}
+                  item={item}
+                  sortBy={cocktailContext.sortBy}
+                ></TriedCocktailItem>
+              );
+            })}
+          <PaginationBar
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalItemCount={
+              cocktails.filter((item) => filterBySearchTerm(item)).length
+            }
+            pageSize={pageSize}
+          />
+        </motion.div>
+      );
+    }
   }
 }
 

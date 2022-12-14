@@ -9,6 +9,7 @@ import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { hasUnownedIngredient } from "../../services/filter.services";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
+import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
 
 function UntriedList({ filterOn }) {
   let [cocktails, setCocktails] = useState([]);
@@ -71,27 +72,31 @@ function UntriedList({ filterOn }) {
   if (loading) {
     return <LoadingSpinner />;
   } else {
-    return (
-      <motion.div
-        className="list"
-        id="untried-list-container"
-        initial={RouteAnimation.initial}
-        animate={RouteAnimation.animate}
-        exit={RouteAnimation.exit}
-      >
-        {cocktails
-          .filter((item) => filterBySearchTerm(item))
-          .map(function (item) {
-            return (
-              <UntriedCocktailItem
-                key={item.cocktailName}
-                item={item}
-                refreshList={refreshList}
-              ></UntriedCocktailItem>
-            );
-          })}
-      </motion.div>
-    );
+    if (cocktails.filter((item) => filterBySearchTerm(item)).length === 0) {
+      return <NoResultsFound />;
+    } else {
+      return (
+        <motion.div
+          className="list"
+          id="untried-list-container"
+          initial={RouteAnimation.initial}
+          animate={RouteAnimation.animate}
+          exit={RouteAnimation.exit}
+        >
+          {cocktails
+            .filter((item) => filterBySearchTerm(item))
+            .map(function (item) {
+              return (
+                <UntriedCocktailItem
+                  key={item.cocktailName}
+                  item={item}
+                  refreshList={refreshList}
+                ></UntriedCocktailItem>
+              );
+            })}
+        </motion.div>
+      );
+    }
   }
 }
 

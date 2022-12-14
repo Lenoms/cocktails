@@ -15,7 +15,6 @@ function TriedCocktailItem({ item, sortBy }) {
   const cocktailContext = useCocktailContext();
 
   let tags = [];
-  console.log(item.tags);
   if (item.tags) {
     tags = item.tags;
   }
