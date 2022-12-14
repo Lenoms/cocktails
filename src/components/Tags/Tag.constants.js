@@ -4,7 +4,7 @@ export const mapToColour = (option) => {
       return "#fffbc2";
     case "favourite":
       return "#ffc7f5";
-    case "try again":
+    case "retry":
       return "#b6f0bb";
     case "strong":
       return "#ff4053";
@@ -19,7 +19,7 @@ export const mapToColour = (option) => {
 export const tagOptions = [
   { label: "summer", value: "summer", color: mapToColour("summer") },
   { label: "favourite", value: "favourite", color: mapToColour("favourite") },
-  { label: "try again", value: "try again", color: mapToColour("try again") },
+  { label: "retry", value: "retry", color: mapToColour("retry") },
   { label: "strong", value: "strong", color: mapToColour("strong") },
   { label: "dessert", value: "dessert", color: mapToColour("dessert") },
   { label: "aesthetic", value: "aesthetic", color: mapToColour("aesthetic") },

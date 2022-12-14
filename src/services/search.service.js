@@ -19,6 +19,11 @@ export function searchQueryMatch(searchQuery, cocktail) {
       }
     }
 
+    let tags = cocktail.tags;
+    if (tags && checkTags(searchQuery, cocktail.tags)) {
+      return true;
+    }
+
     return false;
   } else {
     return true;
@@ -57,4 +62,12 @@ function checkIngredient(searchQuery, ingredient) {
     }
   }
   return false;
+}
+
+function checkTags(query, tags) {
+  for (let i = 0; i < tags.length; i++) {
+    if (tags[i] === query) {
+      return true;
+    }
+  }
 }
