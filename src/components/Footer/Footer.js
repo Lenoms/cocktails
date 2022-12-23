@@ -76,21 +76,23 @@ function Footer({ setFilterOn }) {
       <div className="footer-body">
         {activeFooter ? (
           <div className="footer-nav-bar">
-            <div style={{ width: "15%" }} />
-            <select
-              onChange={handleSortSelect}
-              name="sorter"
-              id="sorter"
-              className="footer-sorter"
-              defaultValue={cocktailContext.sortBy}
-            >
-              <option>Alphabetical</option>
-              <option>Overall Grade</option>
-              <option>Daniel Grade</option>
-              <option>Dani Grade</option>
-              <option>Date Created</option>
-            </select>
-            <FilterButton setFilterOn={setFilterOn} />
+            <div style={{ width: "15%", height: "100%" }} />
+            <div className="footer-options-container">
+              <select
+                onChange={handleSortSelect}
+                name="sorter"
+                id="sorter"
+                className="footer-sorter"
+                defaultValue={cocktailContext.sortBy}
+              >
+                <option>Alphabetical</option>
+                <option>Overall Grade</option>
+                <option>Daniel Grade</option>
+                <option>Dani Grade</option>
+                <option>Date Created</option>
+              </select>
+              <FilterButton setFilterOn={setFilterOn} />
+            </div>
             <LogoutButton size={["10%", "50%"]} />
           </div>
         ) : (
