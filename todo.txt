@@ -10,11 +10,7 @@ QOL Changes
 - Add proper keys to cocktails in db?
 - Fix the bug on mobile? where footer floats above bottom
 
-**CONTEXT**
-- Need some kind of app context to store filterOn, sortBy, and searchQuery. 
-Will make things nicer by not having to pass heaps around. Also will fix filterOn bug
 
-- Scroll height remembering
 - More validation on upsert (cant have characters like '.' in title)
 
 - Think theres a bug where filter is on and try to load tried page. DOesn't load

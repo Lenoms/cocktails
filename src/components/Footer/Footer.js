@@ -76,6 +76,7 @@ function Footer({ setFilterOn }) {
       <div className="footer-body">
         {activeFooter ? (
           <div className="footer-nav-bar">
+            <div style={{ width: "15%" }} />
             <select
               onChange={handleSortSelect}
               name="sorter"
