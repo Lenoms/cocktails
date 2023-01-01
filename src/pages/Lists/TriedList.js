@@ -12,6 +12,7 @@ import { hasUnownedIngredient } from "../../services/filter.services";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
+import { downloadBackUp } from "../../services/backup.service";
 
 function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
@@ -64,7 +65,7 @@ function TriedList({ filterOn }) {
 
     setTimeout(() => {
       cocktailContext.setScrollHeight(0);
-    }, 700);
+    }, 600);
   });
 
   // Return user to page they were on

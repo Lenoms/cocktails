@@ -1,42 +1,26 @@
 import React from "react";
 import "./FilterList.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CocktailService from "../../services/cocktail.service";
 
-function UnownedIngredients({ unownedIngredients }) {
-  const UnownedIngredient = (ingredient) => {
-    return (
-      <div className="unowned-ingredient-container">
-        {ingredient.ingredient}
-      </div>
-    );
+function UnownedIngredients({ unownedIngredients, refreshList }) {
+  const deleteUnownedIngredient = (ingredient) => {
+    console.log("called", ingredient);
+    CocktailService.deleteUnownedIngredient(ingredient.ingredient);
+    refreshList();
   };
-  const BarRow = (row) => {
-    return (
-      <div className="unowned-ingredients-bar-row">
-        {row.row.map((ingredient) => {
-          return <UnownedIngredient ingredient={ingredient.ingredient} />;
-        })}
-      </div>
-    );
-  };
-  const BarRows = () => {
-    let rows = splitArrayIntoChunksOfLen(unownedIngredients, 3);
-    return rows.map((row) => {
-      return <BarRow row={row} />;
-    });
-  };
-
-  function splitArrayIntoChunksOfLen(arr, len) {
-    var chunks = [],
-      i = 0,
-      n = arr.length;
-    while (i < n) {
-      chunks.push(arr.slice(i, (i += len)));
-    }
-    return chunks;
-  }
   return (
     <div className="unowned-ingredients-list-container">
-      <BarRows />
+      {unownedIngredients.map((ingredient) => {
+        return (
+          <div className="unowned-ingredient-container">
+            <div>{ingredient.ingredient}</div>
+            <span onClick={() => deleteUnownedIngredient(ingredient)}>
+              <DeleteIcon style={{ color: "black" }} />
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -15,7 +15,7 @@ function AddUnownedIngredientButton({ setLoading, refreshList }) {
   };
   return (
     <div className="add-unowned-ingredient-container">
-      <input id="filter-list-ingredient-input"></input>
+      <input id="filter-list-ingredient-input" autoComplete="off"></input>
       <button
         className="filter-list-add-ingredient-button"
         onClick={addUnownedIngredient}

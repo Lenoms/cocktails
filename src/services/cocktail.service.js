@@ -151,10 +151,20 @@ const CocktailService = {
   },
   addUnownedIngredient: function (ingredient) {
     const db = getDatabase();
+    if (ingredient.length == 0) return;
     set(databaseRef(db, "cocktails/unownedIngredients/" + ingredient), {
       ingredient: ingredient,
     });
   },
+  deleteUnownedIngredient: function (ingredient) {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+    const db = getDatabase();
+    if (ingredient.length == 0) return;
+    remove(databaseRef(db, `cocktails/unownedIngredients/${ingredient}`));
+  },
+
   printAnalytics: function (data) {
     let daniel_sum = 0;
     let dani_sum = 0;

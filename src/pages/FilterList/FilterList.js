@@ -35,7 +35,10 @@ function FilterList() {
         className="filter-list-container"
       >
         <h1>Unowned Ingredients</h1>
-        <UnownedIngredients unownedIngredients={unownedIngredients} />
+        <UnownedIngredients
+          unownedIngredients={unownedIngredients}
+          refreshList={refreshList}
+        />
         <AddUnownedIngredientButton
           setLoading={setLoading}
           refreshList={refreshList}

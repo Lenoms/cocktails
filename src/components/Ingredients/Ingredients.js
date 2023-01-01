@@ -2,8 +2,6 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import "./Ingredients.css";
-import { ListItemIcon, MenuItem, NativeSelect } from "@mui/material";
-import { Add } from "@mui/icons-material";
 
 function Ingredients({ ingredients, setIngredients }) {
   function addIngredient(e) {
