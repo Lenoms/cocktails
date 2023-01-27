@@ -49,7 +49,10 @@ function Ingredients({ ingredients, setIngredients }) {
           className="add-ingredients-input"
           id="cocktail-ingredients"
         ></input>
-        <select defaultValue={"Amount"}>
+        <select
+          defaultValue={"Amount"}
+          id="ingredients-measure-dropdown-amount"
+        >
           <option hidden disabled>
             Amount
           </option>
@@ -62,7 +65,10 @@ function Ingredients({ ingredients, setIngredients }) {
           <option>2½</option>
           <option>3</option>
         </select>
-        <select defaultValue={"Measure"}>
+        <select
+          defaultValue={"Measure"}
+          id="ingredients-measure-dropdown-measure"
+        >
           <option hidden disabled>
             Measure
           </option>
