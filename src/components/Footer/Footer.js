@@ -18,6 +18,7 @@ function Footer({ setFilterOn }) {
   function handleSortSelect() {
     let sortBySelected = document.getElementById("sorter").value;
     cocktailContext.setSortBy(sortBySelected);
+    cocktailContext.setPageNumber(1);
   }
 
   const variants = {
