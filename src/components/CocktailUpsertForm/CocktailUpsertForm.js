@@ -48,7 +48,6 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
       imgUrl: imgUrl,
       tags: tags,
     };
-    console.log(tags);
     addCocktail(newCocktail);
   };
 

@@ -13,11 +13,10 @@ function PaginationBar({
   totalItemCount,
   pageSize,
 }) {
-  // Don't ask me about this formula. It works.
-  const max_pages = Math.floor(totalItemCount / (pageSize + 1)) + 1;
+  const max_pages = Math.ceil(totalItemCount / pageSize);
   const cocktailContext = useCocktailContext();
   const incrementPage = () => {
-    if (!(currentPage >= max_pages)) {
+    if (currentPage < max_pages) {
       cocktailContext.setPageNumber(currentPage + 1);
       setCurrentPage(currentPage + 1);
       scrollToHeight(0, "smooth");
@@ -36,8 +35,8 @@ function PaginationBar({
     scrollToHeight(0, "smooth");
   };
   const jumpLastPage = () => {
-    cocktailContext.setPageNumber(Math.ceil(totalItemCount / pageSize));
-    setCurrentPage(Math.ceil(totalItemCount / pageSize));
+    cocktailContext.setPageNumber(max_pages);
+    setCurrentPage(max_pages);
     scrollToHeight(0, "smooth");
   };
   return (
