@@ -20,7 +20,9 @@ const csvmaker = function (data) {
   // Pushing Object values into array
   // with comma separation
   for (let i = 0; i < data.length; i++) {
-    const values = Object.values(data[i]).join(",");
+    const values = Object.values(data[i])
+      .map((value) => `"${value}"`)
+      .join(",");
     csvRows.push(values);
   }
 

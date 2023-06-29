@@ -1,20 +1,20 @@
 QOL Changes
 
-- Security updates on database
-- Make info ui nicer?
-
 - Something to look into in the future is image optimisation and lazy loading. If it starts to get too slow to load the 
   tried list.
 
-- filtering UI looks like shit
-- Add proper keys to cocktails in db?
-- Fix the bug on mobile? where footer floats above bottom
+Database and multi-user plan
 
+- Auth0 Returns a sub in the user object. Can use this to extend app to other users if we want.
+  
+1. Properly integrate auth0 with the database:
+    - Add security rules on add/update/delete
+    - Add proper keys and structure. User folder, and give cocktails actual keys not their name.
+    - Then with a nice database that we're happy, start thinking about multi-user.
 
-- More validation on upsert (cant have characters like '.' in title)
-
-- Think theres a bug where filter is on and try to load tried page. DOesn't load
-features
-
-Auth0 Returns a sub in the user object. Can use this to extend app to other users if we want.
+2. Multi user:
+    - I'm not sure man. Do we want to try figure out how to make it read only for some people? 
+      We have a weird use case where people might not actually want the app for themselves, they
+      want to see OUR data. 
+      How can we effectively handle this (People wanting their own account as well as read-access to ours)?
 
