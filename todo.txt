@@ -18,3 +18,5 @@ Database and multi-user plan
       want to see OUR data. 
       How can we effectively handle this (People wanting their own account as well as read-access to ours)?
 
+To debug on mobile: 
+https://medium.com/front-end-weekly/how-to-inspect-websites-on-mobile-devices-with-chrome-devtools-534086bb76a8

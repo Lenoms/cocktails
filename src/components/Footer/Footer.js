@@ -23,7 +23,7 @@ function Footer({ setFilterOn }) {
 
   const variants = {
     low: { y: 0 },
-    high: { y: "-20%", rotate: 360 },
+    high: { y: "-80%", rotate: 360 },
   };
 
   let location = useLocation();
@@ -45,25 +45,7 @@ function Footer({ setFilterOn }) {
   }
 
   return (
-    <div
-      className={
-        activeFooter
-          ? "footer-container footer-container-up"
-          : "footer-container footer-container-down"
-      }
-    >
-      <div className="bubbles">
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-      </div>
+    <>
       <div className="footer-cocktail-image-container">
         <motion.img
           onClick={toggleFooter}
@@ -74,33 +56,53 @@ function Footer({ setFilterOn }) {
           src={process.env.PUBLIC_URL + "/cocktail-footer.png"}
         />
       </div>
-      <div className="footer-body">
-        {activeFooter ? (
-          <div className="footer-nav-bar">
-            <div style={{ width: "12%", height: "100%" }} />
-            <div className="footer-options-container">
-              <select
-                onChange={handleSortSelect}
-                name="sorter"
-                id="sorter"
-                className="footer-sorter"
-                defaultValue={cocktailContext.sortBy}
-              >
-                <option>Alphabetical</option>
-                <option>Overall Grade</option>
-                <option>Daniel Grade</option>
-                <option>Dani Grade</option>
-                <option>Date Created</option>
-              </select>
-              <FilterButton setFilterOn={setFilterOn} />
+      <div
+        className={
+          activeFooter
+            ? "footer-container footer-container-up"
+            : "footer-container footer-container-down"
+        }
+      >
+        <div className="bubbles">
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+        </div>
+        <div className="footer-body">
+          {activeFooter ? (
+            <div className="footer-nav-bar">
+              <div style={{ width: "12%", height: "100%" }} />
+              <div className="footer-options-container">
+                <select
+                  onChange={handleSortSelect}
+                  name="sorter"
+                  id="sorter"
+                  className="footer-sorter"
+                  defaultValue={cocktailContext.sortBy}
+                >
+                  <option>Alphabetical</option>
+                  <option>Overall Grade</option>
+                  <option>Daniel Grade</option>
+                  <option>Dani Grade</option>
+                  <option>Date Created</option>
+                </select>
+                <FilterButton setFilterOn={setFilterOn} />
+              </div>
+              <LogoutButton size={["10%", "50%"]} />
             </div>
-            <LogoutButton size={["10%", "50%"]} />
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
