@@ -11,10 +11,14 @@ import { scrollToHeight } from "../../services/scroll.service";
 import Tag from "../../components/Tags/Tag";
 
 function CocktailInfo({ location }) {
+  const [hideDeleteModal, setHideDeleteModal] = useState(true);
+  let navigate = useNavigate();
+  useEffect(() => {
+    scrollToHeight(0);
+  }, []);
+
   if (!!location.state) {
-    let navigate = useNavigate();
     let cocktail = location.state.cocktailItem;
-    const [hideDeleteModal, setHideDeleteModal] = useState(true);
 
     let danielGrade = parseInt(cocktail.danielGrade);
     let daniGrade = parseInt(cocktail.daniGrade);
@@ -34,10 +38,6 @@ function CocktailInfo({ location }) {
     const showDeleteModal = () => {
       setHideDeleteModal(false);
     };
-
-    useEffect(() => {
-      scrollToHeight(0);
-    }, []);
 
     return (
       <motion.div

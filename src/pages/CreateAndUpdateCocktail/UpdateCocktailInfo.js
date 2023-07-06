@@ -8,8 +8,8 @@ import "./UpdateCocktailInfo.css";
 import CocktailUpsertForm from "../../components/CocktailUpsertForm/CocktailUpsertForm";
 
 function UpdateCocktailInfo({ location }) {
+  let navigate = useNavigate();
   if (!!location.state) {
-    let navigate = useNavigate();
     let defaultCocktail = {
       ...location.state.cocktailItem,
       tried: location.state.tried,
