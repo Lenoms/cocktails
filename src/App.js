@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { CocktailContextProvider } from "./services/CocktailContextProvider";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const AppMain = ({ filterOn, setFilterOn }) => {
   return (
@@ -32,8 +33,22 @@ const AppMain = ({ filterOn, setFilterOn }) => {
 
 function App() {
   const [filterOn, setFilterOn] = useState(false);
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
   const [loginTried, setLoginTried] = useState(false);
+  const [auth0AndFBAuthenticated, setauth0AndFBAuthenticated] = useState(false);
+
+  // Still no perfect. The API key is stored in index.js. I think we need to figure out a way to authenticate
+  // to FB with our auth0 token. That way its all locked up and secure behind auth0.
+  const authenticateToFirebase = () => {
+    const auth = getAuth();
+    signInAnonymously(auth)
+      .then(() => {
+        setauth0AndFBAuthenticated(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     if (window.location.href.split("?").length > 1) {
@@ -41,13 +56,21 @@ function App() {
     }
   }, []);
 
-  if (!isLoading) {
+  useEffect(() => {
     if (isAuthenticated) {
+      authenticateToFirebase();
+    }
+  }, [isAuthenticated]);
+
+  if (!isLoading) {
+    if (auth0AndFBAuthenticated) {
       return (
         <CocktailContextProvider>
           <AppMain setFilterOn={setFilterOn} filterOn={filterOn} />
         </CocktailContextProvider>
       );
+    } else if (isAuthenticated) {
+      return <LoadingSpinner />;
     } else {
       return <LoginPage loginTried={loginTried} />;
     }
