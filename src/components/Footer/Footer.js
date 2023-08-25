@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Footer.css";
 import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import { useCocktailContext } from "../../services/CocktailContextProvider";
 
 function Footer({ setFilterOn }) {
   const [activeFooter, setActiveFooter] = useState(false);
+  const [showCocktailIcon, setShowCocktailIcon] = useState(true);
   const cocktailContext = useCocktailContext();
 
   function toggleFooter() {
@@ -27,35 +28,36 @@ function Footer({ setFilterOn }) {
   };
 
   let location = useLocation();
-  if (
-    location.pathname == "/cocktails/info" ||
-    location.pathname == "/cocktails/create" ||
-    location.pathname == "/cocktails/update"
-  ) {
-    if (activeFooter) setActiveFooter(false);
+  function isLocationNotLists() {
     return (
-      <div
-        className={
-          activeFooter
-            ? "footer-container footer-container-up"
-            : "footer-container footer-container-down"
-        }
-      ></div>
+      location.pathname != "/cocktails/tried" &&
+      location.pathname != "/cocktails/untried"
     );
   }
 
+  useEffect(() => {
+    if (isLocationNotLists()) {
+      setActiveFooter(false);
+      setShowCocktailIcon(false);
+    } else {
+      setShowCocktailIcon(true);
+    }
+  }, [location]);
+
   return (
     <>
-      <div className="footer-cocktail-image-container">
-        <motion.img
-          onClick={toggleFooter}
-          animate={activeFooter ? "high" : "low"}
-          variants={variants}
-          transition={{ type: "spring" }}
-          className="footer-cocktail-image"
-          src={process.env.PUBLIC_URL + "/cocktail-footer.png"}
-        />
-      </div>
+      {showCocktailIcon && (
+        <div className="footer-cocktail-image-container">
+          <motion.img
+            onClick={toggleFooter}
+            animate={activeFooter ? "high" : "low"}
+            variants={variants}
+            transition={{ type: "spring" }}
+            className="footer-cocktail-image"
+            src={process.env.PUBLIC_URL + "/cocktail-footer.png"}
+          />
+        </div>
+      )}
       <div
         className={
           activeFooter
