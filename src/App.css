@@ -12,6 +12,7 @@ body,
   position: absolute;
   top: 0;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .app-header-and-body {
