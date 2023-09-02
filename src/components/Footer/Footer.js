@@ -6,11 +6,13 @@ import { useLocation } from "react-router-dom";
 import LogoutButton from "../LogButtons/LogoutButton";
 import FilterButton from "./FilterButton";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
+import { locationShouldShowCocktailIcon } from "../../config/FooterConfig";
 
 function Footer({ setFilterOn }) {
   const [activeFooter, setActiveFooter] = useState(false);
   const [showCocktailIcon, setShowCocktailIcon] = useState(true);
   const cocktailContext = useCocktailContext();
+  const location = useLocation();
 
   function toggleFooter() {
     setActiveFooter(!activeFooter);
@@ -27,20 +29,12 @@ function Footer({ setFilterOn }) {
     high: { y: "-80%", rotate: 360 },
   };
 
-  let location = useLocation();
-  function isLocationNotLists() {
-    return (
-      location.pathname != "/cocktails/tried" &&
-      location.pathname != "/cocktails/untried"
-    );
-  }
-
   useEffect(() => {
-    if (isLocationNotLists()) {
+    if (locationShouldShowCocktailIcon(location)) {
+      setShowCocktailIcon(true);
+    } else {
       setActiveFooter(false);
       setShowCocktailIcon(false);
-    } else {
-      setShowCocktailIcon(true);
     }
   }, [location]);
 
