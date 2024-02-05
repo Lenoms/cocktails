@@ -187,6 +187,15 @@ const CocktailService = {
       ).toPrecision(4)}`
     );
   },
+  calculateAverageGrade: function (danielGrade, daniGrade) {
+    return isNaN(danielGrade) || danielGrade === null
+      ? isNaN(daniGrade) || daniGrade === null
+        ? "N/A"
+        : daniGrade
+      : isNaN(daniGrade) || daniGrade === null
+      ? danielGrade
+      : (danielGrade + daniGrade) / 2;
+  },
 };
 
 function getDateArray() {

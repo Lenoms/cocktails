@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import Tag from "../Tags/Tag";
+import CocktailService from "../../services/cocktail.service";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
   let cocktailName = item.cocktailName;
-  let danielGrade = parseInt(item.danielGrade);
-  let daniGrade = parseInt(item.daniGrade);
-  let overallGrade = (danielGrade + daniGrade) / 2;
+  let danielGrade = item.danielGrade ? parseInt(item.danielGrade) : "N/A";
+  let daniGrade = item.daniGrade ? parseInt(item.daniGrade) : "N/A";
+  let overallGrade = CocktailService.calculateAverageGrade(
+    danielGrade,
+    daniGrade
+  );
   let cocktailImageUrl = item.image;
   const cocktailContext = useCocktailContext();
 

@@ -32,8 +32,14 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
     var daniel_grade;
     var dani_grade;
     if (tried) {
-      daniel_grade = document.getElementById("daniel-grade").value;
-      dani_grade = document.getElementById("dani-grade").value;
+      daniel_grade =
+        document.getElementById("daniel-grade").value == ""
+          ? null
+          : document.getElementById("daniel-grade").value;
+      dani_grade =
+        document.getElementById("dani-grade").value == ""
+          ? null
+          : document.getElementById("dani-grade").value;
     } else {
       daniel_grade = null;
       dani_grade = null;

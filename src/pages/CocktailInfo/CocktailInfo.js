@@ -20,9 +20,14 @@ function CocktailInfo({ location }) {
   if (!!location.state) {
     let cocktail = location.state.cocktailItem;
 
-    let danielGrade = parseInt(cocktail.danielGrade);
-    let daniGrade = parseInt(cocktail.daniGrade);
-    let overallGrade = (danielGrade + daniGrade) / 2;
+    let danielGrade = cocktail.danielGrade
+      ? parseInt(cocktail.danielGrade)
+      : "N/A";
+    let daniGrade = cocktail.daniGrade ? parseInt(cocktail.daniGrade) : "N/A";
+    let overallGrade = CocktailService.calculateAverageGrade(
+      danielGrade,
+      daniGrade
+    );
 
     const editCocktail = () => {
       navigate("/cocktails/update", {

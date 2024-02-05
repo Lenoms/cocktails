@@ -39,7 +39,7 @@ function TriedForm({
               min="1"
               max="100"
               id="daniel-grade"
-              defaultValue={defaultGrades ? defaultGrades[0] : 0}
+              defaultValue={defaultGrades ? defaultGrades[0] : ""}
             ></input>
           </div>
           <div className="grade-container">
@@ -52,7 +52,7 @@ function TriedForm({
               min="1"
               max="100"
               id="dani-grade"
-              defaultValue={defaultGrades ? defaultGrades[1] : 0}
+              defaultValue={defaultGrades ? defaultGrades[1] : ""}
             ></input>
           </div>
         </div>
