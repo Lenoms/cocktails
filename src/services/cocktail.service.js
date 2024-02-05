@@ -166,24 +166,43 @@ const CocktailService = {
   },
 
   printAnalytics: function (data) {
-    let daniel_sum = 0;
-    let dani_sum = 0;
+    let danielSum = 0;
+    let daniSum = 0;
+    let danielDrinksNotTriedCount = 0;
+    let daniDrinksNotTriedCount = 0;
     for (let i = 0; i < data.length; i++) {
-      daniel_sum += parseInt(data[i].danielGrade);
-      dani_sum += parseInt(data[i].daniGrade);
+      if (!data[i].danielGrade) {
+        danielDrinksNotTriedCount += 1;
+      }
+      if (!data[i].daniGrade) {
+        daniDrinksNotTriedCount += 1;
+      }
+      danielSum += data[i].danielGrade ? parseInt(data[i].danielGrade) : 0;
+      daniSum += data[i].daniGrade ? parseInt(data[i].daniGrade) : 0;
     }
+
+    console.log(daniDrinksNotTriedCount, danielDrinksNotTriedCount);
 
     console.log(`TOTAL COCKTAILS: ${data.length} `);
 
+    const averageCocktailGrade = (
+      (danielSum + daniSum) /
+      (data.length * 2 - danielDrinksNotTriedCount - daniDrinksNotTriedCount)
+    ).toPrecision(4);
+
+    console.log(`Average Cocktail Grade: ${averageCocktailGrade}`);
+
     console.log(
-      `Daniel Total Grade: ${daniel_sum}, Average: ${(
-        daniel_sum / data.length
+      `Daniel Total Grade: ${danielSum}, Average: ${(
+        danielSum /
+        (data.length - danielDrinksNotTriedCount)
       ).toPrecision(4)}`
     );
 
     console.log(
-      `Dani Total Grade: ${dani_sum}, Average: ${(
-        dani_sum / data.length
+      `Dani Total Grade: ${daniSum}, Average: ${(
+        daniSum /
+        (data.length - daniDrinksNotTriedCount)
       ).toPrecision(4)}`
     );
   },
