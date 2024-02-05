@@ -207,13 +207,18 @@ const CocktailService = {
     );
   },
   calculateAverageGrade: function (danielGrade, daniGrade) {
-    return isNaN(danielGrade) || danielGrade === null
-      ? isNaN(daniGrade) || daniGrade === null
-        ? "N/A"
-        : daniGrade
-      : isNaN(daniGrade) || daniGrade === null
-      ? danielGrade
-      : (danielGrade + daniGrade) / 2;
+    if (
+      (danielGrade === null || isNaN(danielGrade)) &&
+      (daniGrade === null || isNaN(daniGrade))
+    ) {
+      return "N/A";
+    } else if (danielGrade === null || isNaN(danielGrade)) {
+      return daniGrade;
+    } else if (daniGrade === null || isNaN(daniGrade)) {
+      return danielGrade;
+    } else {
+      return (danielGrade + daniGrade) / 2;
+    }
   },
 };
 

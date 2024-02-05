@@ -1,3 +1,5 @@
+import CocktailService from "./cocktail.service";
+
 export function sortList(data, sortBy) {
   if (sortBy == "Alphabetical") {
     return sortByAlphabetical(data);
@@ -20,17 +22,22 @@ function sortByAlphabetical(data) {
 }
 
 function sortByOverallGrade(data) {
-  let sortedData = data.sort((a, b) =>
-    getOverall(a) < getOverall(b) ? 1 : -1
-  );
+  let sortedData = data.sort((a, b) => {
+    const overallA = getOverall(a);
+    const overallB = getOverall(b);
+
+    return overallA < overallB ? 1 : -1;
+  });
   return sortedData;
 }
 
 function getOverall(cocktail) {
-  let danielGrade = cocktail.danielGrade;
-  let daniGrade = cocktail.daniGrade;
-  let overallGrade = (parseInt(daniGrade) + parseInt(danielGrade)) / 2;
-  return overallGrade;
+  const overallValue = CocktailService.calculateAverageGrade(
+    parseInt(cocktail.danielGrade),
+    parseInt(cocktail.daniGrade)
+  );
+
+  return isNaN(overallValue) ? 0 : overallValue;
 }
 
 function sortByDanielGrade(data) {
