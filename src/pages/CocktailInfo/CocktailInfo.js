@@ -86,7 +86,9 @@ function CocktailInfo({ location }) {
 
         <div className="cocktail-date-created-container">
           <div style={{ marginRight: "5px", fontWeight: "bold" }}>Date: </div>
-          <div style={{ color: "grey" }}>{cocktail.date[1]}</div>
+          <div style={{ color: "grey" }}>
+            {CocktailService.getNonAmericanDateString(cocktail.date[1])}
+          </div>
         </div>
         <div className="cocktail-buttons-container">
           <button className="cocktail-edit-button" onClick={editCocktail}>

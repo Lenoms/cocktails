@@ -220,6 +220,10 @@ const CocktailService = {
       return (danielGrade + daniGrade) / 2;
     }
   },
+  getNonAmericanDateString: function (date) {
+    const dateParts = date.split("/");
+    return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+  },
 };
 
 function getDateArray() {

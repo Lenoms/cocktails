@@ -89,7 +89,9 @@ function TriedCocktailItem({ item, sortBy }) {
             return <Tag tag={tag} />;
           })}
         </div>
-        <div className="tried-cocktail-date-created">{item.date[1]}</div>
+        <div className="tried-cocktail-date-created">
+          {CocktailService.getNonAmericanDateString(item.date[1])}
+        </div>
       </div>
       <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>
     </Card>
