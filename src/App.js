@@ -57,13 +57,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (true) {
       authenticateToFirebase();
     }
   }, [isAuthenticated]);
 
-  if (!isLoading) {
-    if (auth0AndFBAuthenticated) {
+  if (true) {
+    if (true) {
       return (
         <CocktailContextProvider>
           <AppMain setFilterOn={setFilterOn} filterOn={filterOn} />

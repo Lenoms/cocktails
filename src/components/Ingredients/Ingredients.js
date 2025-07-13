@@ -1,35 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import "./Ingredients.css";
 
 function Ingredients({ ingredients, setIngredients }) {
+  const [newIngredientName, setNewIngredientName] = useState("");
+  const [newAmount, setNewAmount] = useState("");
+  const [newMeasure, setNewMeasure] = useState("");
+  const handleNewIngredientNameChange = (event) => {
+    setNewIngredientName(event.target.value);
+  };
+  const handleAmountChange = (event) => {
+    setNewAmount(event.target.value);
+  };
+  const handleMeasureChange = (event) => {
+    setNewMeasure(event.target.value);
+  };
   function addIngredient(e) {
     e.preventDefault();
-    let ingredientName = document.getElementById("cocktail-ingredients").value;
-    let amount = document.getElementById(
-      "ingredients-measure-dropdown-amount"
-    ).value;
-    let measure = document.getElementById(
-      "ingredients-measure-dropdown-measure"
-    ).value;
 
-    if (amount === "Amount") {
-      amount = "";
+    if (newMeasure === "top with") {
+      setNewMeasure("Top with");
     }
-    if (measure === "Measure") {
-      measure = "";
-    }
-    if (measure === "top with") {
-      measure = "Top with";
-    }
-    let ingredient = `${amount} ${measure} ${ingredientName}`;
+    let ingredient = `${newAmount} ${newMeasure} ${newIngredientName}`;
+    console.log(ingredient);
     setIngredients([...ingredients, ingredient]);
-    document.getElementById("cocktail-ingredients").value = "";
-    document.getElementById("ingredients-measure-dropdown-amount").value =
-      "Amount";
-    document.getElementById("ingredients-measure-dropdown-measure").value =
-      "Measure";
+    setNewIngredientName("");
+    setNewAmount("");
+    setNewMeasure("");
   }
 
   function deleteIngredient(ingredient) {
@@ -48,12 +46,16 @@ function Ingredients({ ingredients, setIngredients }) {
           name="cocktail-ingredients"
           className="add-ingredients-input"
           id="cocktail-ingredients"
+          value={newIngredientName}
+          onChange={handleNewIngredientNameChange}
         ></input>
         <select
           defaultValue={"Amount"}
+          value={newAmount}
           id="ingredients-measure-dropdown-amount"
+          onChange={handleAmountChange}
         >
-          <option hidden disabled>
+          <option value="" hidden disabled>
             Amount
           </option>
           <option>¼</option>
@@ -67,9 +69,11 @@ function Ingredients({ ingredients, setIngredients }) {
         </select>
         <select
           defaultValue={"Measure"}
+          value={newMeasure}
           id="ingredients-measure-dropdown-measure"
+          onChange={handleMeasureChange}
         >
-          <option hidden disabled>
+          <option value="" hidden disabled>
             Measure
           </option>
           <option>oz</option>

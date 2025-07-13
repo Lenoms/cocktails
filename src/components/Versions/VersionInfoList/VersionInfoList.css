@@ -1,0 +1,12 @@
+.version-info-list {
+  width: 100%;
+  margin: 0;
+  margin: 10px 0;
+}
+
+.version-info-item {
+  border: 1px solid #ccc;
+  margin-bottom: 1px;
+  border-radius: 5px;
+  overflow: hidden;
+}

@@ -1,0 +1,14 @@
+.version-button {
+    height: 50px;
+    width: 30%;
+    background-color: rgb(248, 128, 148);
+    outline: none;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+
+.version-button:hover{
+    background-color: rgb(255, 159, 175);
+}

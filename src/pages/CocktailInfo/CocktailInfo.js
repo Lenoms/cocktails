@@ -9,6 +9,11 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import CocktailService from "../../services/cocktail.service";
 import { scrollToHeight } from "../../services/scroll.service";
 import Tag from "../../components/Tags/Tag";
+import VersionInfoList from "../../components/Versions/VersionInfoList/VersionInfoList";
+import VersionInfo from "../../components/Versions/VersionInfo/VersionInfo";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import { reformatTried } from "../../services/reformat.service";
 
 function CocktailInfo({ location }) {
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
@@ -16,6 +21,8 @@ function CocktailInfo({ location }) {
   useEffect(() => {
     scrollToHeight(0);
   }, []);
+
+  const [sliderRef] = useKeenSlider();
 
   if (!!location.state) {
     let cocktail = location.state.cocktailItem;
@@ -28,6 +35,15 @@ function CocktailInfo({ location }) {
       danielGrade,
       daniGrade
     );
+
+    // Backwards compatability (i.e if a cocktail doesn't have versions)
+    const versions = cocktail.versions ?? [
+      {
+        ingredients: cocktail.ingredients,
+        notes: cocktail.cocktailNotes,
+        imgUrl: cocktail.image,
+      },
+    ];
 
     const editCocktail = () => {
       navigate("/cocktails/update", {
@@ -52,30 +68,31 @@ function CocktailInfo({ location }) {
         exit={RouteAnimation.infoExit}
       >
         <h1>{cocktail.cocktailName}</h1>
-        <img id="cocktail-info-image" src={cocktail.image}></img>
+        <div className="image-slider-container">
+          <div ref={sliderRef} className="keen-slider">
+            {versions.map((version) => {
+              return (
+                <img
+                  key={version.imgUrl}
+                  className="keen-slider__slide cocktail-info-image"
+                  src={version.imgUrl}
+                />
+              );
+            })}
+          </div>
+        </div>
         <div className="cocktail-info-grades-container">
           <h4 className="cocktail-grade">Grade: {overallGrade}</h4>
           <h6>
             Daniel: {danielGrade}, Dani: {daniGrade}
           </h6>
         </div>
-        <div className="cocktail-description">
-          <h5>Notes:</h5>
-          <p>{cocktail.cocktailNotes ? cocktail.cocktailNotes : "N/A"} </p>
-        </div>
-        <div className="cocktail-ingredients">
-          <h5>Ingredients:</h5>
-          <ul>
-            {cocktail.ingredients &&
-              cocktail.ingredients.map(function (ingredient) {
-                return (
-                  <div className="ingredients-list-item" key={ingredient}>
-                    <li>{ingredient}</li>
-                  </div>
-                );
-              })}
-          </ul>
-        </div>
+
+        {cocktail.versions && cocktail.versions.length > 1 ? (
+          <VersionInfoList versions={cocktail.versions} />
+        ) : (
+          <VersionInfo version={versions[0]} />
+        )}
 
         <div className="cocktail-info-tags-container">
           {cocktail.tags &&

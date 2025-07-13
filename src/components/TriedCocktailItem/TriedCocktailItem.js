@@ -8,6 +8,7 @@ import CocktailService from "../../services/cocktail.service";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
+  console.log(item);
   let cocktailName = item.cocktailName;
   let danielGrade = item.danielGrade ? parseInt(item.danielGrade) : "N/A";
   let daniGrade = item.daniGrade ? parseInt(item.daniGrade) : "N/A";
@@ -15,7 +16,7 @@ function TriedCocktailItem({ item, sortBy }) {
     danielGrade,
     daniGrade
   );
-  let cocktailImageUrl = item.image;
+  let cocktailImageUrl = item.versions ? item.versions[0].imgUrl : item.image;
   const cocktailContext = useCocktailContext();
 
   let tags = [];

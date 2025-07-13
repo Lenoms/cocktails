@@ -53,9 +53,7 @@ const CocktailService = {
     cocktailName,
     danielGrade,
     daniGrade,
-    cocktailNotes,
-    ingredients,
-    imgUrl,
+    versions,
     date,
     tags
   ) {
@@ -68,9 +66,7 @@ const CocktailService = {
         cocktailName: cocktailName,
         danielGrade: danielGrade,
         daniGrade: daniGrade,
-        cocktailNotes: cocktailNotes,
-        ingredients: ingredients,
-        image: imgUrl,
+        versions: versions,
         date: date,
         dateModified: currentDate,
         tags: tags,
@@ -80,23 +76,20 @@ const CocktailService = {
         cocktailName: cocktailName,
         danielGrade: danielGrade,
         daniGrade: daniGrade,
-        cocktailNotes: cocktailNotes,
-        ingredients: ingredients,
-        image: imgUrl,
+        versions: versions,
         date: currentDate,
         tags: tags,
       });
     }
   },
 
-  writeUntriedToDatabase: function (cocktailName, cocktailNotes, ingredients) {
+  writeUntriedToDatabase: function (cocktailName, versions) {
     const db = getDatabase();
     const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
     if (noSpecialCharactersKey.length == 0) return;
     set(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey), {
       cocktailName: cocktailName,
-      cocktailNotes: cocktailNotes,
-      ingredients: ingredients,
+      versions: versions,
     });
   },
   deleteCocktail: function (cocktailName, list) {

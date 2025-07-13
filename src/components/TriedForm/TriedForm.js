@@ -1,30 +1,9 @@
 import React from "react";
 import "./TriedForm.css";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import CocktailService from "../../services/cocktail.service";
 import { useState } from "react";
 import TagSelector from "../Tags/TagSelector";
 
-function TriedForm({
-  setImgUrl,
-  imgUrl,
-  setIsUploading,
-  defaultGrades,
-  tags,
-  setTags,
-}) {
-  const [progresspercent, setProgresspercent] = useState(0);
-
-  function uploadImage(event) {
-    setIsUploading(true);
-    CocktailService.uploadImage(
-      event,
-      setProgresspercent,
-      setImgUrl,
-      setIsUploading
-    );
-  }
-
+function TriedForm({ defaultGrades, tags, setTags }) {
   return (
     <div className="upload-form">
       <div className="form-input-field-container">
@@ -65,34 +44,6 @@ function TriedForm({
         <div className="form-tags-container">
           <TagSelector handleSelectedTags={setTags} tags={tags} />
         </div>
-      </div>
-
-      <div className="form-input-field-container">
-        <label htmlFor="pic" className="custom-file-upload">
-          <AddAPhotoIcon />
-        </label>
-        <input
-          type="file"
-          id="pic"
-          name="pic"
-          hidden
-          accept=".jpg, .jpeg, .png"
-          onChange={uploadImage}
-        ></input>
-        {!imgUrl && (
-          <div className="outerbar">
-            <div
-              className="innerbar"
-              style={{
-                width: `${progresspercent}%`,
-                position: "relative",
-                left: progresspercent === 0 ? "10px" : "0px",
-              }}
-            >
-              {progresspercent}%
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

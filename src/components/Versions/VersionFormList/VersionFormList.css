@@ -1,0 +1,19 @@
+.version-form-list {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+}
+
+.version-item {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.version-delete-button {
+  background-color:  rgb(255, 198, 91);
+  border: none;
+  outline: none;
+  border-radius: 50%;
+}

@@ -16,18 +16,15 @@ function CreateCocktail() {
         cocktailObject.name,
         cocktailObject.daniel_grade,
         cocktailObject.dani_grade,
-        cocktailObject.notes,
-        cocktailObject.ingredients,
-        cocktailObject.imgUrl,
-        null,
+        cocktailObject.versions,
+        null, // date
         cocktailObject.tags
       );
       navigate("/cocktails/tried");
     } else {
       CocktailService.writeUntriedToDatabase(
         cocktailObject.name,
-        cocktailObject.notes,
-        cocktailObject.ingredients
+        cocktailObject.versions
       );
       navigate("/cocktails/untried");
     }

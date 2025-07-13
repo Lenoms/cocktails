@@ -1,77 +1,106 @@
-import React from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import "./CocktailUpsertForm.css";
-import { useState } from "react";
-import Ingredients from "../Ingredients/Ingredients";
 import AddIcon from "@mui/icons-material/Add";
+import Ingredients from "../Ingredients/Ingredients";
 import TriedForm from "../TriedForm/TriedForm";
+import VersionButton from "../Versions/VersionButton/VersionButton";
+import VersionFormList from "../Versions/VersionFormList/VersionFormList";
+import AddPhoto from "../AddPhoto/AddPhoto";
+import VersionForm from "../Versions/VersionForm/VersionForm";
 
 function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
-  const [tried, setTried] = useState(defaultCocktailObject?.tried);
-  const [tags, setTags] = useState(
-    defaultCocktailObject?.tags ? defaultCocktailObject?.tags : []
-  );
-  const [imgUrl, setImgUrl] = useState(
-    defaultCocktailObject?.image ? defaultCocktailObject.image : null
-  );
-  const [ingredients, setIngredients] = useState(
-    defaultCocktailObject?.ingredients ? defaultCocktailObject.ingredients : []
-  );
+  const [tried, setTried] = useState(defaultCocktailObject?.tried ?? false);
+  const [tags, setTags] = useState(defaultCocktailObject?.tags ?? []);
   const [isUploading, setIsUploading] = useState(false);
 
-  const default_grades = defaultCocktailObject?.tried
-    ? [defaultCocktailObject.danielGrade, defaultCocktailObject.daniGrade]
+  const default_grades = tried
+    ? [defaultCocktailObject?.danielGrade, defaultCocktailObject?.daniGrade]
     : null;
+
+  const [versions, setVersions] = useState(
+    defaultCocktailObject?.versions ?? [
+      {
+        name: "Version 1",
+        ingredients: [],
+        notes: "",
+        imgUrl: null,
+        versionId: crypto.randomUUID(),
+      },
+    ]
+  );
+
+  const handleVersionUpdate = (index, updatedVersion) => {
+    console.log(updatedVersion);
+    const newVersions = [...versions];
+    newVersions[index] = updatedVersion;
+    setVersions(newVersions);
+  };
+
+  console.log("Versions: ", versions);
+
+  const handleAddVersion = (e) => {
+    e.preventDefault();
+    setVersions((prev) => [
+      ...prev,
+      {
+        name: `Version ${versions.length + 1}`,
+        ingredients: [],
+        notes: "",
+        imgUrl: null,
+        versionId: crypto.randomUUID(),
+      },
+    ]);
+  };
+
+  const handleDeleteVersion = (e, idToDelete) => {
+    e.preventDefault();
+    setVersions((prev) =>
+      prev.filter((version) => version.versionId !== idToDelete)
+    );
+  };
+
+  const showValidationError = () => {
+    document.getElementById("validation-message")?.removeAttribute("hidden");
+  };
 
   const returnCocktailObject = (e) => {
     e.preventDefault();
-    var name = document.getElementById("cocktail-name").value;
+    const name = document.getElementById("cocktail-name").value;
     if (!name) {
       showValidationError();
       return;
     }
-    var daniel_grade;
-    var dani_grade;
-    if (tried) {
-      daniel_grade =
-        document.getElementById("daniel-grade").value == ""
-          ? null
-          : document.getElementById("daniel-grade").value;
-      dani_grade =
-        document.getElementById("dani-grade").value == ""
-          ? null
-          : document.getElementById("dani-grade").value;
-    } else {
-      daniel_grade = null;
-      dani_grade = null;
-    }
-    let newCocktail = {
-      name: document.getElementById("cocktail-name").value,
-      notes: document.getElementById("cocktail-notes").value,
-      tried: tried,
-      ingredients: ingredients,
-      daniel_grade: daniel_grade,
-      dani_grade: dani_grade,
-      imgUrl: imgUrl,
-      tags: tags,
+
+    const danielGrade =
+      tried && document.getElementById("daniel-grade").value !== ""
+        ? document.getElementById("daniel-grade").value
+        : null;
+    const daniGrade =
+      tried && document.getElementById("dani-grade").value !== ""
+        ? document.getElementById("dani-grade").value
+        : null;
+
+    const newCocktail = {
+      name,
+      tried,
+      daniel_grade: danielGrade,
+      dani_grade: daniGrade,
+      tags,
+      versions,
     };
+
     addCocktail(newCocktail);
   };
-
-  function checkboxClicked(e) {
-    setTried(!tried);
-  }
-
-  function showValidationError() {
-    document.getElementById("validation-message").removeAttribute("hidden");
-  }
 
   return (
     <form className="cocktail-form" onSubmit={returnCocktailObject}>
       <h1>
         {defaultCocktailObject
           ? `Update ${defaultCocktailObject.cocktailName}`
-          : `Add Cocktail`}
+          : "Add Cocktail"}
       </h1>
+
+      {/* Cocktail Name */}
       <div className="form-input-field-container">
         <label className="form-label" htmlFor="cocktail-name">
           Cocktail Name
@@ -83,55 +112,55 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
           name="cocktail-name"
           autoComplete="off"
           defaultValue={defaultCocktailObject?.cocktailName}
-        ></input>
+        />
         <p id="validation-message" hidden style={{ color: "red", margin: 0 }}>
           Cocktail name cannot be empty!
         </p>
       </div>
+
+      {/* Tried Checkbox */}
       <div className="tried-checkbox-container">
-        <div className="form-label" htmlFor="tried">
-          Tried?
-        </div>
+        <div className="form-label">Tried?</div>
         <input
           type="checkbox"
           id="tried"
-          onChange={checkboxClicked}
+          onChange={() => setTried(!tried)}
           className="checkbox"
           checked={tried}
-        ></input>
-      </div>
-      <div className="form-input-field-container">
-        <label className="form-label" htmlFor="cocktail-notes">
-          Notes:
-        </label>
-        <textarea
-          className="notes-field"
-          rows={4}
-          type="text"
-          id="cocktail-notes"
-          name="cocktail-notes"
-          defaultValue={defaultCocktailObject?.cocktailNotes}
-        ></textarea>
+        />
       </div>
 
-      <Ingredients ingredients={ingredients} setIngredients={setIngredients} />
+      {/* Version Forms */}
+      {(versions.length > 1) & tried ? (
+        <VersionFormList
+          versions={versions}
+          setIsUploading={setIsUploading}
+          handleVersionUpdate={handleVersionUpdate}
+          onDeleteVersion={handleDeleteVersion}
+        />
+      ) : (
+        <VersionForm
+          version={versions[0]}
+          versionNumber={0}
+          setIsUploading={setIsUploading}
+          onChange={(updatedVersion) => handleVersionUpdate(0, updatedVersion)}
+          addImageAvailable={tried}
+        />
+      )}
+
+      {/* Add Version / Image Upload / Tags */}
       {tried && (
         <>
+          <VersionButton onClick={handleAddVersion} />
           <TriedForm
-            setImgUrl={setImgUrl}
-            imgUrl={imgUrl}
-            setIsUploading={setIsUploading}
             defaultGrades={default_grades}
             tags={tags}
             setTags={setTags}
-          ></TriedForm>
+          />
         </>
       )}
 
-      {imgUrl && (
-        <img className="create-update-image" src={imgUrl} alt="uploaded file" />
-      )}
-
+      {/* Submit */}
       <button disabled={isUploading} className="submit-button" type="submit">
         <AddIcon style={{ color: "white" }} />
       </button>

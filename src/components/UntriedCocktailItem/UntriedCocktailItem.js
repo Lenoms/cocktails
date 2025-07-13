@@ -12,11 +12,14 @@ function UntriedCocktailItem({ item, refreshList }) {
   const navigate = useNavigate();
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
   const [hideRecipe, setHideRecipe] = useState(true);
+  console.log(item);
   let cocktailName = item.cocktailName;
+  const notes = item.cocktailNotes || item.versions?.[0]?.notes || "";
+  const ingredients = item.ingredients || item.versions?.[0]?.ingredients || [];
   let ingredientsString = "";
-  for (var i = 0; i < item.ingredients?.length; i++) {
-    ingredientsString += item.ingredients[i];
-    if (i != item.ingredients.length - 1) {
+  for (var i = 0; i < ingredients.length; i++) {
+    ingredientsString += ingredients[i];
+    if (i != ingredients.length - 1) {
       ingredientsString += ", ";
     }
   }
@@ -54,7 +57,7 @@ function UntriedCocktailItem({ item, refreshList }) {
             height: "20px",
           }}
         >
-          {item.cocktailNotes}
+          {notes}
         </div>
       </div>
       <div className="untried-cocktail-item-buttons">
@@ -75,8 +78,8 @@ function UntriedCocktailItem({ item, refreshList }) {
         <Recipe
           handleClose={() => setHideRecipe(true)}
           name={item.cocktailName}
-          ingredients={item.ingredients}
-          notes={item.cocktailNotes}
+          ingredients={ingredients}
+          notes={notes}
           updateCocktail={updateCocktail}
         ></Recipe>
       )}
