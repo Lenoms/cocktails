@@ -11,9 +11,7 @@ import { scrollToHeight } from "../../services/scroll.service";
 import Tag from "../../components/Tags/Tag";
 import VersionInfoList from "../../components/Versions/VersionInfoList/VersionInfoList";
 import VersionInfo from "../../components/Versions/VersionInfo/VersionInfo";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
-import { reformatTried } from "../../services/reformat.service";
+import ImageSlider from "../../components/ImageSlider/ImageSlider";
 
 function CocktailInfo({ location }) {
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
@@ -21,8 +19,6 @@ function CocktailInfo({ location }) {
   useEffect(() => {
     scrollToHeight(0);
   }, []);
-
-  const [sliderRef] = useKeenSlider();
 
   if (!!location.state) {
     let cocktail = location.state.cocktailItem;
@@ -69,17 +65,7 @@ function CocktailInfo({ location }) {
       >
         <h1>{cocktail.cocktailName}</h1>
         <div className="image-slider-container">
-          <div ref={sliderRef} className="keen-slider">
-            {versions.map((version) => {
-              return (
-                <img
-                  key={version.imgUrl}
-                  className="keen-slider__slide cocktail-info-image"
-                  src={version.imgUrl}
-                />
-              );
-            })}
-          </div>
+          <ImageSlider versions={versions} />
         </div>
         <div className="cocktail-info-grades-container">
           <h4 className="cocktail-grade">Grade: {overallGrade}</h4>

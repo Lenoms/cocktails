@@ -12,7 +12,6 @@ function UntriedCocktailItem({ item, refreshList }) {
   const navigate = useNavigate();
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
   const [hideRecipe, setHideRecipe] = useState(true);
-  console.log(item);
   let cocktailName = item.cocktailName;
   const notes = item.cocktailNotes || item.versions?.[0]?.notes || "";
   const ingredients = item.ingredients || item.versions?.[0]?.ingredients || [];

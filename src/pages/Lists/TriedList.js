@@ -13,7 +13,6 @@ import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
 import { downloadBackUp } from "../../services/backup.service";
-import { reformatAllTried } from "../../services/reformat.service";
 
 function TriedList({ filterOn }) {
   const [cocktails, setCocktails] = useState([]);
@@ -83,7 +82,7 @@ function TriedList({ filterOn }) {
     // if (cocktails.length !== 0) {
     //   downloadBackUp(cocktails);
     // }
-    //reformatAllTried(cocktails);
+
   }, [cocktails]);
 
   if (loading) {

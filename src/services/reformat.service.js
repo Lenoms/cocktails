@@ -41,3 +41,31 @@ export function reformatTried(cocktail) {
   });
   console.log("Successfully reformatted: ", cocktail.cocktailName);
 }
+
+export function reformatUntried(cocktail) {
+  const db = getDatabase();
+  console.log("Reformatting: ", cocktail.cocktailName);
+  if (cocktail.versions) {
+    console.log("Already reformatted!");
+    return;
+  }
+  const versions = [
+    {
+      ingredients: cocktail.ingredients ?? null,
+      name: "Version 1",
+      notes: cocktail.cocktailNotes ?? null,
+      versionId: crypto.randomUUID(),
+    },
+  ];
+  console.log("New versions: ", versions);
+  const noSpecialCharactersKey = cocktail.cocktailName.replace(
+    /[.$#[\]/]/g,
+    ""
+  );
+  if (noSpecialCharactersKey.length == 0) return;
+  set(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey), {
+    cocktailName: cocktail.cocktailName,
+    versions: versions,
+  });
+  console.log("Successfully reformatted: ", cocktail.cocktailName);
+}
