@@ -20,7 +20,12 @@ frontend:
         - key: Cache-Control
           value: max-age=0,no-cache,no-store,must-revalidate
   redirects:
-    # Single Page App rewrite: send all non-file requests to /index.html
-    - source: </^[^.]+$|(\.[^/]+$)/>
+    - source: /cocktails
+      target: /index.html
+      status: 200
+    - source: /cocktails/
+      target: /index.html
+      status: 200
+    - source: /cocktails/<*>
       target: /index.html
       status: 200
