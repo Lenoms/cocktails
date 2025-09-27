@@ -7,6 +7,8 @@ frontend:
     build:
       commands:
         - npm run build
+        - mkdir -p build/cocktails
+        - cp -r build/static build/cocktails/
   artifacts:
     baseDirectory: build
     files:
@@ -20,12 +22,9 @@ frontend:
         - key: Cache-Control
           value: max-age=0,no-cache,no-store,must-revalidate
   redirects:
-    - source: /cocktails
+    - source: </^[^.]+$|\.(html?|json)$/>
       target: /index.html
       status: 200
-    - source: /cocktails/
-      target: /index.html
-      status: 200
-    - source: /cocktails/<*>
-      target: /index.html
+    - source: /cocktails/static/<*>
+      target: /static/<*>
       status: 200
