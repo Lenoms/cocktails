@@ -33,7 +33,7 @@ const AppMain = ({ filterOn, setFilterOn }) => {
 
 function App() {
   const [filterOn, setFilterOn] = useState(false);
-  const { isAuthenticated, isLoading, user } = useAuth0();
+  // const { isAuthenticated, isLoading, user } = useAuth0();
   const [loginTried, setLoginTried] = useState(false);
   const [auth0AndFBAuthenticated, setauth0AndFBAuthenticated] = useState(false);
 
@@ -50,33 +50,37 @@ function App() {
       });
   };
 
+  authenticateToFirebase();
+
   useEffect(() => {
     if (window.location.href.split("?").length > 1) {
       setLoginTried(true);
     }
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      authenticateToFirebase();
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     authenticateToFirebase();
+  //   }
+  // }, [isAuthenticated]);
 
-  if (!isLoading) {
-    if (auth0AndFBAuthenticated) {
+  if (true) {
+    if (true) {
       return (
         <CocktailContextProvider>
           <AppMain setFilterOn={setFilterOn} filterOn={filterOn} />
         </CocktailContextProvider>
       );
-    } else if (isAuthenticated) {
-      return <LoadingSpinner />;
-    } else {
-      return <LoginPage loginTried={loginTried} />;
     }
-  } else {
-    return <LoadingSpinner />;
   }
+  //   } else if (isAuthenticated) {
+  //     return <LoadingSpinner />;
+  //   } else {
+  //     return <LoginPage loginTried={loginTried} />;
+  //   }
+  // } else {
+  //   return <LoadingSpinner />;
+  // }
 }
 
 export default App;
