@@ -39,13 +39,13 @@ function UpdateCocktailInfo({ location }) {
         date,
         cocktailObject.tags
       );
-      navigate("/cocktails/tried");
+      navigate("/tried");
     } else {
       CocktailService.writeUntriedToDatabase(
         cocktailObject.name,
         cocktailObject.versions
       );
-      navigate("/cocktails/untried");
+      navigate("/untried");
     }
   }
 

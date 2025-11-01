@@ -11,33 +11,25 @@ function AppRoutes({ filterOn }) {
   let location = useLocation();
   return (
     <Routes location={location} key={location.pathname}>
+      <Route exact path="/" element={<TriedList filterOn={filterOn} />} />
+      <Route exact path="/tried" element={<TriedList filterOn={filterOn} />} />
       <Route
         exact
-        path="/cocktails"
-        element={<TriedList filterOn={filterOn} />}
-      />
-      <Route
-        exact
-        path="/cocktails/tried"
-        element={<TriedList filterOn={filterOn} />}
-      />
-      <Route
-        exact
-        path="/cocktails/untried"
+        path="/untried"
         element={<UntriedList filterOn={filterOn} />}
       />
-      <Route exact path="/cocktails/create" element={<CreateCocktail />} />
+      <Route exact path="/create" element={<CreateCocktail />} />
       <Route
         exact
-        path="/cocktails/info"
+        path="/info"
         element={<CocktailInfo location={location} />}
       />
       <Route
         exact
-        path="/cocktails/update"
+        path="/update"
         element={<UpdateCocktailInfo location={location} />}
       />
-      <Route exact path="/cocktails/filter" element={<FilterList />} />
+      <Route exact path="/filter" element={<FilterList />} />
     </Routes>
   );
 }

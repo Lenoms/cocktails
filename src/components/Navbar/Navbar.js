@@ -10,17 +10,11 @@ function Navbar() {
   return (
     <div className="nav-bar">
       <div className="nav-buttons">
-        <button
-          className="nav-button"
-          onClick={() => navigate("/cocktails/tried")}
-        >
+        <button className="nav-button" onClick={() => navigate("/tried")}>
           <CheckCircleIcon style={{ color: "orange" }} />
         </button>
         <div style={{ width: "1%" }}></div>
-        <button
-          className="nav-button"
-          onClick={() => navigate("/cocktails/untried")}
-        >
+        <button className="nav-button" onClick={() => navigate("/untried")}>
           <ListAltIcon style={{ color: "rgb(248, 128, 148)" }} />
         </button>
       </div>

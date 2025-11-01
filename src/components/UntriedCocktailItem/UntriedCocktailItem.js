@@ -28,7 +28,7 @@ function UntriedCocktailItem({ item, refreshList }) {
     refreshList();
   };
   const updateCocktail = () => {
-    navigate("/cocktails/update", {
+    navigate("/update", {
       state: { cocktailItem: item, tried: false },
     });
   };

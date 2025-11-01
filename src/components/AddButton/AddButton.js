@@ -18,10 +18,7 @@ function AddButton() {
   return (
     <div className="button-container">
       <ThemeProvider theme={theme}>
-        <button
-          onClick={() => navigate("/cocktails/create")}
-          className="add-button"
-        >
+        <button onClick={() => navigate("/create")} className="add-button">
           <AddIcon fontSize="large" color="primary" />
         </button>
       </ThemeProvider>

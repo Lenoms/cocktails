@@ -42,7 +42,7 @@ function TriedCocktailItem({ item, sortBy }) {
     cocktailContext.setScrollHeight(
       document.getElementById("app-header-and-body").scrollTop
     );
-    navigate("/cocktails/info", { state: { cocktailItem: item } });
+    navigate("/info", { state: { cocktailItem: item } });
   };
 
   const getGradeBorderColour = (grade) => {

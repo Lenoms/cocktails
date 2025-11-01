@@ -31,7 +31,7 @@ root.render(
   //   clientId="rvyYa5XzFYnj5UPWQu47GXyLLrP5K70h"
   //   redirectUri={window.location.origin + "/cocktails/tried"}
   // >
-  <BrowserRouter>
+  <BrowserRouter basename="/cocktails">
     <App />
   </BrowserRouter>
   /* </Auth0Provider> */

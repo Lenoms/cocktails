@@ -42,14 +42,14 @@ function CocktailInfo({ location }) {
     ];
 
     const editCocktail = () => {
-      navigate("/cocktails/update", {
+      navigate("/update", {
         state: { cocktailItem: cocktail, tried: true },
       });
     };
 
     const deleteCocktail = (e) => {
       CocktailService.deleteCocktail(cocktail.cocktailName, "tried");
-      navigate("/cocktails/tried");
+      navigate("/tried");
     };
 
     const showDeleteModal = () => {
