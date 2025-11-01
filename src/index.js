@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 //import * as firebase from 'firebase';
 import { initializeApp } from "firebase/app";
-// import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -26,15 +26,15 @@ initializeApp(firebaseConfig);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 console.log(window.location.origin);
 root.render(
-  // <Auth0Provider
-  //   domain="dev-n47evzlh.us.auth0.com"
-  //   clientId="rvyYa5XzFYnj5UPWQu47GXyLLrP5K70h"
-  //   redirectUri={window.location.origin + "/cocktails/tried"}
-  // >
-  <BrowserRouter basename="/cocktails">
-    <App />
-  </BrowserRouter>
-  /* </Auth0Provider> */
+  <Auth0Provider
+    domain="dev-n47evzlh.us.auth0.com"
+    clientId="rvyYa5XzFYnj5UPWQu47GXyLLrP5K70h"
+    redirectUri={window.location.origin + "/cocktails/tried"}
+  >
+    <BrowserRouter basename="/cocktails">
+      <App />
+    </BrowserRouter>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
