@@ -10,7 +10,7 @@ const LogoutButton = ({ size }) => {
       className="log-button"
       style={{ width: size[0], height: size[1] }}
       onClick={() =>
-        logout({ returnTo: window.location.origin + "/cocktails" })
+        logout({ returnTo: window.location.origin + "/cocktails/" })
       }
     >
       <LogoutIcon style={{ color: "white" }} />

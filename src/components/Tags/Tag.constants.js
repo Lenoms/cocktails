@@ -16,6 +16,8 @@ export const mapToColour = (option) => {
       return "#8BFFD7";
     case "original":
       return "#FFC0CB";
+    case "festive":
+      return "linear-gradient(90deg,rgba(255, 122, 122, 1) 0%, rgba(125, 255, 179, 1) 100%)";
   }
   return "#8ff6f7";
 };
@@ -33,4 +35,5 @@ export const tagOptions = [
     color: mapToColour("herbaceous"),
   },
   { label: "original", value: "original", color: mapToColour("original") },
+  { label: "festive", value: "festive", color: mapToColour("festive") },
 ];

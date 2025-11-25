@@ -8,18 +8,18 @@ function TagSelector({ handleSelectedTags, tags }) {
     option: (styles, { data }) => {
       return {
         ...styles,
-        backgroundColor: data.color,
+        background: data.color, // bg colour in dropdown
       };
     },
     multiValue: (styles, { data }) => {
       return {
         ...styles,
-        backgroundColor: data.color ? data.color : mapToColour(),
+        background: data.color ? data.color : mapToColour(), // bg colour when selected
       };
     },
     multiValueLabel: (styles, { data }) => ({
       ...styles,
-      color: "black",
+      color: "black", //Text color inside selected tag
     }),
   };
 
