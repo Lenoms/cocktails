@@ -21,32 +21,17 @@ function UpdateCocktailInfo({ location }) {
     return <p>Loading...</p>; // or null
   }
 
-  function updateCocktail(cocktailObject) {
-    const date = defaultCocktail.date;
-
-    if (location.state.tried) {
-      CocktailService.deleteCocktail(defaultCocktail.cocktailName, "tried");
-    } else {
-      CocktailService.deleteCocktail(defaultCocktail.cocktailName, "untried");
-    }
-
-    if (cocktailObject.tried) {
-      CocktailService.writeTriedToDatabase(
-        cocktailObject.name,
-        cocktailObject.daniel_grade,
-        cocktailObject.dani_grade,
-        cocktailObject.versions,
-        date,
-        cocktailObject.tags
-      );
-      navigate("/tried");
-    } else {
-      CocktailService.writeUntriedToDatabase(
-        cocktailObject.name,
-        cocktailObject.versions
-      );
-      navigate("/untried");
-    }
+  async function updateCocktail(cocktailObject) {
+    await CocktailService.saveCocktail({
+      cocktailId: defaultCocktail.cocktailId,
+      isTried: cocktailObject.tried,
+      name: cocktailObject.name,
+      danielGrade: cocktailObject.danielGrade ?? null,
+      daniGrade: cocktailObject.daniGrade ?? null,
+      versions: cocktailObject.versions,
+      tags: cocktailObject.tags ?? [],
+    });
+    navigate(cocktailObject.tried ? "/tried" : "/untried");
   }
 
   return (

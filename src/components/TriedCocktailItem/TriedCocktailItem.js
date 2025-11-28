@@ -5,10 +5,11 @@ import { Card } from "@mui/material";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import Tag from "../Tags/Tag";
 import CocktailService from "../../services/cocktail.service";
+import { formatPrettyDate } from "../../utils/dateFormatUtil";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
-  let cocktailName = item.cocktailName;
+  let cocktailName = item.name;
   let danielGrade = item.danielGrade ? parseInt(item.danielGrade) : "N/A";
   let daniGrade = item.daniGrade ? parseInt(item.daniGrade) : "N/A";
   let overallGrade = CocktailService.calculateAverageGrade(
@@ -90,7 +91,7 @@ function TriedCocktailItem({ item, sortBy }) {
           })}
         </div>
         <div className="tried-cocktail-date-created">
-          {CocktailService.getNonAmericanDateString(item.date[1])}
+          {formatPrettyDate(item.createdAt)}
         </div>
       </div>
       <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>

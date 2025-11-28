@@ -10,24 +10,16 @@ import CocktailUpsertForm from "../../components/CocktailUpsertForm/CocktailUpse
 function CreateCocktail() {
   const navigate = useNavigate();
 
-  function addCocktail(cocktailObject) {
-    if (cocktailObject.tried) {
-      CocktailService.writeTriedToDatabase(
-        cocktailObject.name,
-        cocktailObject.daniel_grade,
-        cocktailObject.dani_grade,
-        cocktailObject.versions,
-        null, // date
-        cocktailObject.tags
-      );
-      navigate("/tried");
-    } else {
-      CocktailService.writeUntriedToDatabase(
-        cocktailObject.name,
-        cocktailObject.versions
-      );
-      navigate("/untried");
-    }
+  async function addCocktail(cocktailObject) {
+    await CocktailService.saveCocktail({
+      isTried: cocktailObject.tried,
+      name: cocktailObject.name,
+      danielGrade: cocktailObject.danielGrade ?? null,
+      daniGrade: cocktailObject.daniGrade ?? null,
+      versions: cocktailObject.versions,
+      tags: cocktailObject.tags ?? [],
+    });
+    navigate(cocktailObject.tried ? "/tried" : "/untried");
   }
 
   return (

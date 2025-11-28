@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import "./Lists.css";
 import TriedCocktailItem from "../../components/TriedCocktailItem/TriedCocktailItem";
 import { motion } from "framer-motion";
@@ -8,13 +8,13 @@ import { searchQueryMatch } from "../../services/search.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import PaginationBar from "../../components/PaginationBar/PaginationBar";
-import { hasUnownedIngredient } from "../../services/filter.services";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
 import { downloadBackUp } from "../../services/backup.service";
 
-function TriedList({ filterOn }) {
+function TriedList() {
+  const [original, setOriginal] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,34 +22,20 @@ function TriedList({ filterOn }) {
   const cocktailContext = useCocktailContext();
   const pageSize = 20;
 
-  // Get cocktails
   useEffect(() => {
-    CocktailService.getTriedCocktails().then((data) => {
-      const cocktailList = Object.values(data);
-      if (filterOn) {
-        CocktailService.getUnownedIngredients().then((data) => {
-          sortAndSetCocktails(
-            cocktailList.filter(
-              (cocktail) => !hasUnownedIngredient(cocktail, Object.values(data))
-            )
-          );
-          setLoading(false);
-        });
-      } else {
-        sortAndSetCocktails(cocktailList);
-        setLoading(false);
-      }
-    });
-  }, [filterOn]);
+    async function load() {
+      const items = await CocktailService.fetchCocktails(true);
+      setOriginal(items);
+      setCocktails(sortList(items, cocktailContext.sortBy));
+      setLoading(false);
+    }
+    load();
+  }, []);
 
-  // Sort
   useEffect(() => {
-    sortAndSetCocktails(cocktails);
-  }, [cocktailContext.sortBy]);
-
-  const sortAndSetCocktails = (list) => {
-    setCocktails([...sortList(list, cocktailContext.sortBy)]);
-  };
+    setCocktails(sortList(original, cocktailContext.sortBy));
+    setCurrentPage(1);
+  }, [cocktailContext.sortBy, original]);
 
   // Filter function for search term
   const filterBySearchTerm = (item) => {
@@ -57,16 +43,13 @@ function TriedList({ filterOn }) {
     return searchQueryMatch(cocktailContext.searchTerm, item);
   };
 
-  // Return user to previous scroll height
-  useEffect(() => {
-    if (cocktailContext.scrollHeight !== 0) {
-      scrollToHeight(cocktailContext.scrollHeight);
-    }
+  if (cocktailContext.scrollHeight !== 0) {
+    scrollToHeight(cocktailContext.scrollHeight);
+  }
 
-    setTimeout(() => {
-      cocktailContext.setScrollHeight(0);
-    }, 600);
-  });
+  setTimeout(() => {
+    cocktailContext.setScrollHeight(0);
+  }, 600);
 
   // Return user to page they were on
   useEffect(() => {
@@ -83,6 +66,7 @@ function TriedList({ filterOn }) {
     //   downloadBackUp(cocktails);
     // }
 
+    //migrateCocktailData();
   }, [cocktails]);
 
   if (loading) {
@@ -104,7 +88,7 @@ function TriedList({ filterOn }) {
             .map(function (item) {
               return (
                 <TriedCocktailItem
-                  key={item.cocktailName}
+                  key={item.cocktailId}
                   item={item}
                   sortBy={cocktailContext.sortBy}
                 ></TriedCocktailItem>

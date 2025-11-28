@@ -10,7 +10,7 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { CocktailContextProvider } from "./services/CocktailContextProvider";
 import { getAuth, signInAnonymously } from "firebase/auth";
 
-const AppMain = ({ filterOn, setFilterOn }) => {
+const AppMain = () => {
   return (
     <div className="App">
       <div className="app-header-and-body" id="app-header-and-body">
@@ -19,20 +19,19 @@ const AppMain = ({ filterOn, setFilterOn }) => {
         </div>
         <div className="app-body">
           <AnimatePresence exitBeforeEnter>
-            <AppRoutes filterOn={filterOn} />
+            <AppRoutes />
           </AnimatePresence>
         </div>
       </div>
 
       <div className="footer">
-        <Footer setFilterOn={setFilterOn} />
+        <Footer />
       </div>
     </div>
   );
 };
 
 function App() {
-  const [filterOn, setFilterOn] = useState(false);
   const { isAuthenticated, isLoading, user } = useAuth0();
   const [loginTried, setLoginTried] = useState(false);
   const [auth0AndFBAuthenticated, setauth0AndFBAuthenticated] = useState(false);
@@ -66,7 +65,7 @@ function App() {
     if (auth0AndFBAuthenticated) {
       return (
         <CocktailContextProvider>
-          <AppMain setFilterOn={setFilterOn} filterOn={filterOn} />
+          <AppMain />
         </CocktailContextProvider>
       );
     } else if (isAuthenticated) {

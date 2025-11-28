@@ -4,11 +4,10 @@ import "../../animations/bubbles.css";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import LogoutButton from "../LogButtons/LogoutButton";
-import FilterButton from "./FilterButton";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { locationShouldShowCocktailIcon } from "../../config/FooterConfig";
 
-function Footer({ setFilterOn }) {
+function Footer() {
   const [activeFooter, setActiveFooter] = useState(false);
   const [showCocktailIcon, setShowCocktailIcon] = useState(true);
   const cocktailContext = useCocktailContext();
@@ -89,7 +88,6 @@ function Footer({ setFilterOn }) {
                   <option>Dani Grade</option>
                   <option>Date Created</option>
                 </select>
-                <FilterButton setFilterOn={setFilterOn} />
               </div>
               <LogoutButton size={["10%", "50%"]} />
             </div>

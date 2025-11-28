@@ -36,8 +36,6 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
     setVersions(newVersions);
   };
 
-  console.log("Versions: ", versions);
-
   const handleAddVersion = (e) => {
     e.preventDefault();
     setVersions((prev) => [
@@ -83,8 +81,8 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
     const newCocktail = {
       name,
       tried,
-      daniel_grade: danielGrade,
-      dani_grade: daniGrade,
+      danielGrade: danielGrade,
+      daniGrade: daniGrade,
       tags,
       versions,
     };
@@ -96,7 +94,7 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
     <form className="cocktail-form" onSubmit={returnCocktailObject}>
       <h1>
         {defaultCocktailObject
-          ? `Update ${defaultCocktailObject.cocktailName}`
+          ? `Update ${defaultCocktailObject.name}`
           : "Add Cocktail"}
       </h1>
 
@@ -111,7 +109,7 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
           id="cocktail-name"
           name="cocktail-name"
           autoComplete="off"
-          defaultValue={defaultCocktailObject?.cocktailName}
+          defaultValue={defaultCocktailObject?.name}
         />
         <p id="validation-message" hidden style={{ color: "red", margin: 0 }}>
           Cocktail name cannot be empty!

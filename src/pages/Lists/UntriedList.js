@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Lists.css";
 import UntriedCocktailItem from "../../components/UntriedCocktailItem/UntriedCocktailItem";
 import { motion } from "framer-motion";
@@ -7,41 +7,28 @@ import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { hasUnownedIngredient } from "../../services/filter.services";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
+import { migrateCocktailData } from "../../services/migration.service";
 
-function UntriedList({ filterOn }) {
+function UntriedList() {
   let [cocktails, setCocktails] = useState([]);
   let [loading, setLoading] = useState(true);
   const cocktailContext = useCocktailContext();
 
-  // Get cocktails
   useEffect(() => {
-    CocktailService.getUntriedCocktails().then((data) => {
-      const cocktailList = Object.values(data);
-      if (filterOn) {
-        CocktailService.getUnownedIngredients().then((data) => {
-          setCocktails(
-            cocktailList.filter(
-              (cocktail) => !hasUnownedIngredient(cocktail, Object.values(data))
-            )
-          );
-          setLoading(false);
-        });
-      } else {
-        setCocktails(cocktailList);
-        setLoading(false);
-      }
-    });
-  }, [filterOn]);
-
-  const refreshList = () => {
-    setLoading(true);
-    CocktailService.getUntriedCocktails().then((data) => {
-      setCocktails(Object.values(data));
+    async function load() {
+      const items = await CocktailService.fetchCocktails(false); // or false
+      setCocktails(items);
       setLoading(false);
-    });
+    }
+
+    load();
+  }, []);
+
+  const deleteCocktail = (cocktailId) => {
+    CocktailService.deleteCocktail(cocktailId);
+    setCocktails((prev) => prev.filter((c) => c.cocktailId !== cocktailId));
   };
 
   // Filter function for search query
@@ -49,17 +36,6 @@ function UntriedList({ filterOn }) {
     if (!item) return true;
     return searchQueryMatch(cocktailContext.searchTerm, item);
   };
-
-  // useEffect(() => {
-  //   if (filterUnowned) {
-  //     if (cocktails.length > 0) {
-  //       CocktailService.getUnownedIngredients().then((data) => {
-  //         setDisplayList(filterByUnownedList(cocktails, data));
-  //         setLoading(false);
-  //       });
-  //     }
-  //   }
-  // }, [cocktails, filterUnowned]);
 
   // Bonus stuff
   useEffect(() => {
@@ -88,9 +64,9 @@ function UntriedList({ filterOn }) {
             .map(function (item) {
               return (
                 <UntriedCocktailItem
-                  key={item.cocktailName}
+                  key={item.name}
                   item={item}
-                  refreshList={refreshList}
+                  deleteCocktail={deleteCocktail}
                 ></UntriedCocktailItem>
               );
             })}

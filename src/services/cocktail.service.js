@@ -1,105 +1,76 @@
 import {
-  getDatabase,
-  ref as databaseRef,
-  remove,
-  set,
-  get,
-  child,
-} from "firebase/database";
-
-import {
   getDownloadURL,
   getStorage,
   uploadBytesResumable,
   ref,
 } from "firebase/storage";
 
+const API_URL =
+  "https://s8zmac6xjl.execute-api.ap-southeast-2.amazonaws.com/prod/cocktails";
+
 const CocktailService = {
-  getTriedCocktails: function () {
-    return new Promise(function (resolve, reject) {
-      const dbRef = databaseRef(getDatabase());
-      get(child(dbRef, "cocktails/tried"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            resolve(snapshot.val());
-          } else {
-            console.log("No data available");
-            resolve([]);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  },
-  getUntriedCocktails: function () {
-    return new Promise(function (resolve, reject) {
-      const dbRef = databaseRef(getDatabase());
-      get(child(dbRef, "cocktails/untried"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            resolve(snapshot.val());
-          } else {
-            console.log("No data available");
-            resolve([]);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  },
-  writeTriedToDatabase: function (
-    cocktailName,
-    danielGrade,
-    daniGrade,
-    versions,
-    date,
-    tags
-  ) {
-    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
-    if (noSpecialCharactersKey.length == 0) return;
-    const db = getDatabase();
-    const currentDate = getDateArray();
-    if (date != null) {
-      set(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey), {
-        cocktailName: cocktailName,
-        danielGrade: danielGrade,
-        daniGrade: daniGrade,
-        versions: versions,
-        date: date,
-        dateModified: currentDate,
-        tags: tags,
+  fetchCocktails: async function (isTried) {
+    const url = `${API_URL}?tried=${isTried}`;
+
+    try {
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-    } else {
-      set(databaseRef(db, "cocktails/tried/" + noSpecialCharactersKey), {
-        cocktailName: cocktailName,
-        danielGrade: danielGrade,
-        daniGrade: daniGrade,
-        versions: versions,
-        date: currentDate,
-        tags: tags,
-      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
+      const data = await res.json();
+      return data.items;
+    } catch (err) {
+      console.error("Error fetching cocktails:", err);
+      return [];
     }
   },
+  saveCocktail: async function (cocktail) {
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cocktail),
+      });
 
-  writeUntriedToDatabase: function (cocktailName, versions) {
-    const db = getDatabase();
-    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
-    if (noSpecialCharactersKey.length == 0) return;
-    set(databaseRef(db, "cocktails/untried/" + noSpecialCharactersKey), {
-      cocktailName: cocktailName,
-      versions: versions,
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Cocktail saved:", data);
+      return data;
+    } catch (error) {
+      console.error("Error saving cocktail:", error);
+    }
   },
-  deleteCocktail: function (cocktailName, list) {
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-    const db = getDatabase();
-    const noSpecialCharactersKey = cocktailName.replace(/[.$#[\]/]/g, "");
-    if (noSpecialCharactersKey.length == 0) return;
-    remove(databaseRef(db, `cocktails/${list}/${noSpecialCharactersKey}`));
+  deleteCocktail: async function (cocktailId) {
+    try {
+      const response = await fetch(`${API_URL}/${cocktailId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to delete cocktail");
+      }
+
+      return await response.json(); // maybe return { success: true } or the deleted item
+    } catch (err) {
+      console.error("Error deleting cocktail:", err);
+      throw err;
+    }
   },
 
   uploadImage: function (event, setProgresspercent, setImgUrl, setIsUploading) {
@@ -125,39 +96,6 @@ const CocktailService = {
       }
     );
   },
-  getUnownedIngredients: function () {
-    return new Promise(function (resolve, reject) {
-      const dbRef = databaseRef(getDatabase());
-      get(child(dbRef, "cocktails/unownedIngredients"))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            resolve(snapshot.val());
-          } else {
-            console.log("No data available");
-            resolve([]);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  },
-  addUnownedIngredient: function (ingredient) {
-    const db = getDatabase();
-    if (ingredient.length == 0) return;
-    set(databaseRef(db, "cocktails/unownedIngredients/" + ingredient), {
-      ingredient: ingredient,
-    });
-  },
-  deleteUnownedIngredient: function (ingredient) {
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-    const db = getDatabase();
-    if (ingredient.length == 0) return;
-    remove(databaseRef(db, `cocktails/unownedIngredients/${ingredient}`));
-  },
-
   printAnalytics: function (data) {
     let danielSum = 0;
     let daniSum = 0;
@@ -218,14 +156,5 @@ const CocktailService = {
     return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
   },
 };
-
-function getDateArray() {
-  let dateArray = [];
-  dateArray.push(Date.now());
-  var today = new Date();
-
-  dateArray.push(today.toLocaleDateString("en-US"));
-  return dateArray;
-}
 
 export default CocktailService;

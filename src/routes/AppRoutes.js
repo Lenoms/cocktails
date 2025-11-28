@@ -5,19 +5,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import TriedList from "../pages/Lists/TriedList";
 import UntriedList from "../pages/Lists/UntriedList";
 import CreateCocktail from "../pages/CreateAndUpdateCocktail/CreateCocktail";
-import FilterList from "../pages/FilterList/FilterList";
 
-function AppRoutes({ filterOn }) {
+function AppRoutes() {
   let location = useLocation();
   return (
     <Routes location={location} key={location.pathname}>
-      <Route exact path="/" element={<TriedList filterOn={filterOn} />} />
-      <Route exact path="/tried" element={<TriedList filterOn={filterOn} />} />
-      <Route
-        exact
-        path="/untried"
-        element={<UntriedList filterOn={filterOn} />}
-      />
+      <Route exact path="/" element={<TriedList />} />
+      <Route exact path="/tried" element={<TriedList />} />
+      <Route exact path="/untried" element={<UntriedList />} />
       <Route exact path="/create" element={<CreateCocktail />} />
       <Route
         exact
@@ -29,7 +24,6 @@ function AppRoutes({ filterOn }) {
         path="/update"
         element={<UpdateCocktailInfo location={location} />}
       />
-      <Route exact path="/filter" element={<FilterList />} />
     </Routes>
   );
 }

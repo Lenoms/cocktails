@@ -12,6 +12,7 @@ import Tag from "../../components/Tags/Tag";
 import VersionInfoList from "../../components/Versions/VersionInfoList/VersionInfoList";
 import VersionInfo from "../../components/Versions/VersionInfo/VersionInfo";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
+import { formatPrettyDate } from "../../utils/dateFormatUtil";
 
 function CocktailInfo({ location }) {
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
@@ -47,8 +48,8 @@ function CocktailInfo({ location }) {
       });
     };
 
-    const deleteCocktail = (e) => {
-      CocktailService.deleteCocktail(cocktail.cocktailName, "tried");
+    const deleteCocktail = async (e) => {
+      await CocktailService.deleteCocktail(cocktail.cocktailId);
       navigate("/tried");
     };
 
@@ -63,7 +64,7 @@ function CocktailInfo({ location }) {
         animate={RouteAnimation.animate}
         exit={RouteAnimation.infoExit}
       >
-        <h1>{cocktail.cocktailName}</h1>
+        <h1>{cocktail.name}</h1>
         <div className="image-slider-container">
           <ImageSlider versions={versions} />
         </div>
@@ -90,7 +91,7 @@ function CocktailInfo({ location }) {
         <div className="cocktail-date-created-container">
           <div style={{ marginRight: "5px", fontWeight: "bold" }}>Date: </div>
           <div style={{ color: "grey" }}>
-            {CocktailService.getNonAmericanDateString(cocktail.date[1])}
+            {formatPrettyDate(cocktail.createdAt)}
           </div>
         </div>
         <div className="cocktail-buttons-container">
@@ -105,7 +106,7 @@ function CocktailInfo({ location }) {
           <DeleteModal
             confirmDelete={deleteCocktail}
             handleCancel={() => setHideDeleteModal(true)}
-            deleteString={cocktail.cocktailName}
+            deleteString={cocktail.name}
           />
         )}
       </motion.div>

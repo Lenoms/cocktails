@@ -1,15 +1,14 @@
 export function searchQueryMatch(searchQuery, cocktail) {
   if (searchQuery != undefined) {
     if (
-      isSubString(
-        searchQuery.trim().toLowerCase(),
-        cocktail.cocktailName.toLowerCase()
-      )
+      isSubString(searchQuery.trim().toLowerCase(), cocktail.name.toLowerCase())
     ) {
       return true;
     }
 
-    let ingredients = cocktail.ingredients;
+    let ingredients = cocktail.versions
+      .map((version) => version.ingredients)
+      .flat();
 
     if (ingredients) {
       for (let i = 0; i < ingredients.length; i++) {

@@ -95,6 +95,9 @@
     ]
   },
   "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.940.0",
+    "@aws-sdk/lib-dynamodb": "^3.940.0",
+    "crypto": "^1.0.1",
     "gh-pages": "^3.2.3"
   },
   "jest": {

@@ -8,11 +8,11 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import Recipe from "../Recipe/Recipe";
 import CocktailService from "../../services/cocktail.service";
 
-function UntriedCocktailItem({ item, refreshList }) {
+function UntriedCocktailItem({ item, deleteCocktail }) {
   const navigate = useNavigate();
   const [hideDeleteModal, setHideDeleteModal] = useState(true);
   const [hideRecipe, setHideRecipe] = useState(true);
-  let cocktailName = item.cocktailName;
+  let cocktailName = item.name;
   const notes = item.cocktailNotes || item.versions?.[0]?.notes || "";
   const ingredients = item.ingredients || item.versions?.[0]?.ingredients || [];
   let ingredientsString = "";
@@ -22,11 +22,7 @@ function UntriedCocktailItem({ item, refreshList }) {
       ingredientsString += ", ";
     }
   }
-  const deleteCocktail = (e) => {
-    CocktailService.deleteCocktail(cocktailName, "untried");
-    setHideDeleteModal(true);
-    refreshList();
-  };
+
   const updateCocktail = () => {
     navigate("/update", {
       state: { cocktailItem: item, tried: false },
@@ -76,7 +72,7 @@ function UntriedCocktailItem({ item, refreshList }) {
       {!hideRecipe && (
         <Recipe
           handleClose={() => setHideRecipe(true)}
-          name={item.cocktailName}
+          name={item.name}
           ingredients={ingredients}
           notes={notes}
           updateCocktail={updateCocktail}
@@ -84,7 +80,7 @@ function UntriedCocktailItem({ item, refreshList }) {
       )}
       {!hideDeleteModal && (
         <DeleteModal
-          confirmDelete={deleteCocktail}
+          confirmDelete={() => deleteCocktail(item.cocktailId)}
           handleCancel={() => setHideDeleteModal(true)}
           deleteString={cocktailName}
         />
