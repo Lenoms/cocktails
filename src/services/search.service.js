@@ -1,72 +1,42 @@
-export function searchQueryMatch(searchQuery, cocktail) {
-  if (searchQuery != undefined) {
-    if (
-      isSubString(searchQuery.trim().toLowerCase(), cocktail.name.toLowerCase())
-    ) {
-      return true;
-    }
+export function searchQueryMatch(query, cocktail) {
+  const q = normalize(query);
+  if (!q) return true;
 
-    let ingredients = cocktail.versions
-      .map((version) => version.ingredients)
-      .flat();
-
-    if (ingredients) {
-      for (let i = 0; i < ingredients.length; i++) {
-        if (checkIngredient(searchQuery, ingredients[i])) {
-          return true;
-        }
-      }
-    }
-
-    let tags = cocktail.tags;
-    if (tags && checkTags(searchQuery, cocktail.tags)) {
-      return true;
-    }
-
-    return false;
-  } else {
+  // -------- Name match --------
+  if (includes(q, cocktail.name)) {
     return true;
   }
-}
 
-function isSubString(s1, s2) {
-  var M = s1.length;
-  var N = s2.length;
+  // -------- Ingredient match --------
+  const ingredients =
+    cocktail?.versions?.flatMap((v) => v.ingredients || []).filter(Boolean) ||
+    [];
 
-  /* A loop to slide pat[] one by one */
-  for (var i = 0; i <= N - M; i++) {
-    var j;
+  for (const ing of ingredients) {
+    if (ingredientMatch(q, ing)) return true;
+  }
 
-    /* For current index i, check for
- pattern match */
-    for (j = 0; j < M; j++) if (s2[i + j] != s1[j]) break;
-
-    if (j == M) return true;
+  // -------- Tag match --------
+  const tags = cocktail.tags || [];
+  for (const t of tags) {
+    if (normalize(t) === q) return true; // exact match
+    if (includes(q, t)) return true; // partial match
   }
 
   return false;
 }
 
-function checkIngredient(searchQuery, ingredient) {
-  // Check full ingredient
-  if (searchQuery.toLowerCase().trim() === ingredient.toLowerCase().trim()) {
-    return true;
-  }
-
-  // Split and check parts. This is to cover search terms like 'rum' returning for ingredients like 'white rum'
-  ingredient = ingredient.split(" ");
-  for (let j = 0; j < ingredient.length; j++) {
-    if (searchQuery.toLowerCase() === ingredient[j].toLowerCase()) {
-      return true;
-    }
-  }
-  return false;
+function normalize(str) {
+  return str?.toLowerCase().trim() ?? "";
 }
 
-function checkTags(query, tags) {
-  for (let i = 0; i < tags.length; i++) {
-    if (tags[i] === query.toLowerCase().trim()) {
-      return true;
-    }
-  }
+function includes(query, value) {
+  return normalize(value).includes(normalize(query));
+}
+
+function ingredientMatch(query, ingredient) {
+  const q = normalize(query);
+  const ing = normalize(ingredient);
+
+  return ing.includes(q) || ing.split(" ").some((word) => word === q);
 }
