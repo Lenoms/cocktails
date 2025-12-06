@@ -23,7 +23,6 @@ function Ingredients({ ingredients, setIngredients }) {
       setNewMeasure("Top with");
     }
     let ingredient = `${newAmount} ${newMeasure} ${newIngredientName}`;
-    console.log(ingredient);
     setIngredients([...ingredients, ingredient]);
     setNewIngredientName("");
     setNewAmount("");

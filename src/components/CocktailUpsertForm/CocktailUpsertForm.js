@@ -30,7 +30,6 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   );
 
   const handleVersionUpdate = (index, updatedVersion) => {
-    console.log(updatedVersion);
     const newVersions = [...versions];
     newVersions[index] = updatedVersion;
     setVersions(newVersions);

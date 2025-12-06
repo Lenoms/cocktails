@@ -1,25 +1,37 @@
 import React from "react";
-import { mapToColour } from "./Tag.constants";
+import { christmasLightsColours, mapToColour } from "./Tag.constants";
 import "./Tag.css";
+import "./Festive.css";
+import "./Halloween.css";
 
 function Tag({ tag }) {
-  const isFestive = tag && String(tag).toLowerCase() === "festive";
+  const lower = tag && String(tag).toLowerCase();
+  const isFestive = lower === "festive";
+  const isHalloween = lower === "halloween";
 
   return (
     <div
-      className={`tried-tag ${isFestive ? "festive" : ""}`}
+      className={`tried-tag ${isFestive ? "festive" : ""} ${
+        isHalloween ? "halloween" : ""
+      }`}
       style={{ background: mapToColour(tag) }}
     >
       {isFestive && (
         <div className="lights" aria-hidden>
-          {["red", "green", "yellow", "blue", "purple", "orange", "pink"].map(
-            (c, i) => (
-              <span key={i} className={`festive-dot ${c}`} />
-            )
-          )}
+          {christmasLightsColours.map((c, i) => (
+            <span key={i} className={`festive-dot ${c}`} />
+          ))}
         </div>
       )}
-      {tag}
+
+      {isHalloween && (
+        <div className="pumpkin" aria-hidden>
+          <div className="pumpkin-stem"></div>
+          <div className="pumpkin-content">{tag}</div>
+        </div>
+      )}
+
+      {!isHalloween && tag}
     </div>
   );
 }

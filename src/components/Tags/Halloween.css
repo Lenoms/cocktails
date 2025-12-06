@@ -1,0 +1,57 @@
+/* 🎃 Pumpkin tag */
+.tried-tag.halloween {
+  padding: 0;     
+  border: none;      
+  background: none !important;
+}
+
+.pumpkin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px / 20px;
+  position: relative;
+  background-color: #d45900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+}
+
+/* Pumpkin shading effect */
+.pumpkin:before,
+.pumpkin:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+	height: 100%;
+  border-radius: 180px / 240px;
+  z-index: -1;
+}
+
+.pumpkin:before {
+  left: 18%;
+  border-left: 3px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin:after {
+  right: 18%;
+  border-right: 3px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin-stem {
+  position: absolute;
+  top: -8px;
+  left: 30px;
+  height: 8px;
+  width: 12px;
+  background-color: #194d14;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 23px;
+  border-top-right-radius: 10px;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,.1) 58%, rgba(0,0,0,.1) 62%, rgba(0,0,0,0.3) 100%);
+  z-index: 2;
+}
