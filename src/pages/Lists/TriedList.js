@@ -60,6 +60,7 @@ function TriedList() {
   useEffect(() => {
     //Analytics stuff interested.
     CocktailService.printAnalytics(cocktails);
+    //CocktailService.printWrappedStats(cocktails);
 
     // TO BACK UP
     // if (cocktails.length !== 0) {

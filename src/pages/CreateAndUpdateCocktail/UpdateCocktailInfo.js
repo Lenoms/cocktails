@@ -30,6 +30,7 @@ function UpdateCocktailInfo({ location }) {
       daniGrade: cocktailObject.daniGrade ?? null,
       versions: cocktailObject.versions,
       tags: cocktailObject.tags ?? [],
+      createdAt: defaultCocktail.tried ? defaultCocktail.createdAt : null,
     });
     navigate(cocktailObject.tried ? "/tried" : "/untried");
   }
