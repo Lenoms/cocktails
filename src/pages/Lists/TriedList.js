@@ -12,6 +12,7 @@ import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
 import { downloadBackUp } from "../../services/backup.service";
+import WrappedService from "../../services/wrapped.service";
 
 function TriedList() {
   const [original, setOriginal] = useState([]);
@@ -60,7 +61,7 @@ function TriedList() {
   useEffect(() => {
     //Analytics stuff interested.
     CocktailService.printAnalytics(cocktails);
-    //CocktailService.printWrappedStats(cocktails);
+    // WrappedService.printWrappedStats(cocktails);
 
     // TO BACK UP
     // if (cocktails.length !== 0) {

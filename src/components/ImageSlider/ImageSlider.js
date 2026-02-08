@@ -24,15 +24,17 @@ function ImageSlider({ versions }) {
     <>
       <div className="navigation-wrapper">
         <div ref={sliderRef} className="keen-slider">
-          {versions.map((version, i) => {
-            return (
-              <img
-                key={version.imgUrl}
-                className={`keen-slider__slide numberslide${i} cocktail-info-image`}
-                src={version.imgUrl}
-              />
-            );
-          })}
+          {versions
+            .filter((version) => version.imgUrl)
+            .map((version, i) => {
+              return (
+                <img
+                  key={version.imgUrl}
+                  className={`keen-slider__slide numberslide${i} cocktail-info-image`}
+                  src={version.imgUrl}
+                />
+              );
+            })}
         </div>
         {showArrowsAndDots() && (
           <>

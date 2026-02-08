@@ -137,60 +137,6 @@ const CocktailService = {
       ).toPrecision(4)}`
     );
   },
-  printWrappedStats: function (data) {
-    // Filter cocktails from 2025
-    const cocktails2025 = data.filter((cocktail) => {
-      if (!cocktail.createdAt) return false;
-      const year = cocktail.createdAt.substring(0, 4);
-      return year === "2025";
-    });
-
-    // Top 5 by Dani grade
-    const top5Dani = cocktails2025
-      .filter((c) => c.daniGrade)
-      .sort((a, b) => parseInt(b.daniGrade) - parseInt(a.daniGrade))
-      .slice(0, 5);
-
-    // Top 5 by Daniel grade
-    const top5Daniel = cocktails2025
-      .filter((c) => c.danielGrade)
-      .sort((a, b) => parseInt(b.danielGrade) - parseInt(a.danielGrade))
-      .slice(0, 5);
-
-    // Top 5 by overall grade (average)
-    const top5Overall = cocktails2025
-      .map((c) => ({
-        ...c,
-        average:
-          (parseInt(c.danielGrade) || 0 + parseInt(c.daniGrade) || 0) / 2,
-      }))
-      .sort((a, b) => b.average - a.average)
-      .slice(0, 5);
-
-    console.log("===== 2025 WRAPPED STATS =====");
-    console.log(`Number of cocktails in 2025: ${cocktails2025.length}`);
-    console.log("");
-
-    console.log("TOP 5 - Dani's Ratings:");
-    top5Dani.forEach((c, i) =>
-      console.log(`  ${i + 1}. ${c.name} (${c.daniGrade})`)
-    );
-    console.log("");
-
-    console.log("TOP 5 - Daniel's Ratings:");
-    top5Daniel.forEach((c, i) =>
-      console.log(`  ${i + 1}. ${c.name} (${c.danielGrade})`)
-    );
-    console.log("");
-
-    console.log("TOP 5 - Overall Average:");
-    top5Overall.forEach((c, i) =>
-      console.log(`  ${i + 1}. ${c.name} (${c.average.toPrecision(3)})`)
-    );
-    console.log("");
-
-    console.log("==============================");
-  },
   calculateAverageGrade: function (danielGrade, daniGrade) {
     if (
       (danielGrade === null || isNaN(danielGrade)) &&
