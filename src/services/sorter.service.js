@@ -1,16 +1,20 @@
 import CocktailService from "./cocktail.service";
+import { SORT_OPTIONS } from "../constants/sortOptions.constants";
 
 export function sortList(data, sortBy) {
-  if (sortBy == "Alphabetical") {
-    return sortByAlphabetical(data);
-  } else if (sortBy == "Overall Grade") {
-    return sortByOverallGrade(data);
-  } else if (sortBy == "Daniel Grade") {
-    return sortByDanielGrade(data);
-  } else if (sortBy == "Dani Grade") {
-    return sortByDaniGrade(data);
-  } else if (sortBy == "Date Created") {
-    return sortByDateCreated(data);
+  switch (sortBy) {
+    case SORT_OPTIONS.ALPHABETICAL:
+      return sortByAlphabetical(data);
+    case SORT_OPTIONS.OVERALL_GRADE:
+      return sortByOverallGrade(data);
+    case SORT_OPTIONS.DANIEL_GRADE:
+      return sortByDanielGrade(data);
+    case SORT_OPTIONS.DANI_GRADE:
+      return sortByDaniGrade(data);
+    case SORT_OPTIONS.DATE_CREATED:
+      return sortByDateCreated(data);
+    default:
+      return sortByAlphabetical(data);
   }
 }
 
@@ -63,7 +67,7 @@ function sortByDateCreated(data) {
 function getOverall(cocktail) {
   const overallValue = CocktailService.calculateAverageGrade(
     parseInt(cocktail.danielGrade),
-    parseInt(cocktail.daniGrade)
+    parseInt(cocktail.daniGrade),
   );
 
   return isNaN(overallValue) ? 0 : overallValue;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Lists.css";
 import UntriedCocktailItem from "../../components/UntriedCocktailItem/UntriedCocktailItem";
-import { motion } from "framer-motion";
-import { RouteAnimation } from "../../animations/RouteAnimation";
+import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
 import { searchQueryMatch } from "../../services/search.service";
 import { downloadBackUp } from "../../services/backup.service";
 import CocktailService from "../../services/cocktail.service";
@@ -52,13 +51,7 @@ function UntriedList() {
       return <NoResultsFound />;
     } else {
       return (
-        <motion.div
-          className="list"
-          id="untried-list-container"
-          initial={RouteAnimation.initial}
-          animate={RouteAnimation.animate}
-          exit={RouteAnimation.exit}
-        >
+        <RouteWrapper className="list" id="untried-list-container">
           {cocktails
             .filter((item) => filterBySearchTerm(item))
             .map(function (item) {
@@ -70,7 +63,7 @@ function UntriedList() {
                 ></UntriedCocktailItem>
               );
             })}
-        </motion.div>
+        </RouteWrapper>
       );
     }
   }

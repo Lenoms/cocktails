@@ -8,16 +8,9 @@ function Header() {
   return (
     <div className="header-body">
       <div className="bubbles">
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} className="bubble"></div>
+        ))}
       </div>
       <TitleSearchAddBar />
       <Navbar />

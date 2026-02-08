@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import "./Ingredients.css";
+import {
+  AMOUNTS,
+  MEASURES,
+  PLACEHOLDERS,
+  MEASURE_TOP_WITH_RAW,
+  MEASURE_TOP_WITH_DISPLAY,
+  ICON_COLOR,
+} from "./Ingredients.constants";
 
 function Ingredients({ ingredients, setIngredients }) {
   const [newIngredientName, setNewIngredientName] = useState("");
@@ -18,11 +26,12 @@ function Ingredients({ ingredients, setIngredients }) {
   };
   function addIngredient(e) {
     e.preventDefault();
+    const measureForIngredient =
+      newMeasure === MEASURE_TOP_WITH_RAW
+        ? MEASURE_TOP_WITH_DISPLAY
+        : newMeasure;
 
-    if (newMeasure === "top with") {
-      setNewMeasure("Top with");
-    }
-    let ingredient = `${newAmount} ${newMeasure} ${newIngredientName}`;
+    const ingredient = `${newAmount} ${measureForIngredient} ${newIngredientName}`;
     setIngredients([...ingredients, ingredient]);
     setNewIngredientName("");
     setNewAmount("");
@@ -31,7 +40,7 @@ function Ingredients({ ingredients, setIngredients }) {
 
   function deleteIngredient(ingredient) {
     setIngredients(
-      ingredients.filter((eachIngredient) => eachIngredient !== ingredient)
+      ingredients.filter((eachIngredient) => eachIngredient !== ingredient),
     );
   }
   return (
@@ -49,44 +58,35 @@ function Ingredients({ ingredients, setIngredients }) {
           onChange={handleNewIngredientNameChange}
         ></input>
         <select
-          defaultValue={"Amount"}
+          defaultValue={PLACEHOLDERS.AMOUNT}
           value={newAmount}
-          id="ingredients-measure-dropdown-amount"
           onChange={handleAmountChange}
         >
           <option value="" hidden disabled>
-            Amount
+            {PLACEHOLDERS.AMOUNT}
           </option>
-          <option>¼</option>
-          <option>½</option>
-          <option>¾</option>
-          <option>1</option>
-          <option>1½</option>
-          <option>2</option>
-          <option>2½</option>
-          <option>3</option>
+          {AMOUNTS.map((a) => (
+            <option key={a} value={a}>
+              {a}
+            </option>
+          ))}
         </select>
         <select
-          defaultValue={"Measure"}
+          defaultValue={PLACEHOLDERS.MEASURE}
           value={newMeasure}
-          id="ingredients-measure-dropdown-measure"
           onChange={handleMeasureChange}
         >
           <option value="" hidden disabled>
-            Measure
+            {PLACEHOLDERS.MEASURE}
           </option>
-          <option>oz</option>
-          <option>dash</option>
-          <option>cup</option>
-          <option>teaspoon</option>
-          <option>tablespoon</option>
-          <option>unit</option>
-          <option>top with</option>
-          <option>scoop</option>
-          <option>slice</option>
+          {MEASURES.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
         </select>
         <button className="add-ingredient-button" onClick={addIngredient}>
-          <AddIcon fontSize="large" style={{ color: "black" }} />
+          <AddIcon fontSize="large" style={{ color: ICON_COLOR }} />
         </button>
       </div>
       <div>
@@ -96,7 +96,7 @@ function Ingredients({ ingredients, setIngredients }) {
               <li className="ingredients-list-item">
                 <div className="ingredients-list-item-name">{ingredient}</div>
                 <span onClick={() => deleteIngredient(ingredient)}>
-                  <DeleteIcon style={{ color: "black" }} />
+                  <DeleteIcon style={{ color: ICON_COLOR }} />
                 </span>
               </li>
             </div>

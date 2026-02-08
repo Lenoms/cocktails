@@ -8,11 +8,6 @@ function VersionForm({ version, setIsUploading, onChange, addImageAvailable }) {
   const [imgUrl, setImgUrl] = useState(version.imgUrl ?? null);
 
   useEffect(() => {
-    console.log("ImgURL Updated: ", version, imgUrl);
-  }, [imgUrl]);
-
-  useEffect(() => {
-    console.log(version);
     onChange?.({
       ...version,
       ingredients,

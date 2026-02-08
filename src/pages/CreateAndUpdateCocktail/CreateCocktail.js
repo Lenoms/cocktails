@@ -2,8 +2,7 @@ import React from "react";
 import "./CreateCocktail.css";
 import CocktailService from "../../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { RouteAnimation } from "../../animations/RouteAnimation";
+import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
 import "./CreateUpdate.css";
 import CocktailUpsertForm from "../../components/CocktailUpsertForm/CocktailUpsertForm";
 
@@ -23,14 +22,9 @@ function CreateCocktail() {
   }
 
   return (
-    <motion.div
-      className="create-cocktail"
-      initial={RouteAnimation.initial}
-      animate={RouteAnimation.animate}
-      exit={RouteAnimation.exit}
-    >
+    <RouteWrapper className="create-cocktail">
       <CocktailUpsertForm addCocktail={addCocktail} />
-    </motion.div>
+    </RouteWrapper>
   );
 }
 

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import LogoutButton from "../LogButtons/LogoutButton";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
+import { SORT_OPTIONS_ARRAY } from "../../constants/sortOptions.constants";
 import { locationShouldShowCocktailIcon } from "../../config/FooterConfig";
 
 function Footer() {
@@ -13,15 +14,15 @@ function Footer() {
   const cocktailContext = useCocktailContext();
   const location = useLocation();
 
-  function toggleFooter() {
+  const toggleFooter = () => {
     setActiveFooter(!activeFooter);
-  }
+  };
 
-  function handleSortSelect() {
-    let sortBySelected = document.getElementById("sorter").value;
+  const handleSortSelect = (e) => {
+    const sortBySelected = e.target.value;
     cocktailContext.setSortBy(sortBySelected);
     cocktailContext.setPageNumber(1);
-  }
+  };
 
   const variants = {
     low: { y: 0 },
@@ -59,16 +60,9 @@ function Footer() {
         }
       >
         <div className="bubbles">
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
-          <div className="bubble"></div>
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="bubble"></div>
+          ))}
         </div>
         <div className="footer-body">
           {activeFooter ? (
@@ -78,22 +72,17 @@ function Footer() {
                 <select
                   onChange={handleSortSelect}
                   name="sorter"
-                  id="sorter"
                   className="footer-sorter"
                   defaultValue={cocktailContext.sortBy}
                 >
-                  <option>Alphabetical</option>
-                  <option>Overall Grade</option>
-                  <option>Daniel Grade</option>
-                  <option>Dani Grade</option>
-                  <option>Date Created</option>
+                  {SORT_OPTIONS_ARRAY.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
                 </select>
               </div>
               <LogoutButton size={["10%", "50%"]} />
             </div>
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
       </div>
     </>

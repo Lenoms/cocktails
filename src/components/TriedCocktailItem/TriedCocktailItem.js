@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./TriedCocktailItem.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
@@ -6,67 +6,56 @@ import { useCocktailContext } from "../../services/CocktailContextProvider";
 import Tag from "../Tags/Tag";
 import CocktailService from "../../services/cocktail.service";
 import { formatPrettyDate } from "../../utils/dateFormatUtil";
+import {
+  GRADE_COLORS,
+  GRADE_TYPES,
+  COLORS,
+} from "./TriedCocktailItem.constants";
 
 function TriedCocktailItem({ item, sortBy }) {
   const navigate = useNavigate();
-  let cocktailName = item.name;
-  let danielGrade = item.danielGrade ? parseInt(item.danielGrade) : "N/A";
-  let daniGrade = item.daniGrade ? parseInt(item.daniGrade) : "N/A";
-  let overallGrade = CocktailService.calculateAverageGrade(
+  const cocktailName = item.name;
+  const danielGrade = item.danielGrade ? parseInt(item.danielGrade) : "N/A";
+  const daniGrade = item.daniGrade ? parseInt(item.daniGrade) : "N/A";
+  const overallGrade = CocktailService.calculateAverageGrade(
     danielGrade,
-    daniGrade
+    daniGrade,
   );
-  let cocktailImageUrl = item.versions ? item.versions[0].imgUrl : item.image;
+  const cocktailImageUrl = item.versions ? item.versions[0].imgUrl : item.image;
   const cocktailContext = useCocktailContext();
+  const tags = item.tags || [];
 
-  let tags = [];
-  if (item.tags) {
-    tags = item.tags;
-  }
-
-  const [gradeToShow, setGradeToShow] = useState(overallGrade);
-
-  useEffect(() => {
-    if (sortBy == "Overall Grade") {
-      setGradeToShow(overallGrade);
-    } else if (sortBy == "Daniel Grade") {
-      setGradeToShow(danielGrade);
-    } else if (sortBy == "Dani Grade") {
-      setGradeToShow(daniGrade);
+  const getGradeToShow = () => {
+    switch (sortBy) {
+      case GRADE_TYPES.DANIEL:
+        return danielGrade;
+      case GRADE_TYPES.DANI:
+        return daniGrade;
+      case GRADE_TYPES.OVERALL:
+      default:
+        return overallGrade;
     }
-  }, [sortBy]);
+  };
 
-  const cocktailClicked = () => {
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
+  const gradeToShow = getGradeToShow();
+
+  const cocktailClicked = (e) => {
+    e.stopPropagation();
     cocktailContext.setScrollHeight(
-      document.getElementById("app-header-and-body").scrollTop
+      document.getElementById("app-header-and-body").scrollTop,
     );
     navigate("/info", { state: { cocktailItem: item } });
   };
 
   const getGradeBorderColour = (grade) => {
-    const gradientArray = [
-      "#FF0000",
-      "#FF0000",
-      "#FF0000",
-      "#FF0000",
-      "#E24200",
-      "#E27E00",
-      "#E2B600",
-      "#D2E200",
-      "#6BE200",
-      "#00E22D",
-    ];
     const index = Math.floor(grade / 10);
-    return gradientArray[index];
+    return GRADE_COLORS[index];
   };
   return (
     <Card
       className="tried-cocktail-item-body"
       onClick={cocktailClicked}
-      style={{ backgroundColor: "#FFE5B0" }}
+      style={{ backgroundColor: COLORS.BACKGROUND }}
     >
       <div className="border-tried-left"></div>
       <div className="tried-cocktail-info-container">
@@ -76,9 +65,9 @@ function TriedCocktailItem({ item, sortBy }) {
             className="tried-cocktail-item-grade"
             style={{
               color:
-                sortBy == "Daniel Grade" || sortBy == "Dani Grade"
-                  ? "#FF1493"
-                  : "black",
+                sortBy === GRADE_TYPES.DANIEL || sortBy === GRADE_TYPES.DANI
+                  ? COLORS.INDIVIDUAL_GRADE_TEXT
+                  : COLORS.DEFAULT_TEXT,
               borderColor: getGradeBorderColour(gradeToShow),
             }}
           >
@@ -86,15 +75,20 @@ function TriedCocktailItem({ item, sortBy }) {
           </div>
         </div>
         <div className="tried-cocktail-tags">
-          {tags.map((tag) => {
-            return <Tag tag={tag} />;
+          {tags.map((tag, index) => {
+            return <Tag key={index} tag={tag} />;
           })}
         </div>
         <div className="tried-cocktail-date-created">
           {formatPrettyDate(item.createdAt)}
         </div>
       </div>
-      <img loading="lazy" id="cocktail-image" src={cocktailImageUrl}></img>
+      <img
+        loading="lazy"
+        id="cocktail-image"
+        src={cocktailImageUrl}
+        alt={cocktailName}
+      />
     </Card>
   );
 }

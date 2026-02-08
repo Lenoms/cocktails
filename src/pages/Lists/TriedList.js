@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import "./Lists.css";
 import TriedCocktailItem from "../../components/TriedCocktailItem/TriedCocktailItem";
-import { motion } from "framer-motion";
-import { RouteAnimation } from "../../animations/RouteAnimation";
+import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
 import { sortList } from "../../services/sorter.service";
 import { searchQueryMatch } from "../../services/search.service";
 import CocktailService from "../../services/cocktail.service";
@@ -78,12 +77,7 @@ function TriedList() {
       return <NoResultsFound />;
     } else {
       return (
-        <motion.div
-          className="list"
-          initial={RouteAnimation.initial}
-          animate={RouteAnimation.animate}
-          exit={RouteAnimation.exit}
-        >
+        <RouteWrapper className="list">
           {cocktails
             .filter((item) => filterBySearchTerm(item))
             .slice((currentPage - 1) * pageSize, currentPage * pageSize)
@@ -104,7 +98,7 @@ function TriedList() {
             }
             pageSize={pageSize}
           />
-        </motion.div>
+        </RouteWrapper>
       );
     }
   }

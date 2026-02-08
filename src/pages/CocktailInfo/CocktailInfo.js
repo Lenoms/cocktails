@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CocktailInfo.css";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { RouteAnimation } from "../../animations/RouteAnimation";
+import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
@@ -30,7 +29,7 @@ function CocktailInfo({ location }) {
     let daniGrade = cocktail.daniGrade ? parseInt(cocktail.daniGrade) : "N/A";
     let overallGrade = CocktailService.calculateAverageGrade(
       danielGrade,
-      daniGrade
+      daniGrade,
     );
 
     // Backwards compatability (i.e if a cocktail doesn't have versions)
@@ -58,12 +57,7 @@ function CocktailInfo({ location }) {
     };
 
     return (
-      <motion.div
-        className="cocktail-info"
-        initial={RouteAnimation.infoInitial}
-        animate={RouteAnimation.animate}
-        exit={RouteAnimation.infoExit}
-      >
+      <RouteWrapper className="cocktail-info" direction="right">
         <h1>{cocktail.name}</h1>
         <div className="image-slider-container">
           <ImageSlider versions={versions} />
@@ -109,7 +103,7 @@ function CocktailInfo({ location }) {
             deleteString={cocktail.name}
           />
         )}
-      </motion.div>
+      </RouteWrapper>
     );
   } else {
     return <div></div>;

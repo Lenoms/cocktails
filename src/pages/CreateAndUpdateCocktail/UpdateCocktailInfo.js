@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { motion } from "framer-motion";
 import { getDatabase, ref as databaseRef, remove } from "firebase/database";
 import CocktailService from "../../services/cocktail.service";
 import { useNavigate } from "react-router-dom";
+import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
 import "./CreateUpdate.css";
 import "./UpdateCocktailInfo.css";
 import CocktailUpsertForm from "../../components/CocktailUpsertForm/CocktailUpsertForm";
@@ -36,25 +36,12 @@ function UpdateCocktailInfo({ location }) {
   }
 
   return (
-    <motion.div
-      className="update-cocktail"
-      initial={{
-        opacity: 0,
-        x: "-200vw",
-        transition: { ease: "easeInOut", duration: 0.5 },
-      }}
-      animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
-      exit={{
-        opacity: 0,
-        x: "-200vw",
-        transition: { ease: "easeInOut", duration: 0.5 },
-      }}
-    >
+    <RouteWrapper className="update-cocktail">
       <CocktailUpsertForm
         addCocktail={updateCocktail}
         defaultCocktailObject={defaultCocktail}
       />
-    </motion.div>
+    </RouteWrapper>
   );
 }
 
