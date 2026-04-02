@@ -9,6 +9,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { CocktailContextProvider } from "./services/CocktailContextProvider";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const AppMain = () => {
   return (
@@ -64,9 +66,11 @@ function App() {
   if (!isLoading) {
     if (auth0AndFBAuthenticated) {
       return (
-        <CocktailContextProvider>
-          <AppMain />
-        </CocktailContextProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CocktailContextProvider>
+            <AppMain />
+          </CocktailContextProvider>
+        </LocalizationProvider>
       );
     } else if (isAuthenticated) {
       return <LoadingSpinner />;

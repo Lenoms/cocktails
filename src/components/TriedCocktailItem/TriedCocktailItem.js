@@ -10,6 +10,7 @@ import {
   GRADE_COLORS,
   GRADE_TYPES,
   COLORS,
+  placeHolderImageUrl,
 } from "./TriedCocktailItem.constants";
 
 function TriedCocktailItem({ item, sortBy }) {
@@ -22,6 +23,7 @@ function TriedCocktailItem({ item, sortBy }) {
     daniGrade,
   );
   const cocktailImageUrl = item.versions ? item.versions[0].imgUrl : item.image;
+  const displayImageUrl = cocktailImageUrl || placeHolderImageUrl;
   const cocktailContext = useCocktailContext();
   const tags = item.tags || [];
 
@@ -86,7 +88,7 @@ function TriedCocktailItem({ item, sortBy }) {
       <img
         loading="lazy"
         id="cocktail-image"
-        src={cocktailImageUrl}
+        src={displayImageUrl}
         alt={cocktailName}
       />
     </Card>

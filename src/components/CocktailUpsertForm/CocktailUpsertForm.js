@@ -7,11 +7,16 @@ import VersionButton from "../Versions/VersionButton/VersionButton";
 import VersionFormList from "../Versions/VersionFormList/VersionFormList";
 import AddPhoto from "../AddPhoto/AddPhoto";
 import VersionForm from "../Versions/VersionForm/VersionForm";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TextField } from "@mui/material";
 
 function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   const [tried, setTried] = useState(defaultCocktailObject?.tried ?? false);
   const [tags, setTags] = useState(defaultCocktailObject?.tags ?? []);
   const [isUploading, setIsUploading] = useState(false);
+  const [date, setDate] = useState(
+    defaultCocktailObject?.date ? new Date(defaultCocktailObject.date) : null,
+  );
 
   const default_grades = tried
     ? [defaultCocktailObject?.danielGrade, defaultCocktailObject?.daniGrade]
@@ -26,7 +31,7 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
         imgUrl: null,
         versionId: crypto.randomUUID(),
       },
-    ]
+    ],
   );
 
   const handleVersionUpdate = (index, updatedVersion) => {
@@ -52,7 +57,7 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   const handleDeleteVersion = (e, idToDelete) => {
     e.preventDefault();
     setVersions((prev) =>
-      prev.filter((version) => version.versionId !== idToDelete)
+      prev.filter((version) => version.versionId !== idToDelete),
     );
   };
 
@@ -84,6 +89,7 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
       daniGrade: daniGrade,
       tags,
       versions,
+      date,
     };
 
     addCocktail(newCocktail);
@@ -154,6 +160,16 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
             tags={tags}
             setTags={setTags}
           />
+          <div className="form-input-field-container">
+            <div style={{ marginTop: "20px" }}>
+              <DatePicker
+                label="Date Tried"
+                value={date}
+                onChange={setDate}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </div>
+          </div>
         </>
       )}
 

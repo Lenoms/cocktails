@@ -24,3 +24,5 @@ export const COLORS = {
   INDIVIDUAL_GRADE_TEXT: "#FF1493",
   DEFAULT_TEXT: "black",
 };
+
+export const placeHolderImageUrl = "/cocktail-login-screen.png";

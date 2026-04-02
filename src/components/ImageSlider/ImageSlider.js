@@ -6,6 +6,7 @@ import { useState } from "react";
 function ImageSlider({ versions }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
     slideChanged(slider) {
@@ -17,7 +18,10 @@ function ImageSlider({ versions }) {
   });
 
   const showArrowsAndDots = () => {
-    return loaded && instanceRef.current && versions.length > 1;
+    const versionsWithImages = versions.filter(
+      (version) => version.imgUrl,
+    ).length;
+    return loaded && instanceRef.current && versionsWithImages > 1;
   };
 
   return (
@@ -32,6 +36,8 @@ function ImageSlider({ versions }) {
                   key={version.imgUrl}
                   className={`keen-slider__slide numberslide${i} cocktail-info-image`}
                   src={version.imgUrl}
+                  onClick={() => setSelectedImageUrl(version.imgUrl)}
+                  style={{ cursor: "pointer" }}
                 />
               );
             })}
@@ -73,6 +79,28 @@ function ImageSlider({ versions }) {
               ></button>
             );
           })}
+        </div>
+      )}
+      {selectedImageUrl && (
+        <div
+          className="image-zoom-modal"
+          onClick={() => setSelectedImageUrl(null)}
+        >
+          <div className="image-zoom-container">
+            <img
+              src={selectedImageUrl}
+              alt="Zoomed cocktail"
+              className="image-zoom-fullscreen"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              className="image-zoom-close"
+              onClick={() => setSelectedImageUrl(null)}
+              aria-label="Close zoom"
+            >
+              ✕
+            </button>
+          </div>
         </div>
       )}
     </>

@@ -17,6 +17,7 @@ function CreateCocktail() {
       daniGrade: cocktailObject.daniGrade ?? null,
       versions: cocktailObject.versions,
       tags: cocktailObject.tags ?? [],
+      createdAt: cocktailObject.date ?? null,
     });
     navigate(cocktailObject.tried ? "/tried" : "/untried");
   }
