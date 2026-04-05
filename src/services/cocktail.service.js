@@ -72,28 +72,40 @@ const CocktailService = {
       throw err;
     }
   },
+  uploadPendingVersionImages: async function (versionList) {
+    return Promise.all(
+      versionList.map(async (version) => {
+        if (!version.imgFile) {
+          const { imgFile, previewUrl, ...rest } = version;
+          return rest;
+        }
 
-  uploadImage: function (event, setProgresspercent, setImgUrl, setIsUploading) {
-    const storage = getStorage();
-    const storageRef = ref(storage, `images/${event.target.files[0].name}`);
-    const uploadTask = uploadBytesResumable(storageRef, event.target.files[0]);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgresspercent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL);
-          setIsUploading(false);
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${version.imgFile.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, version.imgFile);
+
+        const downloadURL = await new Promise((resolve, reject) => {
+          uploadTask.on(
+            "state_changed",
+            null,
+            (error) => {
+              reject(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref)
+                .then((url) => resolve(url))
+                .catch((uploadError) => reject(uploadError));
+            },
+          );
         });
-      }
+
+        return {
+          ...version,
+          imgUrl: downloadURL,
+          imgFile: undefined,
+          previewUrl: undefined,
+        };
+      }),
     );
   },
   printAnalytics: function (data) {
@@ -127,14 +139,14 @@ const CocktailService = {
       `Daniel Total Grade: ${danielSum}, Average: ${(
         danielSum /
         (data.length - danielDrinksNotTriedCount)
-      ).toPrecision(4)}`
+      ).toPrecision(4)}`,
     );
 
     console.log(
       `Dani Total Grade: ${daniSum}, Average: ${(
         daniSum /
         (data.length - daniDrinksNotTriedCount)
-      ).toPrecision(4)}`
+      ).toPrecision(4)}`,
     );
   },
   calculateAverageGrade: function (danielGrade, daniGrade) {

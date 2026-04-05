@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./CocktailUpsertForm.css";
 import AddIcon from "@mui/icons-material/Add";
-import Ingredients from "../Ingredients/Ingredients";
 import TriedForm from "../TriedForm/TriedForm";
 import VersionButton from "../Versions/VersionButton/VersionButton";
 import VersionFormList from "../Versions/VersionFormList/VersionFormList";
-import AddPhoto from "../AddPhoto/AddPhoto";
 import VersionForm from "../Versions/VersionForm/VersionForm";
+import CocktailService from "../../services/cocktail.service";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
+import UploadProgress from "../UploadProgress/UploadProgress";
 
 function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   const [tried, setTried] = useState(defaultCocktailObject?.tried ?? false);
@@ -67,14 +67,8 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
     document.getElementById("validation-message")?.removeAttribute("hidden");
   };
 
-  const returnCocktailObject = (e) => {
-    e.preventDefault();
+  const getFormValues = () => {
     const name = document.getElementById("cocktail-name").value;
-    if (!name) {
-      showValidationError();
-      return;
-    }
-
     const danielGrade =
       tried && document.getElementById("daniel-grade").value !== ""
         ? document.getElementById("daniel-grade").value
@@ -84,18 +78,48 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
         ? document.getElementById("dani-grade").value
         : null;
 
-    const newCocktail = {
+    return {
       name,
+      danielGrade,
+      daniGrade,
       tried,
-      danielGrade: danielGrade,
-      daniGrade: daniGrade,
       tags,
       versions,
       date,
     };
-
-    addCocktail(newCocktail);
   };
+
+  const returnCocktailObject = async (e) => {
+    e.preventDefault();
+    const formValues = getFormValues();
+
+    if (!formValues.name) {
+      showValidationError();
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const versionsToSave = await CocktailService.uploadPendingVersionImages(
+        formValues.versions,
+      );
+      const newCocktail = {
+        ...formValues,
+        versions: versionsToSave,
+      };
+      await addCocktail(newCocktail);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  if (isUploading) {
+    return (
+      <div className="uploading-container">
+        <UploadProgress durationMs={6000} />
+      </div>
+    );
+  }
 
   return (
     <form className="cocktail-form" onSubmit={returnCocktailObject}>
@@ -136,10 +160,9 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
       </div>
 
       {/* Version Forms */}
-      {(versions.length > 1) & tried ? (
+      {versions.length > 1 && tried ? (
         <VersionFormList
           versions={versions}
-          setIsUploading={setIsUploading}
           handleVersionUpdate={handleVersionUpdate}
           onDeleteVersion={handleDeleteVersion}
         />
@@ -147,7 +170,6 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
         <VersionForm
           version={versions[0]}
           versionNumber={0}
-          setIsUploading={setIsUploading}
           onChange={(updatedVersion) => handleVersionUpdate(0, updatedVersion)}
           addImageAvailable={tried}
         />

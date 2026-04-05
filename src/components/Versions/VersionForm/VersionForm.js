@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Ingredients from "../../Ingredients/Ingredients";
 import AddPhoto from "../../AddPhoto/AddPhoto";
 
-function VersionForm({ version, setIsUploading, onChange, addImageAvailable }) {
+function VersionForm({ version, onChange, addImageAvailable }) {
   const [ingredients, setIngredients] = useState(version.ingredients || []);
   const [notes, setNotes] = useState(version.notes);
   const [imgUrl, setImgUrl] = useState(version.imgUrl ?? null);
+  const [imgFile, setImgFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(version.imgUrl ?? null);
 
   useEffect(() => {
     onChange?.({
@@ -13,11 +15,19 @@ function VersionForm({ version, setIsUploading, onChange, addImageAvailable }) {
       ingredients,
       notes,
       imgUrl,
+      imgFile,
+      previewUrl,
     });
-  }, [ingredients, notes, imgUrl]);
+  }, [ingredients, notes, imgUrl, imgFile, previewUrl]);
 
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
+  };
+
+  const handleFileSelected = (file, preview) => {
+    setImgFile(file);
+    setImgUrl(null);
+    setPreviewUrl(preview);
   };
 
   return (
@@ -38,21 +48,10 @@ function VersionForm({ version, setIsUploading, onChange, addImageAvailable }) {
         ></textarea>
 
         {addImageAvailable && (
-          <>
-            {" "}
-            <AddPhoto
-              setImgUrl={setImgUrl}
-              imgUrl={version.imgUrl}
-              setIsUploading={setIsUploading}
-            ></AddPhoto>
-            {version.imgUrl && (
-              <img
-                className="create-update-image"
-                src={version.imgUrl}
-                alt="uploaded file"
-              />
-            )}
-          </>
+          <AddPhoto
+            onFileSelected={handleFileSelected}
+            previewUrl={previewUrl}
+          />
         )}
       </div>
     </div>
