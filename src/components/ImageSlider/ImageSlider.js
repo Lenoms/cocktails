@@ -12,10 +12,7 @@ function ImageSlider({ versions }) {
     const viewport = document.querySelector("meta[name=viewport]");
     if (viewport) {
       const originalContent = viewport.getAttribute("content");
-      viewport.setAttribute(
-        "content",
-        "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
-      );
+      viewport.setAttribute("content", "width=device-width, initial-scale=1");
       setTimeout(() => {
         viewport.setAttribute("content", originalContent);
       }, 100);
