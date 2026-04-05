@@ -7,6 +7,26 @@ function ImageSlider({ versions }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+
+  const resetZoom = () => {
+    const viewport = document.querySelector("meta[name=viewport]");
+    if (viewport) {
+      const originalContent = viewport.getAttribute("content");
+      viewport.setAttribute(
+        "content",
+        "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+      );
+      setTimeout(() => {
+        viewport.setAttribute("content", originalContent);
+      }, 100);
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedImageUrl(null);
+    resetZoom();
+  };
+
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
     slideChanged(slider) {
@@ -82,10 +102,7 @@ function ImageSlider({ versions }) {
         </div>
       )}
       {selectedImageUrl && (
-        <div
-          className="image-zoom-modal"
-          onClick={() => setSelectedImageUrl(null)}
-        >
+        <div className="image-zoom-modal" onClick={closeModal}>
           <div className="image-zoom-container">
             <img
               src={selectedImageUrl}
@@ -95,7 +112,7 @@ function ImageSlider({ versions }) {
             />
             <button
               className="image-zoom-close"
-              onClick={() => setSelectedImageUrl(null)}
+              onClick={closeModal}
               aria-label="Close zoom"
             >
               ✕

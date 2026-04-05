@@ -25,4 +25,4 @@ export const COLORS = {
   DEFAULT_TEXT: "black",
 };
 
-export const placeHolderImageUrl = "/cocktail-login-screen.png";
+export const placeHolderImageUrl = process.env.PUBLIC_URL + "/cocktail-login-screen.png";

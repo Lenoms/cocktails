@@ -15,7 +15,9 @@ function CocktailUpsertForm({ addCocktail, defaultCocktailObject }) {
   const [tags, setTags] = useState(defaultCocktailObject?.tags ?? []);
   const [isUploading, setIsUploading] = useState(false);
   const [date, setDate] = useState(
-    defaultCocktailObject?.date ? new Date(defaultCocktailObject.date) : null,
+    defaultCocktailObject?.createdAt
+      ? new Date(defaultCocktailObject.createdAt)
+      : null,
   );
 
   const default_grades = tried
