@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Lists.css";
 import TriedCocktailItem from "../../components/TriedCocktailItem/TriedCocktailItem";
 import RouteWrapper from "../../components/RouteWrapper/RouteWrapper";
@@ -10,98 +10,72 @@ import PaginationBar from "../../components/PaginationBar/PaginationBar";
 import { useCocktailContext } from "../../services/CocktailContextProvider";
 import { scrollToHeight } from "../../services/scroll.service";
 import NoResultsFound from "../../components/NoResultsFound/NoResultsFound";
-import { downloadBackUp } from "../../services/backup.service";
-import WrappedService from "../../services/wrapped.service";
 
 function TriedList() {
   const [original, setOriginal] = useState([]);
-  const [cocktails, setCocktails] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-
   const cocktailContext = useCocktailContext();
+  const [currentPage, setCurrentPage] = useState(
+    cocktailContext.pageNumber ?? 1,
+  );
+
   const pageSize = 20;
 
   useEffect(() => {
     async function load() {
       const items = await CocktailService.fetchCocktails(true);
       setOriginal(items);
-      setCocktails(sortList(items, cocktailContext.sortBy));
       setLoading(false);
     }
     load();
   }, []);
 
-  useEffect(() => {
-    setCocktails(sortList(original, cocktailContext.sortBy));
+  const cocktails = useMemo(
+    () => sortList(original, cocktailContext.sortBy),
+    [original, cocktailContext.sortBy],
+  );
+
+  const filtered = useMemo(
+    () =>
+      cocktails.filter((item) =>
+        item ? searchQueryMatch(cocktailContext.searchTerm, item) : true,
+      ),
+    [cocktails, cocktailContext.searchTerm],
+  );
+
+  const [lastSortBy, setLastSortBy] = useState(cocktailContext.sortBy);
+  if (cocktailContext.sortBy !== lastSortBy) {
+    setLastSortBy(cocktailContext.sortBy);
     setCurrentPage(1);
-  }, [cocktailContext.sortBy, original]);
-
-  // Filter function for search term
-  const filterBySearchTerm = (item) => {
-    if (!item) return true;
-    return searchQueryMatch(cocktailContext.searchTerm, item);
-  };
-
-  if (cocktailContext.scrollHeight !== 0) {
-    scrollToHeight(cocktailContext.scrollHeight);
   }
-
-  setTimeout(() => {
-    cocktailContext.setScrollHeight(0);
-  }, 600);
-
-  // Return user to page they were on
-  useEffect(() => {
-    setCurrentPage(cocktailContext.pageNumber);
-  }, [cocktailContext.pageNumber]);
-
-  // Bonus stuff
-  useEffect(() => {
-    //Analytics stuff interested.
-    CocktailService.printAnalytics(cocktails);
-    // WrappedService.printWrappedStats(cocktails);
-
-    // TO BACK UP
-    // if (cocktails.length !== 0) {
-    //   downloadBackUp(cocktails);
-    // }
-
-    //migrateCocktailData();
-  }, [cocktails]);
 
   if (loading) {
     return <LoadingSpinner />;
-  } else {
-    if (cocktails.filter((item) => filterBySearchTerm(item)).length === 0) {
-      return <NoResultsFound />;
-    } else {
-      return (
-        <RouteWrapper className="list">
-          {cocktails
-            .filter((item) => filterBySearchTerm(item))
-            .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-            .map(function (item) {
-              return (
-                <TriedCocktailItem
-                  key={item.cocktailId}
-                  item={item}
-                  sortBy={cocktailContext.sortBy}
-                ></TriedCocktailItem>
-              );
-            })}
-          <PaginationBar
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalItemCount={
-              cocktails.filter((item) => filterBySearchTerm(item)).length
-            }
-            pageSize={pageSize}
-          />
-        </RouteWrapper>
-      );
-    }
   }
+
+  if (filtered.length === 0) {
+    return <NoResultsFound />;
+  }
+
+  return (
+    <RouteWrapper className="list">
+      {filtered
+        .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        .map((item) => (
+          <TriedCocktailItem
+            key={item.cocktailId}
+            item={item}
+            sortBy={cocktailContext.sortBy}
+          ></TriedCocktailItem>
+        ))}
+      <PaginationBar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItemCount={filtered.length}
+        pageSize={pageSize}
+      />
+    </RouteWrapper>
+  );
 }
 
 export default TriedList;

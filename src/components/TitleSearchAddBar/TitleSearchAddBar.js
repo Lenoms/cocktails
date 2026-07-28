@@ -13,7 +13,6 @@ function TitleSearchAddBar({ searchSubmitted }) {
   function submitSearch(e) {
     e.preventDefault();
     document.activeElement.blur();
-    cocktailContext.setScrollHeight(0);
     cocktailContext.setPageNumber(1);
     let searchQuery = document.getElementById("search-bar-input").value;
     cocktailContext.setSearchTerm(searchQuery);
@@ -21,7 +20,6 @@ function TitleSearchAddBar({ searchSubmitted }) {
 
   function clearSearchBar() {
     document.getElementById("search-bar-input").value = "";
-    cocktailContext.setScrollHeight(0);
     cocktailContext.setPageNumber(1);
     cocktailContext.setSearchTerm("");
   }

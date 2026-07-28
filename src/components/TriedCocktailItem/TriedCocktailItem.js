@@ -43,9 +43,6 @@ function TriedCocktailItem({ item, sortBy }) {
 
   const cocktailClicked = (e) => {
     e.stopPropagation();
-    cocktailContext.setScrollHeight(
-      document.getElementById("app-header-and-body").scrollTop,
-    );
     navigate("/info", { state: { cocktailItem: item } });
   };
 
